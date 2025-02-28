@@ -22,7 +22,7 @@ I am a Full-Stack Developer with experience in Typescript, Javascript, React, Re
 
 As a tech enthusiast, I love to experience tech and share my experiences and insights with others, through my social media posts and blogs.
 
-When I’m not in front of a screen, you’ll likely find me networking, discussing business ideas, hiking or exploring creative outlets like design and photography. Tech is a big part of my life, but so is connecting with people, solving problems, and embracing new experiences.
+When I’m not typing on a computer, you’ll likely find me networking, discussing business ideas, hiking or exploring creative outlets like design and photography. Tech is a big part of my life, but so is connecting with people, solving problems, and embracing new experiences.
 
 I also have a keen interest in entrepreneurship, branding, and outdoor adventures, because I believe in balancing work with personal growth and exploration.
 
