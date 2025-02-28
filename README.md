@@ -1,4 +1,4 @@
-### Hello World 👋 It's Billy here,[Welcome to my Dev page!](https://blyator.github.io/MyPortfolio/)
+### Hello World 👋 It's Billy here,[Welcome to my Dev page!](https://blyator.github.io/blyator/)
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=sakigo9&label=Profile%20views&color=0e75b6&style=flat" alt="Saket Prag" /> </p>
 
