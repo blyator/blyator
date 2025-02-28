@@ -3,14 +3,14 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=sakigo9&label=Profile%20views&color=0e75b6&style=flat" alt="Saket Prag" /> </p>
 
 ## 🌐 Socials:
-[![Follow Me](https://img.shields.io/badge/Follow%20Me-1DA1F2?logo=x&logoColor=white&style=for-the-badge)](https://x.com/blyator) 
+[![Follow Me](https://img.shields.io/badge/Follow%20Me-1DA1F2?logo=x&logoColor=white&style=for-the-badge)](https://x.com/viper_droid) 
 [![Telegram](https://img.shields.io/badge/Telegram-26A5E4?logo=telegram&logoColor=white&style=for-the-badge)](https://t.me/viperdroided) 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/billyyator) 
 [![Dev.to](https://img.shields.io/badge/Dev.to-FFDD57?logo=devdotto&logoColor=black&style=for-the-badge)](https://dev.to/billy_yator) 
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?logo=instagram&logoColor=white&style=for-the-badge)](https://www.instagram.com/viper_droided) 
-[![Facebook](https://img.shields.io/badge/Facebook-1877F2?logo=facebook&logoColor=white&style=for-the-badge)](https://x.com/blyator) 
-[![Stack Overflow](https://img.shields.io/badge/Stack%20Overflow-FE7A16?logo=stackoverflow&logoColor=white&style=for-the-badge)](https://x.com/blyator) 
-[![Medium](https://img.shields.io/badge/Medium-02D57F?logo=medium&logoColor=white&style=for-the-badge)](https://x.com/blyator) 
+[![Facebook](https://img.shields.io/badge/Facebook-1877F2?logo=facebook&logoColor=white&style=for-the-badge)](https://x.com/viper_droid) 
+[![Stack Overflow](https://img.shields.io/badge/Stack%20Overflow-FE7A16?logo=stackoverflow&logoColor=white&style=for-the-badge)](https://x.com/viper_droid) 
+[![Medium](https://img.shields.io/badge/Medium-02D57F?logo=medium&logoColor=white&style=for-the-badge)](https://x.com/viper_droid) 
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=white&style=for-the-badge)](https://www.youtube.com/@blyator)
 
 
