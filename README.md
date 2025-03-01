@@ -37,7 +37,7 @@ Let’s connect, learn, and grow together whether in tech, business, or life in 
 <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" width="450" align="right">
 
 <ul>
-  <li>🔭 I'm a tech enthusiast transitioning into full-stack development, with experience in HTML, CSS, JavaScript, and backend technologies.</li>
+  <li>🔭 I'm a tech enthusiast transitioning into full-stack development, with experience in front end and backend technologies, as well as Mobile Development.</li>
   <li>🌱 I enjoy building scalable and efficient solutions, combining my background in tech support, digital solutions, and customer experience with my growing expertise in software development.</li>
   <li>👯 Active in the developer community, always learning and sharing insights.</li>
   <li>💬 You can find me sharing tech insights, career advice, and industry trends on social media.</li>
