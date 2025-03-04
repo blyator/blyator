@@ -437,3 +437,7 @@ footer {
 .repository-container.animate {
   animation: animateRepository 1s ease-out forwards;
 }
+
+#tittleimg {
+  border-radius: 50%;
+}
