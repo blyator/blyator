@@ -122,6 +122,17 @@ main {
   background-color: var(--bg-color);
 }
 
+main hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  width: 0;
+  border-top: 1px solid #cdced5;
+  position: absolute;
+  bottom: 8px;
+  animation: slide-in 1s cubic-bezier(0.42, 0, 1, 1) forwards;
+}
+
 .user-bio {
   animation: fadeInUp 1s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
@@ -139,7 +150,7 @@ main {
 }
 
 .quote-container p {
-  color: rgb(55, 14, 15);
+  color: rgb(53, 20, 6);
 }
 
 .quote-container:hover {
