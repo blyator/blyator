@@ -44,7 +44,6 @@ Let’s connect, learn, and grow together whether in tech, business, or life in 
 - Moringa School
 - HackClub
 - Tensorflow
-- Girlscript Foundation
 - Coding Ninja
 
 # 💻🚀 Tech Stack:
