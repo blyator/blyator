@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Sono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: all;
+}
+
+@plugin "daisyui/theme" {
+  name: "retro";
+
+  --color-primary: #81b29a;
+  --color-secondary: #f07167;
+}
+
+@plugin "daisyui/theme" {
+  name: "forest";
+
+  --color-secondary: #f07167;
+}
+
+/* Hero.css or global styles */
+
+.callout {
+  transform-origin: top right;
+}
+
+body {
+  font-family: "Sono", sans-serif;
+}
