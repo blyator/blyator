@@ -1,33 +1,48 @@
-import React from "react";
+// src/App.jsx
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
-import { Toaster } from "react-hot-toast";
+import About from "./components/About";
+import TechStack from "./components/TechStack";
+import Projects from "./components/Projects";
 import Hero from "./components/Hero";
-import AppLayout from "./components/AppLayout";
+import NekoCat from "./components/NekoCat";
 import Loader from "./components/Loader";
-import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500); // 3 seconds
+    const timer = setTimeout(() => setLoading(false), 1300);
     return () => clearTimeout(timer);
   }, []);
 
   if (loading) return <Loader />;
+
   return (
     <AppLayout>
-      <div className="min-h-screen flex flex-col">
-        <Toaster />
-
-        <Navbar />
-        <main className="flex-grow">
+      <Toaster />
+      <NekoCat />
+      <Navbar />
+      <main>
+        <section data-scroll-section>
           <Hero />
-        </main>
+        </section>
+        <section data-scroll-section>
+          <About />
+        </section>
+        <section data-scroll-section>
+          <TechStack />
+        </section>
+        <section data-scroll-section>
+          <Projects />
+        </section>
+      </main>
+      <section data-scroll-section>
         <Footer />
-      </div>
+      </section>
     </AppLayout>
   );
 }

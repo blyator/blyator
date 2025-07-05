@@ -1,0 +1,170 @@
+import { useLayoutEffect, useRef } from "react";
+import { gsap, Back, Elastic, Expo } from "gsap";
+import talkButton from "../assets/talkButton.png";
+
+export default function Hero() {
+  const heroRef = useRef();
+  const talkRef = useRef(null);
+  const talkPulseRef = useRef(null);
+  const desRef = useRef(null);
+  const msgRef = useRef(null);
+  const calloutRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(".letter", { fontSize: 0 });
+      gsap.set(desRef.current, { opacity: 0, y: 70 });
+      gsap.set(msgRef.current, { opacity: 0, y: 100 });
+      gsap.set(".talk-wrapper", { opacity: 0 });
+      gsap.set(calloutRef.current, { scale: 0, opacity: 0 });
+
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      tl.to(calloutRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: Back.easeOut.config(1.7),
+      })
+        .to(
+          ".letter",
+          {
+            fontSize: "3rem",
+            duration: 0.15,
+            stagger: 0.12,
+          },
+          "+=0.2"
+        )
+        .to(
+          desRef.current,
+          { opacity: 1, y: 0, duration: 0.7, ease: Back.easeOut.config(1.7) },
+          "+=0.3"
+        )
+        .to(
+          msgRef.current,
+          { opacity: 1, y: 0, duration: 1, ease: Back.easeOut.config(1.7) },
+          "-=0.2"
+        )
+        .to(".talk-wrapper", { opacity: 1, duration: 0.5 }, "+=0.5")
+        .to(
+          talkRef.current,
+          {
+            duration: 0.4,
+            scale: 0.95,
+            rotation: 5,
+            ease: Back.easeOut.config(1.7),
+          },
+          ">"
+        )
+        .to(
+          talkPulseRef.current,
+          {
+            duration: 0.5,
+            scale: 0.9,
+            opacity: 1,
+          },
+          "-=0.4"
+        )
+        .to(
+          talkRef.current,
+          {
+            duration: 1.2,
+            scale: 1,
+            rotation: 0,
+            ease: Elastic.easeOut.config(2.5, 0.5),
+          },
+          ">"
+        )
+        .to(
+          talkPulseRef.current,
+          {
+            duration: 1.1,
+            scale: 3,
+            opacity: 0,
+            ease: Expo.easeOut,
+          },
+          "-=1.0"
+        );
+    }, heroRef);
+
+    return () => ctx.revert(); 
+  }, []);
+
+  return (
+    <header
+      ref={heroRef}
+      className="mt-10 md:flex items-start gap-10 px-6 md:px-16"
+    >
+      {/* Left content */}
+      <div className="md:flex-1 text-center md:text-left">
+        <div
+          ref={calloutRef}
+          className="callout bg-secondary  shadow rounded-full px-6 py-2 font-bold inline-block relative mb-4 mx-auto md:ml-8 md:mx-0"
+        >
+          It's me
+        </div>
+
+        <h1 className="mb-6 text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent leading-tight text-center md:text-left">
+          <span className="block md:inline">
+            {"Billy".split("").map((char, i) => (
+              <span key={`b${i}`} className="letter inline-block">
+                {char}
+              </span>
+            ))}
+          </span>
+          <span className="block md:inline md:ml-6">
+            {"Yator".split("").map((char, i) => (
+              <span key={`y${i}`} className="letter inline-block">
+                {char}
+              </span>
+            ))}
+          </span>
+        </h1>
+
+        <p
+          ref={desRef}
+          className="uppercase font-bold mb-4 text-lg text-accent"
+        >
+          Full-stack Developer
+        </p>
+
+        <p
+          ref={msgRef}
+          className="text-sm mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0"
+        >
+          Software Developer from Nairobi, Kenya with rock-solid experience in
+          building complex applications with cutting-edge technologies.
+        </p>
+
+        <div className="talk-wrapper mt-10 relative flex items-center justify-start">
+          <a
+            href="mailto:kenjimmy17@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block"
+          >
+            <div
+              ref={talkRef}
+              className="relative z-10 flex items-center justify-center rounded-full border border-white bg-[#f3877e] h-[100px] w-[100px]"
+            >
+              <img src={talkButton} alt="talk button" className="h-[70%]" />
+              <div
+                ref={talkPulseRef}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#e45447] rounded-full h-[120px] w-[120px] opacity-0 scale-0 z-0"
+              ></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {/* Right image */}
+      <div className="md:flex-1 mt-10 md:mt-0">
+        <img
+          className="w-40 mx-auto md:w-96"
+          src="https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653600089/kenjimmy.me/Portfolio_ngecqk.png"
+          alt="ken photo"
+        />
+      </div>
+    </header>
+  );
+}

@@ -145,6 +145,7 @@ export default function NekoCat() {
         left: `${renderPos.x}px`,
         top: `${renderPos.y}px`,
         transform: "translate(-50%, -50%)",
+        zIndex: 9999,
       }}
     />
   );

@@ -1,6 +1,9 @@
-// src/hooks/useLocoScroll.js
 import { useEffect } from "react";
 import LocomotiveScroll from "locomotive-scroll";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function useLocoScroll(containerRef) {
   useEffect(() => {
@@ -25,10 +28,35 @@ export default function useLocoScroll(containerRef) {
       },
     });
 
+    // Set global ref if needed
     window.loco = locoScroll;
 
+    // === 🔁 Register ScrollTrigger proxy ===
+    ScrollTrigger.scrollerProxy(scrollEl, {
+      scrollTop(value) {
+        return arguments.length
+          ? locoScroll.scrollTo(value, 0, 0)
+          : locoScroll.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: scrollEl.style.transform ? "transform" : "fixed",
+    });
+
+    // 🚀 Sync scroll events
+    locoScroll.on("scroll", ScrollTrigger.update);
+    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+    ScrollTrigger.refresh();
+
     return () => {
-      locoScroll.destroy();
+      if (locoScroll) locoScroll.destroy();
+      ScrollTrigger.removeEventListener("refresh", locoScroll.update);
     };
   }, [containerRef]);
 }
