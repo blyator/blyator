@@ -6,7 +6,24 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTheme, setActiveTheme] = useState("dark");
   const menuRef = useRef(null);
+  const dropdownRef = useRef(null);
   const tl = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     themeChange(false);
@@ -87,7 +104,7 @@ function Navbar() {
           />
         </div>
 
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end" ref={dropdownRef}>
           <button
             className="btn btn-ghost btn-circle text-primary"
             onClick={() => setIsOpen(!isOpen)}
@@ -103,7 +120,7 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
+                d="M4 6h16M4 12h16M13 18h7"
               />
             </svg>
           </button>

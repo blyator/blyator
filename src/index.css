@@ -30,18 +30,6 @@ body {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  html,
-  body {
-    overflow: auto !important;
-  }
-
-  [data-scroll-container] {
-    transform: none !important;
-    will-change: auto !important;
-  }
-}
-
 .callout {
   transform-origin: top right;
 }
@@ -80,4 +68,27 @@ body::before {
 .sticky {
   position: -webkit-sticky;
   position: sticky;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  [data-scroll-container] {
+    overflow: auto;
+    transform: none !important;
+    will-change: auto !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  [data-scroll-container]::-webkit-scrollbar {
+    display: none;
+  }
 }
