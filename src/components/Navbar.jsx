@@ -1,29 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { themeChange } from "theme-change";
 import gsap from "gsap";
+import BouncyLink from "./BouncyLink";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTheme, setActiveTheme] = useState("dark");
   const menuRef = useRef(null);
-  const dropdownRef = useRef(null);
   const tl = useRef();
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
 
   useEffect(() => {
     themeChange(false);
@@ -104,7 +88,7 @@ function Navbar() {
           />
         </div>
 
-        <div className="dropdown dropdown-end" ref={dropdownRef}>
+        <div className="dropdown dropdown-end">
           <button
             className="btn btn-ghost btn-circle text-primary"
             onClick={() => setIsOpen(!isOpen)}
@@ -120,7 +104,7 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h16M13 18h7"
+                d="M4 6h16M4 12h16M4 18h7"
               />
             </svg>
           </button>
@@ -135,7 +119,7 @@ function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
               >
-                About
+                My Story
               </a>
             </li>
             <li>
@@ -144,7 +128,7 @@ function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
               >
-                Skills
+                Tech Stack
               </a>
             </li>
             <li>
@@ -153,7 +137,7 @@ function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
               >
-                Projects
+                Creations
               </a>
             </li>
 
@@ -163,48 +147,26 @@ function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
               >
-                Contact
+                Say Hi 💬
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Desktop Navigation - 100% UNCHANGED */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           <li>
-            <a
-              href="#about"
-              className="text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 hover:underline"
-            >
-              About
-            </a>
+            <BouncyLink text="My &nbsp; Story" href="#about" />
           </li>
           <li>
-            <a
-              href="#skills"
-              className="text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 hover:underline"
-            >
-              Skills
-            </a>
+            <BouncyLink text="Tech &nbsp; Stack" href="#skills" />
           </li>
           <li>
-            <a
-              href="#projects"
-              className="text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 hover:underline"
-            >
-              Projects
-            </a>
+            <BouncyLink text="Creations" href="#projects" />
           </li>
-
           <li>
-            <a
-              href="#contact"
-              className="text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 hover:underline"
-            >
-              Contact
-            </a>
+            <BouncyLink text="Say &nbsp; Hi" href="#contact" />
           </li>
         </ul>
       </div>
