@@ -1,6 +1,10 @@
 import { useLayoutEffect, useRef } from "react";
-import { gsap, Back, Elastic, Expo } from "gsap";
+import { gsap, Back, Elastic, Expo, Power3 } from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import talkButton from "../assets/talkButton.png";
+
+// Register the TextPlugin
+gsap.registerPlugin(TextPlugin);
 
 export default function Hero() {
   const heroRef = useRef();
@@ -14,7 +18,7 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       gsap.set(".letter", { fontSize: 0 });
       gsap.set(desRef.current, { opacity: 0, y: 70 });
-      gsap.set(msgRef.current, { opacity: 0, y: 100 });
+      gsap.set(".msg-line", { opacity: 0, y: 30 });
       gsap.set(".talk-wrapper", { opacity: 0 });
       gsap.set(calloutRef.current, { scale: 0, opacity: 0 });
 
@@ -40,10 +44,17 @@ export default function Hero() {
           { opacity: 1, y: 0, duration: 0.7, ease: Back.easeOut.config(1.7) },
           "+=0.3"
         )
+        // Updated paragraph animation with line stagger
         .to(
-          msgRef.current,
-          { opacity: 1, y: 0, duration: 1, ease: Back.easeOut.config(1.7) },
-          "-=0.2"
+          ".msg-line",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: Power3.easeOut,
+            stagger: 0.3,
+          },
+          "+=0.2"
         )
         .to(".talk-wrapper", { opacity: 1, duration: 0.5 }, "+=0.5")
         .to(
@@ -79,7 +90,7 @@ export default function Hero() {
           talkPulseRef.current,
           {
             duration: 1.1,
-            scale: 3,
+            scale: 2.5,
             opacity: 0,
             ease: Expo.easeOut,
           },
@@ -87,7 +98,7 @@ export default function Hero() {
         );
     }, heroRef);
 
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -99,20 +110,20 @@ export default function Hero() {
       <div className="md:flex-1 text-center md:text-left">
         <div
           ref={calloutRef}
-          className="callout bg-secondary  shadow rounded-full px-6 py-2 font-bold inline-block relative mb-4 mx-auto md:ml-8 md:mx-0"
+          className="callout bg-secondary shadow rounded-full px-6 py-2 font-bold inline-block relative mb-4 mx-auto md:ml-8 md:mx-0"
         >
           It's me
         </div>
 
         <h1 className="mb-6 text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent leading-tight text-center md:text-left">
-          <span className="block md:inline">
+          <span className="block lg:inline">
             {"Billy".split("").map((char, i) => (
               <span key={`b${i}`} className="letter inline-block">
                 {char}
               </span>
             ))}
           </span>
-          <span className="block md:inline md:ml-6">
+          <span className="block lg:inline lg:ml-6">
             {"Yator".split("").map((char, i) => (
               <span key={`y${i}`} className="letter inline-block">
                 {char}
@@ -128,13 +139,20 @@ export default function Hero() {
           Full-stack Developer
         </p>
 
-        <p
+        <div
           ref={msgRef}
-          className="text-sm mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0"
+          className="text-sm mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0 font-mono leading-relaxed"
         >
-          Software Developer from Nairobi, Kenya with rock-solid experience in
-          building complex applications with cutting-edge technologies.
-        </p>
+          <div className="msg-line mb-2">
+            Software Developer from Nairobi, Kenya
+          </div>
+          <div className="msg-line mb-2">
+            with solid experience building modern
+          </div>
+          <div className="msg-line">
+            web apps using clean code and powerful tools.
+          </div>
+        </div>
 
         <div className="talk-wrapper mt-10 relative flex items-center justify-start">
           <a

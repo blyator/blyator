@@ -20,25 +20,41 @@
   --color-secondary: #f07167;
 }
 
-/* Hero.css or global styles */
+body {
+  font-family: "Sono", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto !important;
+  }
+
+  [data-scroll-container] {
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
 
 .callout {
   transform-origin: top right;
 }
 
-body {
-  font-family: "Sono", sans-serif;
-}
-
 .letter {
   font-size: 0;
+  display: inline-block;
 }
 
 .talk-wrapper {
   opacity: 0;
 }
 
-/* NekoCat */
 body::before {
   content: "";
   position: absolute;
@@ -61,36 +77,6 @@ body::before {
     url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
 }
 
-html,
-body {
-  height: 100%;
-  overflow: hidden; /* let LocomotiveScroll handle scroll */
-}
-
-[data-scroll-container] {
-  min-height: 100vh;
-  will-change: transform;
-  scroll-behavior: smooth;
-}
-
-/* @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: "Sono", sans-serif;
-    scroll-behavior: smooth;
-  }
-} */
-
-/* Custom utility classes */
-.letter {
-  display: inline-block;
-}
-
-/* Smooth transitions for sticky elements */
 .sticky {
   position: -webkit-sticky;
   position: sticky;

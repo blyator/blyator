@@ -5,9 +5,15 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Detect mobile device
+const isMobile = () => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 768; // You can adjust the threshold
+};
+
 export default function useLocoScroll(containerRef) {
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile()) return; // ⛔ Disable on mobile
 
     const scrollEl = containerRef.current;
 
@@ -20,7 +26,7 @@ export default function useLocoScroll(containerRef) {
       getDirection: true,
       getSpeed: true,
       smartphone: {
-        smooth: true,
+        smooth: false, // 👈 Just for clarity, but we'll skip entirely
       },
       tablet: {
         smooth: true,
@@ -28,10 +34,9 @@ export default function useLocoScroll(containerRef) {
       },
     });
 
-    // Set global ref if needed
     window.loco = locoScroll;
 
-    // === 🔁 Register ScrollTrigger proxy ===
+    // Register scroller proxy
     ScrollTrigger.scrollerProxy(scrollEl, {
       scrollTop(value) {
         return arguments.length
@@ -49,13 +54,12 @@ export default function useLocoScroll(containerRef) {
       pinType: scrollEl.style.transform ? "transform" : "fixed",
     });
 
-    // 🚀 Sync scroll events
     locoScroll.on("scroll", ScrollTrigger.update);
     ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
     ScrollTrigger.refresh();
 
     return () => {
-      if (locoScroll) locoScroll.destroy();
+      locoScroll.destroy();
       ScrollTrigger.removeEventListener("refresh", locoScroll.update);
     };
   }, [containerRef]);
