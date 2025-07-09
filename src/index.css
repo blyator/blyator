@@ -65,11 +65,6 @@ body::before {
     url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
 @media (max-width: 768px) {
   html,
   body {

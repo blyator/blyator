@@ -5,7 +5,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Detect mobile device
 const isMobile = () => {
   if (typeof window === "undefined") return false;
   return window.innerWidth <= 768; // You can adjust the threshold
@@ -13,7 +12,7 @@ const isMobile = () => {
 
 export default function useLocoScroll(containerRef) {
   useEffect(() => {
-    if (!containerRef.current || isMobile()) return; // ⛔ Disable on mobile
+    if (!containerRef.current || isMobile()) return;
 
     const scrollEl = containerRef.current;
 
@@ -26,7 +25,7 @@ export default function useLocoScroll(containerRef) {
       getDirection: true,
       getSpeed: true,
       smartphone: {
-        smooth: false, // 👈 Just for clarity, but we'll skip entirely
+        smooth: false,
       },
       tablet: {
         smooth: true,
@@ -36,7 +35,6 @@ export default function useLocoScroll(containerRef) {
 
     window.loco = locoScroll;
 
-    // Register scroller proxy
     ScrollTrigger.scrollerProxy(scrollEl, {
       scrollTop(value) {
         return arguments.length

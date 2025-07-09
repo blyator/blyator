@@ -27,18 +27,13 @@ function TechStack() {
                   color: "primary",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/css3",
-                  title: "CSS",
+                  icon: "https://cdn.simpleicons.org/react",
+                  title: "React",
                   color: "secondary",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/sass",
-                  title: "Sass",
-                  color: "accent",
-                },
-                {
-                  icon: "https://cdn.simpleicons.org/tailwindcss",
-                  title: "TailwindCSS",
+                  icon: "https://cdn.simpleicons.org/css",
+                  title: "CSS",
                   color: "info",
                 },
                 {
@@ -47,8 +42,8 @@ function TechStack() {
                   color: "success",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/nuxtdotjs",
-                  title: "Nuxt",
+                  icon: "https://cdn.simpleicons.org/nextdotjs",
+                  title: "Tailwind",
                   color: "warning",
                 },
                 {
@@ -56,14 +51,14 @@ function TechStack() {
                   title: "GSAP",
                   color: "error",
                 },
+                // {
+                //   icon: "https://cdn.simpleicons.org/flutter",
+                //   title: "Flutter",
+                //   color: "neutral",
+                // },
                 {
-                  icon: "https://cdn.simpleicons.org/flutter",
-                  title: "Flutter",
-                  color: "neutral",
-                },
-                {
-                  icon: "https://cdn.simpleicons.org/pinia",
-                  title: "Pinia",
+                  icon: "https://cdn.simpleicons.org/bootstrap",
+                  title: "Bootstrap",
                   color: "primary",
                 },
               ].map((skill, index) => (
@@ -97,11 +92,11 @@ function TechStack() {
                   title: "Node.js",
                   color: "primary",
                 },
-                {
-                  icon: "https://cdn.simpleicons.org/nestjs",
-                  title: "NestJS",
-                  color: "secondary",
-                },
+                // {
+                //   icon: "https://cdn.simpleicons.org/nestjs",
+                //   title: "NestJS",
+                //   color: "secondary",
+                // },
                 {
                   icon: "https://cdn.simpleicons.org/express",
                   title: "Express",
@@ -118,18 +113,18 @@ function TechStack() {
                   color: "success",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/mongoose",
-                  title: "Mongoose",
+                  icon: "https://cdn.simpleicons.org/mysql",
+                  title: "MySql",
                   color: "warning",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/prisma",
-                  title: "Prisma",
+                  icon: "https://cdn.simpleicons.org/python",
+                  title: "Python",
                   color: "error",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/typescript",
-                  title: "TypeScript",
+                  icon: "https://jwt.io/img/pic_logo.svg",
+                  title: "JWT",
                   color: "neutral",
                 },
               ].map((skill, index) => (
@@ -183,29 +178,29 @@ function TechStack() {
                   title: "Docker",
                   color: "success",
                 },
-                {
-                  icon: "https://cdn.simpleicons.org/amazonaws",
-                  title: "AWS",
-                  color: "warning",
-                },
-                {
-                  icon: "https://cdn.simpleicons.org/prometheus",
-                  title: "Prometheus",
-                  color: "error",
-                },
-                {
-                  icon: "https://cdn.simpleicons.org/circleci",
-                  title: "CircleCI",
-                  color: "neutral",
-                },
+                // {
+                //   icon: "https://cdn.simpleicons.org/amazonaws",
+                //   title: "AWS",
+                //   color: "warning",
+                // },
+                // {
+                //   icon: "https://cdn.simpleicons.org/prometheus",
+                //   title: "Prometheus",
+                //   color: "error",
+                // },
+                // {
+                //   icon: "https://cdn.simpleicons.org/circleci",
+                //   title: "CircleCI",
+                //   color: "neutral",
+                // },
                 {
                   icon: "https://cdn.simpleicons.org/netlify",
                   title: "Netlify",
                   color: "primary",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/heroku",
-                  title: "Heroku",
+                  icon: "https://cdn.simpleicons.org/vercel",
+                  title: "Vercel",
                   color: "secondary",
                 },
                 {
@@ -214,8 +209,8 @@ function TechStack() {
                   color: "accent",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/puppeteer",
-                  title: "Puppeteer",
+                  icon: "https://cdn.simpleicons.org/Figma",
+                  title: "Figma",
                   color: "info",
                 },
                 {
@@ -224,8 +219,8 @@ function TechStack() {
                   color: "success",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/webpack",
-                  title: "Webpack",
+                  icon: "https://cdn.simpleicons.org/vite",
+                  title: "Vite",
                   color: "warning",
                 },
                 {

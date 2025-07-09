@@ -10,28 +10,34 @@ function Projects() {
 
   const projects = [
     {
-      title: "E-commerce Platform",
+      title: "MartianHub",
       description:
-        "A full-stack e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and an admin dashboard.",
-      image: "https://picsum.photos/400/250?random=3",
-      badges: ["React", "Node.js", "MongoDB"],
-      badgeColors: ["primary", "secondary", "accent"],
+        "MartianHub is a web app that showcases images taken by NASA's Mars rovers. It provides a simple way to explore the Red Planet through high-quality photos from Curiosity and Perseverance Rovers.",
+      image: "/assets/Illustrations/martian.png",
+      badges: ["Javascript", "CSS", "HTML"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
+      demoLink: "https://martianhub.vercel.app/",
+      codeLink: "https://github.com/blyator/martianhub",
     },
     {
-      title: "Task Management App",
+      title: "NotesApp",
       description:
-        "A collaborative task management application with real-time updates, drag-and-drop features, and team collaboration tools.",
-      image: "https://picsum.photos/400/250?random=4",
-      badges: ["React", "Socket.io", "PostgreSQL"],
-      badgeColors: ["primary", "secondary", "accent"],
+        "This is an app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
+      image: "/assets/Illustrations/notes.png",
+      badges: ["React", "Tailwind", "Python"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
+      demoLink: "https://notes-hub-psi.vercel.app/login",
+      codeLink: "https://github.com/blyator/noteshub",
     },
     {
-      title: "Weather Dashboard",
+      title: "My Portfolio",
       description:
-        "A responsive weather dashboard with location-based forecasts, interactive maps, and data visualization.",
-      image: "https://picsum.photos/400/250?random=5",
-      badges: ["Vue.js", "D3.js", "Weather API"],
-      badgeColors: ["primary", "secondary", "accent"],
+        "This portfolio tells the story of my journey in tech from learning the basics to building full-stack apps.",
+      image: "/assets/Illustrations/portfolio.png",
+      badges: ["DaisyUI", "React", "Tailwind"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
+      demoLink: "https://blyator.github.io/blyator/",
+      codeLink: "https://github.com/blyator/blyator",
     },
   ];
 
@@ -82,17 +88,19 @@ function Projects() {
                   alt={project.title}
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="flex gap-4">
                     <a
-                      href="#"
+                      href={project.demoLink}
+                      target="blank"
                       className="btn btn-sm btn-primary hover:scale-105 transition"
                     >
                       Live Demo
                     </a>
                     <a
-                      href="#"
-                      className="btn btn-sm btn-outline hover:scale-105 transition"
+                      href={project.codeLink}
+                      target="blank"
+                      className="btn btn-sm btn-badge-accent hover:scale-105 transition"
                     >
                       Code
                     </a>
@@ -105,10 +113,7 @@ function Projects() {
                 <p className="text-sm opacity-80">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.badges.map((badge, i) => (
-                    <div
-                      key={i}
-                      className={`badge badge-${project.badgeColors[i]} badge-outline`}
-                    >
+                    <div className={`badge ${project.badgeColors[i]}`}>
                       {badge}
                     </div>
                   ))}
@@ -121,10 +126,11 @@ function Projects() {
         {/* CTA Button */}
         <div className="text-center mt-12">
           <a
-            href="#"
+            href="https://github.com/blyator"
+            target="blank"
             className="btn btn-primary btn-lg hover:scale-105 transition"
           >
-            View All Projects
+            View more Projects
           </a>
         </div>
       </div>

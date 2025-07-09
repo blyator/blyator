@@ -3,7 +3,6 @@ import { gsap, Back, Elastic, Expo, Power3 } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import talkButton from "../assets/talkButton.png";
 
-// Register the TextPlugin
 gsap.registerPlugin(TextPlugin);
 
 export default function Hero() {
@@ -44,7 +43,6 @@ export default function Hero() {
           { opacity: 1, y: 0, duration: 0.7, ease: Back.easeOut.config(1.7) },
           "+=0.3"
         )
-        // Updated paragraph animation with line stagger
         .to(
           ".msg-line",
           {
@@ -104,7 +102,7 @@ export default function Hero() {
   return (
     <header
       ref={heroRef}
-      className="mt-10 md:flex items-start gap-10 px-6 md:px-16"
+      className="lg:mt-30 mt-20 mb-34 md:flex items-start gap-10 px-6 md:px-16"
     >
       {/* Left content */}
       <div className="md:flex-1 text-center md:text-left">
@@ -141,7 +139,7 @@ export default function Hero() {
 
         <div
           ref={msgRef}
-          className="text-sm mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0 font-mono leading-relaxed"
+          className="text-lg mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0 leading-relaxed"
         >
           <div className="msg-line mb-2">
             Software Developer from Nairobi, Kenya
@@ -156,7 +154,7 @@ export default function Hero() {
 
         <div className="talk-wrapper mt-10 relative flex items-center justify-start">
           <a
-            href="mailto:kenjimmy17@gmail.com"
+            href="mailto:dmnbilly@gmail.com"
             target="_blank"
             rel="noreferrer"
             className="inline-block"
