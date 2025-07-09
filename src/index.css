@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Sono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("@fontsource/indie-flower");
+
+@import "tailwindcss";
+@import "locomotive-scroll/dist/locomotive-scroll.css";
+
+@plugin "daisyui" {
+  themes: all;
+}
+
+@plugin "daisyui/theme" {
+  name: "retro";
+
+  --color-primary: #81b29a;
+  --color-secondary: #f07167;
+}
+
+@plugin "daisyui/theme" {
+  name: "forest";
+
+  --color-secondary: #f07167;
+}
+
+body {
+  font-family: "Sono", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.callout {
+  transform-origin: top right;
+}
+
+.letter {
+  font-size: 0;
+  display: inline-block;
+}
+
+.talk-wrapper {
+  opacity: 0;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  background-image: url("/assets/neko/awake.png"),
+    url("/assets/neko/scratch1.png"), url("/assets/neko/scratch2.png"),
+    url("/assets/neko/wash1.png"), url("/assets/neko/wash2.png"),
+    url("/assets/neko/yawn1.png"), url("/assets/neko/yawn2.png"),
+    url("/assets/neko/sleep1.png"), url("/assets/neko/sleep2.png"),
+    url("/assets/neko/up1.png"), url("/assets/neko/up2.png"),
+    url("/assets/neko/upright1.png"), url("/assets/neko/upright2.png"),
+    url("/assets/neko/right1.png"), url("/assets/neko/right2.png"),
+    url("/assets/neko/downright1.png"), url("/assets/neko/downright2.png"),
+    url("/assets/neko/down1.png"), url("/assets/neko/down2.png"),
+    url("/assets/neko/downleft1.png"), url("/assets/neko/downleft2.png"),
+    url("/assets/neko/left1.png"), url("/assets/neko/left2.png"),
+    url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  [data-scroll-container] {
+    overflow: auto;
+    transform: none !important;
+    will-change: auto !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  [data-scroll-container]::-webkit-scrollbar {
+    display: none;
+  }
+}
