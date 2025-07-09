@@ -2,7 +2,10 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer bg-base-100 text-base-content px-6 pt-10 pb-16 border-t border-base-content/10 sm:footer-horizontal">
+    <footer
+      id="contact" // 👈 Important: Enables scroll to #contact to work
+      className="footer bg-base-100 text-base-content px-6 pt-10 pb-16 border-t border-base-content/10 sm:footer-horizontal"
+    >
       <div>
         <span className="footer-title">Billy Yator</span>
         <p>Creative Developer</p>
@@ -13,7 +16,7 @@ function Footer() {
         <a className="link link-hover" href="#home">
           Home
         </a>
-        <a className="link link-hover" href="#">
+        <a className="link link-hover" href="#about">
           About
         </a>
         <a className="link link-hover" href="#skills">
@@ -55,7 +58,7 @@ function Footer() {
         </a>
       </div>
 
-      <div className="">
+      <div>
         <span className="footer-title">Legal</span>
         <a className="link link-hover" href="#">
           Privacy Policy

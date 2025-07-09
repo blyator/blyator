@@ -50,10 +50,13 @@ function Navbar() {
 
   return (
     <div className="navbar bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
-      {/* Portfolio moved left */}
       <div className="navbar-start">
-        <a className="btn btn-ghost normal-case text-2xl text-primary">
-          Portfolio
+        <a
+          className="text-2xl text-primary font-poppins"
+          onClick={() => window.location.reload()}
+          style={{ cursor: "pointer" }}
+        >
+          blyator
         </a>
       </div>
 

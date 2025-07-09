@@ -176,9 +176,9 @@ export default function Hero() {
       {/* Right image */}
       <div className="md:flex-1 mt-10 md:mt-0">
         <img
-          className="w-40 mx-auto md:w-96"
-          src="https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653600089/kenjimmy.me/Portfolio_ngecqk.png"
-          alt="ken photo"
+          className="w-40 mx-auto md:w-96 -scale-x-100"
+          src="/src/assets/hero.png"
+          alt="Bill photo"
         />
       </div>
     </header>

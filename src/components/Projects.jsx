@@ -113,7 +113,7 @@ function Projects() {
                 <p className="text-sm opacity-80">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.badges.map((badge, i) => (
-                    <div className={`badge ${project.badgeColors[i]}`}>
+                    <div className={`badge ${project.badgeColors[i]} badge`}>
                       {badge}
                     </div>
                   ))}

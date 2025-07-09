@@ -40,7 +40,7 @@ function App() {
           <Projects />
         </section>
       </main>
-      <section data-scroll-section id="contact">
+      <section data-scroll-section>
         <Footer />
       </section>
     </AppLayout>

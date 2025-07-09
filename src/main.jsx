@@ -8,6 +8,7 @@ import "@fontsource/sono/400.css";
 import "@fontsource/sono/500.css";
 import "@fontsource/sono/600.css";
 import "@fontsource/sono/700.css";
+import "@fontsource/indie-flower";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
