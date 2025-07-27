@@ -42,7 +42,7 @@ function TechStack() {
                   color: "success",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/nextdotjs",
+                  icon: "https://cdn.simpleicons.org/tailwindcss",
                   title: "Tailwind",
                   color: "warning",
                 },
@@ -51,14 +51,14 @@ function TechStack() {
                   title: "GSAP",
                   color: "error",
                 },
-                // {
-                //   icon: "https://cdn.simpleicons.org/flutter",
-                //   title: "Flutter",
-                //   color: "neutral",
-                // },
                 {
-                  icon: "https://cdn.simpleicons.org/bootstrap",
-                  title: "Bootstrap",
+                  icon: "https://cdn.simpleicons.org/Nextdotjs",
+                  title: "Next.js",
+                  color: "neutral",
+                },
+                {
+                  icon: "https://cdn.simpleicons.org/daisyui",
+                  title: "DaisyUi",
                   color: "primary",
                 },
               ].map((skill, index) => (
@@ -169,9 +169,19 @@ function TechStack() {
                   color: "accent",
                 },
                 {
-                  icon: "https://cdn.simpleicons.org/redis",
-                  title: "Redis",
+                  icon: "https://cdn.simpleicons.org/jira",
+                  title: "Jira",
                   color: "info",
+                },
+                {
+                  icon: "https://cdn.simpleicons.org/cypress",
+                  title: "Cypress",
+                  color: "success",
+                },
+                {
+                  icon: "https://cdn.simpleicons.org/selenium",
+                  title: "Selenium",
+                  color: "success",
                 },
                 {
                   icon: "https://cdn.simpleicons.org/docker",
@@ -213,11 +223,7 @@ function TechStack() {
                   title: "Figma",
                   color: "info",
                 },
-                {
-                  icon: "https://cdn.simpleicons.org/storyblok",
-                  title: "Storyblok",
-                  color: "success",
-                },
+
                 {
                   icon: "https://cdn.simpleicons.org/vite",
                   title: "Vite",

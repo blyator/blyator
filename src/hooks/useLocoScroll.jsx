@@ -7,12 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isMobile = () => {
   if (typeof window === "undefined") return false;
-  return window.innerWidth <= 768; // You can adjust the threshold
+  return window.innerWidth <= 768;
 };
 
-export default function useLocoScroll(containerRef) {
+export default function useLocoScroll(containerRef, shouldInit = true) {
   useEffect(() => {
-    if (!containerRef.current || isMobile()) return;
+    if (!shouldInit || !containerRef.current || isMobile()) return;
 
     const scrollEl = containerRef.current;
 
@@ -60,5 +60,5 @@ export default function useLocoScroll(containerRef) {
       locoScroll.destroy();
       ScrollTrigger.removeEventListener("refresh", locoScroll.update);
     };
-  }, [containerRef]);
+  }, [containerRef, shouldInit]);
 }

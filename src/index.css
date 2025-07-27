@@ -29,7 +29,7 @@ body {
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .callout {
@@ -67,25 +67,25 @@ body::before {
     url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
 }
 
-@media (max-width: 768px) {
-  html,
-  body {
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+html.has-scroll-smooth {
+  overflow: hidden;
+}
 
-  [data-scroll-container] {
-    overflow: auto;
-    transform: none !important;
-    will-change: auto !important;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+html.has-scroll-dragging {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  [data-scroll-container]::-webkit-scrollbar {
-    display: none;
-  }
+[data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-section] {
+  position: relative;
+}
+
+html.has-scroll-smooth .neko-cat {
+  position: absolute !important;
 }

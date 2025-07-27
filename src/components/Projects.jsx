@@ -1,4 +1,3 @@
-// Projects.jsx
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -39,6 +38,16 @@ function Projects() {
       demoLink: "https://blyator.github.io/blyator/",
       codeLink: "https://github.com/blyator/blyator",
     },
+    {
+      title: "The Beauty",
+      description:
+        "A modern e-commerce platform designed for beauty enthusiasts. Users can explore a range of beauty products enjoying a smooth shopping experience.",
+      image: "/assets/Illustrations/beauty.png",
+      badges: ["Python", "React", "PostgreSQL"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
+      demoLink: "https://beauty-shop-opal.vercel.app/",
+      codeLink: "https://github.com/zacthuku/beauty-shop",
+    },
   ];
 
   useEffect(() => {
@@ -66,7 +75,11 @@ function Projects() {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-base-200">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="py-20 bg-base-200 rounded-4xl"
+    >
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16 text-base-content">
@@ -88,19 +101,21 @@ function Projects() {
                   alt={project.title}
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="flex gap-4">
                     <a
                       href={project.demoLink}
-                      target="blank"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn btn-sm btn-primary hover:scale-105 transition"
                     >
                       Live Demo
                     </a>
                     <a
                       href={project.codeLink}
-                      target="blank"
-                      className="btn btn-sm btn-badge-accent hover:scale-105 transition"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-sm btn-accent hover:scale-105 transition"
                     >
                       Code
                     </a>
@@ -113,7 +128,7 @@ function Projects() {
                 <p className="text-sm opacity-80">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.badges.map((badge, i) => (
-                    <div className={`badge ${project.badgeColors[i]} badge`}>
+                    <div key={i} className={`badge ${project.badgeColors[i]}`}>
                       {badge}
                     </div>
                   ))}
@@ -127,10 +142,11 @@ function Projects() {
         <div className="text-center mt-12">
           <a
             href="https://github.com/blyator"
-            target="blank"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary btn-lg hover:scale-105 transition"
           >
-            View more Projects
+            View More Projects
           </a>
         </div>
       </div>

@@ -177,7 +177,7 @@ export default function Hero() {
       <div className="md:flex-1 mt-10 md:mt-0">
         <img
           className="w-40 mx-auto md:w-96 -scale-x-100"
-          src="/assets/hero.png"
+          src="/hero.png"
           alt="Bill photo"
         />
       </div>
