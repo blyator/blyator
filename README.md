@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### Hello World 👋 It's Billy here,[Welcome to my Dev page!](https://blyator.github.io/blyator/)
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=sakigo9&label=Profile%20views&color=0e75b6&style=flat" alt="Saket Prag" /> </p>
@@ -43,7 +42,7 @@ Let’s connect, learn, and grow together whether in tech, business, or life in 
 
 - Moringa School
 - Dev.to
-- freeCodeCamp 
+- freeCodeCamp
 - Coding Ninja
 
 # 💻🚀 Tech Stack:
@@ -67,17 +66,3 @@ Let’s connect, learn, and grow together whether in tech, business, or life in 
 
 ![](https://github-readme-stats.vercel.app/api?username=blyator&theme=dark&hide_border=false&include_all_commits=false&count_private=false)
 ![](https://github-readme-streak-stats.herokuapp.com/?user=blyator&theme=dark&hide_border=false)<br/>
-=======
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> Switch-to-react
