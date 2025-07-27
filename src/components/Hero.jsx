@@ -152,7 +152,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="talk-wrapper mt-10 relative flex items-center justify-start">
+        <div className="talk-wrapper mt-10 relative flex justify-center md:justify-start md:ml-10">
           <a
             href="mailto:dmnbilly@gmail.com"
             target="_blank"
@@ -176,7 +176,7 @@ export default function Hero() {
       {/* Right image */}
       <div className="md:flex-1 mt-10 md:mt-0">
         <img
-          className="w-40 mx-auto md:w-96 -scale-x-100"
+          className="w-11/12 max-w-xs mx-auto md:max-w-md md:w-96 -scale-x-100"
           src="/hero.png"
           alt="Bill photo"
         />
