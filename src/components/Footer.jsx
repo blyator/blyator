@@ -1,9 +1,27 @@
 import React from "react";
 
-function Footer() {
+function Footer({ locoScroll }) {
+  const handleSmoothScroll = (target) => {
+    const element = document.querySelector(target);
+    if (!element) return;
+
+    if (locoScroll?.current) {
+      locoScroll.current.scrollTo(element, {
+        offset: -100,
+        duration: 1500,
+        easing: [0.25, 0.0, 0.35, 1.0],
+      });
+    } else {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <footer
-      id="contact" // 👈 Important: Enables scroll to #contact to work
+      id="contact"
       className="footer bg-base-100 text-base-content px-6 pt-10 pb-16 border-t border-base-content/10 sm:footer-horizontal"
     >
       <div>
@@ -13,21 +31,30 @@ function Footer() {
 
       <div>
         <span className="footer-title">Links</span>
-        <a className="link link-hover" href="#home">
+        <button
+          className="link link-hover text-left"
+          onClick={() => handleSmoothScroll("#home")}
+        >
           Home
-        </a>
-        <a className="link link-hover" href="#about">
+        </button>
+        <button
+          className="link link-hover text-left"
+          onClick={() => handleSmoothScroll("#about")}
+        >
           About
-        </a>
-        <a className="link link-hover" href="#skills">
+        </button>
+        <button
+          className="link link-hover text-left"
+          onClick={() => handleSmoothScroll("#skills")}
+        >
           Skills
-        </a>
-        <a className="link link-hover" href="#projects">
+        </button>
+        <button
+          className="link link-hover text-left"
+          onClick={() => handleSmoothScroll("#projects")}
+        >
           Projects
-        </a>
-        <a className="link link-hover" href="#contact">
-          Contact
-        </a>
+        </button>
       </div>
 
       <div>
@@ -60,10 +87,24 @@ function Footer() {
 
       <div>
         <span className="footer-title">Legal</span>
-        <a className="link link-hover" href="#">
+        <a
+          className="link link-hover"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("privacy_modal")?.showModal();
+          }}
+        >
           Privacy Policy
         </a>
-        <a className="link link-hover" href="#">
+        <a
+          className="link link-hover"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("terms_modal")?.showModal();
+          }}
+        >
           Terms of Use
         </a>
       </div>

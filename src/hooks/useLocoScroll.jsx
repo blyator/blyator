@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -11,6 +11,8 @@ const isMobile = () => {
 };
 
 export default function useLocoScroll(containerRef, shouldInit = true) {
+  const locoScrollRef = useRef(null);
+
   useEffect(() => {
     if (!shouldInit || !containerRef.current || isMobile()) return;
 
@@ -33,6 +35,7 @@ export default function useLocoScroll(containerRef, shouldInit = true) {
       },
     });
 
+    locoScrollRef.current = locoScroll;
     window.loco = locoScroll;
 
     ScrollTrigger.scrollerProxy(scrollEl, {
@@ -61,4 +64,6 @@ export default function useLocoScroll(containerRef, shouldInit = true) {
       ScrollTrigger.removeEventListener("refresh", locoScroll.update);
     };
   }, [containerRef, shouldInit]);
+
+  return locoScrollRef;
 }

@@ -3,7 +3,7 @@ import { themeChange } from "theme-change";
 import gsap from "gsap";
 import BouncyLink from "./BouncyLink";
 
-function Navbar() {
+function Navbar({ locoScroll }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTheme, setActiveTheme] = useState("dark");
   const menuRef = useRef(null);
@@ -11,15 +11,37 @@ function Navbar() {
 
   useEffect(() => {
     themeChange(false);
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
-    setActiveTheme(savedTheme || "light");
+    setActiveTheme(savedTheme);
   }, []);
 
   const changeTheme = (theme) => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
     setActiveTheme(theme);
+  };
+
+  const handleSmoothScroll = (target) => {
+    if (locoScroll && locoScroll.current) {
+      const element = document.querySelector(target);
+      if (element) {
+        locoScroll.current.scrollTo(element, {
+          offset: -100,
+          duration: 1500,
+          easing: [0.25, 0.0, 0.35, 1.0],
+        });
+      }
+    } else {
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -51,13 +73,14 @@ function Navbar() {
   return (
     <div className="navbar bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
       <div className="navbar-start">
-        <a
-          className="text-2xl text-primary font-poppins"
-          onClick={() => window.location.reload()}
-          style={{ cursor: "pointer" }}
+        <button
+          className="text-2xl text-primary font-poppins cursor-pointer"
+          onClick={() => {
+            window.location.href = "/";
+          }}
         >
           blyator
-        </a>
+        </button>
       </div>
 
       <div className="navbar-end lg:hidden flex items-center gap-3">
@@ -117,41 +140,36 @@ function Navbar() {
             style={{ display: "none" }}
           >
             <li>
-              <a
-                href="#about"
-                onClick={() => setIsOpen(false)}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
+              <button
+                onClick={() => handleSmoothScroll("#about")}
+                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
               >
                 My Story
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#skills"
-                onClick={() => setIsOpen(false)}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
+              <button
+                onClick={() => handleSmoothScroll("#skills")}
+                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
               >
                 Tech Stack
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#projects"
-                onClick={() => setIsOpen(false)}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
+              <button
+                onClick={() => handleSmoothScroll("#projects")}
+                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
               >
                 Creations
-              </a>
+              </button>
             </li>
-
             <li>
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105"
+              <button
+                onClick={() => handleSmoothScroll("#contact")}
+                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
               >
                 Say Hi 💬
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -160,16 +178,32 @@ function Navbar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           <li>
-            <BouncyLink text="My &nbsp; Story" href="#about" />
+            <BouncyLink
+              text="My &nbsp; Story"
+              href="#about"
+              onClick={() => handleSmoothScroll("#about")}
+            />
           </li>
           <li>
-            <BouncyLink text="Tech &nbsp; Stack" href="#skills" />
+            <BouncyLink
+              text="Tech &nbsp; Stack"
+              href="#skills"
+              onClick={() => handleSmoothScroll("#skills")}
+            />
           </li>
           <li>
-            <BouncyLink text="Creations" href="#projects" />
+            <BouncyLink
+              text="Creations"
+              href="#projects"
+              onClick={() => handleSmoothScroll("#projects")}
+            />
           </li>
           <li>
-            <BouncyLink text="Say &nbsp; Hi" href="#contact" />
+            <BouncyLink
+              text="Say &nbsp; Hi"
+              href="#contact"
+              onClick={() => handleSmoothScroll("#contact")}
+            />
           </li>
         </ul>
       </div>

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 
-export default function BouncyLink({ text, href }) {
+function BouncyLink({ text, href, onClick }) {
   const lettersRef = useRef([]);
   const containerRef = useRef();
 
@@ -19,7 +19,7 @@ export default function BouncyLink({ text, href }) {
       ease: "power2.out",
     });
 
-    // Letter bounce //
+    // Letter bounce
     lettersRef.current.forEach((el, i) => {
       const direction = i % 2 === 0 ? 1 : -1;
       gsap.fromTo(
@@ -51,13 +51,20 @@ export default function BouncyLink({ text, href }) {
     });
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <a
-      href={href}
+    <button
+      onClick={handleClick}
       ref={containerRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="inline-flex items-center font-sans text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1"
+      className="inline-flex items-center font-sans text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1 border-none bg-transparent cursor-pointer"
       style={{
         gap: "0.04em",
         transformStyle: "preserve-3d",
@@ -74,6 +81,8 @@ export default function BouncyLink({ text, href }) {
           {char}
         </span>
       ))}
-    </a>
+    </button>
   );
 }
+
+export default BouncyLink;
