@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function Projects() {
   const sectionRef = useRef(null);
+  const [touchedCard, setTouchedCard] = useState(null);
 
   const projects = [
     {
@@ -50,6 +51,14 @@ function Projects() {
     },
   ];
 
+  const handleCardTouch = (index) => {
+    setTouchedCard(touchedCard === index ? null : index);
+  };
+
+  const handleOutsideTouch = () => {
+    setTouchedCard(null);
+  };
+
   useEffect(() => {
     const el = sectionRef.current;
 
@@ -73,7 +82,6 @@ function Projects() {
       }
     );
 
-    // Enhanced staggered card animations
     const cards = el.querySelectorAll(".project-card");
     gsap.fromTo(
       cards,
@@ -99,6 +107,18 @@ function Projects() {
         },
       }
     );
+
+    const handleDocumentTouch = (e) => {
+      if (!el.contains(e.target)) {
+        setTouchedCard(null);
+      }
+    };
+
+    document.addEventListener("touchstart", handleDocumentTouch);
+
+    return () => {
+      document.removeEventListener("touchstart", handleDocumentTouch);
+    };
   }, []);
 
   return (
@@ -125,6 +145,7 @@ function Projects() {
                 transformStyle: "preserve-3d",
                 perspective: "1000px",
               }}
+              onTouchStart={() => handleCardTouch(index)}
             >
               {/* Animated background gradient on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -140,8 +161,20 @@ function Projects() {
                 />
 
                 {/* Enhanced overlay with blur backdrop */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                  <div className="flex gap-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                <div
+                  className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-500 flex items-center justify-center ${
+                    touchedCard === index
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-100"
+                  }`}
+                >
+                  <div
+                    className={`flex gap-4 transition-transform duration-500 delay-100 ${
+                      touchedCard === index
+                        ? "translate-y-0"
+                        : "translate-y-8 group-hover:translate-y-0"
+                    }`}
+                  >
                     <a
                       href={project.demoLink}
                       target="_blank"
@@ -215,7 +248,6 @@ function Projects() {
         </div>
       </div>
 
-      {/* Custom styles for enhanced effects */}
       <style jsx>{`
         .project-card:hover {
           filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
