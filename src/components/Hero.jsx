@@ -12,6 +12,8 @@ export default function Hero() {
   const desRef = useRef(null);
   const msgRef = useRef(null);
   const calloutRef = useRef(null);
+  const jokeRef = useRef(null);
+  const cursorRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -20,6 +22,8 @@ export default function Hero() {
       gsap.set(".msg-line", { opacity: 0, y: 30 });
       gsap.set(".talk-wrapper", { opacity: 0 });
       gsap.set(calloutRef.current, { scale: 0, opacity: 0 });
+      gsap.set(jokeRef.current, { opacity: 0 });
+      gsap.set(cursorRef.current, { opacity: 0 });
 
       const tl = gsap.timeline({ delay: 0.5 });
 
@@ -54,6 +58,45 @@ export default function Hero() {
           },
           "+=0.2"
         )
+
+        .to(jokeRef.current, { opacity: 1, duration: 0.5 }, "+=0.2")
+        .to(cursorRef.current, { opacity: 1, duration: 0.1 }, "-=0.5")
+
+        .to(jokeRef.current, {
+          duration: 2.5,
+          text: "sudo rm -rf / ..",
+          ease: "none",
+        })
+        .to({}, { duration: 1 })
+
+        .to(jokeRef.current, {
+          duration: 0.5,
+          text: "sudo rm -rf /",
+          ease: "none",
+        })
+        .to(jokeRef.current, {
+          duration: 0.5,
+          text: "sudo rm",
+          ease: "none",
+        })
+        .to(jokeRef.current, {
+          duration: 0.5,
+          text: "sudo",
+          ease: "none",
+        })
+        .to(jokeRef.current, {
+          duration: 0.5,
+          text: "",
+          ease: "none",
+        })
+
+        .to(cursorRef.current, {
+          opacity: 0,
+          duration: 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+        })
         .to(".talk-wrapper", { opacity: 1, duration: 0.5 }, "+=0.5")
         .to(
           talkRef.current,
@@ -149,6 +192,16 @@ export default function Hero() {
           </div>
           <div className="msg-line">
             web apps using clean code and powerful tools.
+          </div>
+          <div className="relative">
+            <div
+              ref={jokeRef}
+              className="msg-line text-accent italic mt-2 font-mono inline-block"
+            ></div>
+            <span
+              ref={cursorRef}
+              className="ml-1 h-5 w-2 bg-primary inline-block align-middle"
+            ></span>
           </div>
         </div>
 

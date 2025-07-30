@@ -53,8 +53,11 @@ function BouncyLink({ text, href, onClick }) {
 
   const handleClick = (e) => {
     e.preventDefault();
+
     if (onClick) {
       onClick();
+    } else if (href) {
+      window.location.href = href;
     }
   };
 
@@ -64,7 +67,7 @@ function BouncyLink({ text, href, onClick }) {
       ref={containerRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="inline-flex items-center font-sans text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1 border-none bg-transparent cursor-pointer"
+      className="inline-flex items-center font-poppins text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1 border-none bg-transparent cursor-pointer"
       style={{
         gap: "0.04em",
         transformStyle: "preserve-3d",

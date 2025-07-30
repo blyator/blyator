@@ -73,14 +73,9 @@ function Navbar({ locoScroll }) {
   return (
     <div className="navbar bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
       <div className="navbar-start">
-        <button
-          className="text-2xl text-primary font-poppins cursor-pointer"
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        >
-          blyator
-        </button>
+        <div className="text-3xl text-primary text-bold font-poppins">
+          <BouncyLink text="blyator" href="/" />
+        </div>
       </div>
 
       <div className="navbar-end lg:hidden flex items-center gap-3">

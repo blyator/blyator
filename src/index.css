@@ -29,7 +29,7 @@ body {
 html,
 body {
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .callout {
@@ -65,27 +65,4 @@ body::before {
     url("/assets/neko/downleft1.png"), url("/assets/neko/downleft2.png"),
     url("/assets/neko/left1.png"), url("/assets/neko/left2.png"),
     url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
-}
-
-html.has-scroll-smooth {
-  overflow: hidden;
-}
-
-html.has-scroll-dragging {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-[data-scroll-container] {
-  min-height: 100vh;
-}
-
-[data-scroll-section] {
-  position: relative;
-}
-
-html.has-scroll-smooth .neko-cat {
-  position: absolute !important;
 }

@@ -1,14 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useState } from "react";
 
 function Projects() {
-  const sectionRef = useRef(null);
   const [touchedCard, setTouchedCard] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const projects = [
+    {
+      title: "NotesApp",
+      description:
+        "This is an app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
+      image: "/assets/Illustrations/notes.png",
+      badges: ["React", "Tailwind", "Python"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
+      demoLink: "https://notes-hub-psi.vercel.app/",
+      codeLink: "https://github.com/blyator/noteshub",
+    },
     {
       title: "MartianHub",
       description:
@@ -20,19 +26,9 @@ function Projects() {
       codeLink: "https://github.com/blyator/martianhub",
     },
     {
-      title: "NotesApp",
-      description:
-        "This is an app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
-      image: "/assets/Illustrations/notes.png",
-      badges: ["React", "Tailwind", "Python"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
-      demoLink: "https://notes-hub-psi.vercel.app/login",
-      codeLink: "https://github.com/blyator/noteshub",
-    },
-    {
       title: "My Portfolio",
       description:
-        "This portfolio tells the story of my journey in tech from learning the basics to building full-stack apps.",
+        "This portfolio tells the story of how I fell in love with code. Creating beautiful and dynamic web applications. It reflects my journey, creativity, and the joy I find in creating clean design.",
       image: "/assets/Illustrations/portfolio.png",
       badges: ["DaisyUI", "React", "Tailwind"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
@@ -55,164 +51,193 @@ function Projects() {
     setTouchedCard(touchedCard === index ? null : index);
   };
 
-  const handleOutsideTouch = () => {
-    setTouchedCard(null);
+  const handleCardHover = (index) => {
+    setHoveredCard(index);
   };
 
-  useEffect(() => {
-    const el = sectionRef.current;
-
-    // Simple fade-in animation for the entire section
-    gsap.fromTo(
-      el,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          scroller: "[data-scroll-container]",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    const handleDocumentTouch = (e) => {
-      if (!el.contains(e.target)) {
-        setTouchedCard(null);
-      }
-    };
-
-    document.addEventListener("touchstart", handleDocumentTouch);
-
-    return () => {
-      document.removeEventListener("touchstart", handleDocumentTouch);
-    };
-  }, []);
+  const handleCardLeave = () => {
+    setHoveredCard(null);
+  };
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="py-20 bg-base-200 rounded-4xl"
-    >
+    <section id="projects" className="py-20 bg-base-100">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16 text-base-content">
-          <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-          <div className="divider divider-primary max-w-xs mx-auto" />
-          <p className="text-xl opacity-80">Explore some of my recent work</p>
+        <div className="text-center mb-20 text-base-content">
+          <div className="relative inline-block">
+            <h2 className="text-5xl font-bold mb-6 text-secondary">
+              Featured Projects
+            </h2>
+          </div>
+          <div className="divider divider-primary max-w-xs mx-auto opacity-60" />
+          <p className="text-xl opacity-70 font-light tracking-wide">
+            Explore some of my recent work
+          </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="project-card card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-500 group relative overflow-hidden transform-gpu hover:-translate-y-3 hover:rotate-1 hover:scale-[1.02] cursor-pointer"
+              className={`project-card relative group cursor-pointer transition-all duration-700 ease-out ${
+                hoveredCard === index ? "z-20" : "z-10"
+              }`}
               style={{
+                transform:
+                  hoveredCard === index
+                    ? "translateY(-12px) rotateX(5deg) rotateY(2deg) scale(1.03)"
+                    : "translateY(0) rotateX(0) rotateY(0) scale(1)",
                 transformStyle: "preserve-3d",
-                perspective: "1000px",
+                perspective: "1200px",
               }}
+              onMouseEnter={() => handleCardHover(index)}
+              onMouseLeave={handleCardLeave}
               onTouchStart={() => handleCardTouch(index)}
             >
-              {/* Animated background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-              {/* Glowing border effect */}
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-500 -z-10" />
-
-              <figure className="relative overflow-hidden rounded-t-lg">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-52 object-cover group-hover:scale-110 group-hover:brightness-110 group-hover:contrast-105 transition-all duration-700 ease-out"
-                />
-
-                {/* Enhanced overlay with blur backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl transition-all duration-700">
                 <div
-                  className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-500 flex items-center justify-center ${
-                    touchedCard === index
-                      ? "opacity-100"
-                      : "opacity-0 group-hover:opacity-100"
+                  className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5 rounded-3xl transition-opacity duration-500 ${
+                    hoveredCard === index ? "opacity-100" : "opacity-0"
                   }`}
-                >
+                />
+              </div>
+
+              <div
+                className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-secondary to-accent p-[2px] transition-opacity duration-500 ${
+                  hoveredCard === index ? "opacity-60" : "opacity-0"
+                }`}
+              >
+                <div className="w-full h-full bg-base-100 rounded-3xl" />
+              </div>
+
+              <div className="relative bg-base-100/95 backdrop-blur-lg rounded-3xl shadow-xl border border-base-300/50 overflow-hidden transition-all duration-700">
+                <figure className="relative overflow-hidden rounded-t-3xl h-56">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                      hoveredCard === index
+                        ? "scale-110 brightness-110 contrast-105 saturate-110 blur-sm"
+                        : "scale-100 blur-0"
+                    }`}
+                  />
+
                   <div
-                    className={`flex gap-4 transition-transform duration-500 delay-100 ${
-                      touchedCard === index
-                        ? "translate-y-0"
-                        : "translate-y-8 group-hover:translate-y-0"
+                    className={`absolute inset-0 bg-black/20 transition-all duration-500 flex items-center justify-center ${
+                      touchedCard === index || hoveredCard === index
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                    style={{ zIndex: 100 }}
+                  >
+                    <div
+                      className={`flex gap-4 transition-all duration-600 ${
+                        touchedCard === index || hoveredCard === index
+                          ? "translate-y-0 scale-100"
+                          : "translate-y-8 scale-90"
+                      }`}
+                      style={{ zIndex: 110 }}
+                    >
+                      <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-sm bg-gradient-to-r from-primary to-primary/80 border-none text-white hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
+                        style={{ zIndex: 120 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="relative z-10">Live Site</span>
+                      </a>
+                      <a
+                        href={project.codeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-sm bg-gradient-to-r from-accent to-accent/80 border-none text-white hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
+                        style={{ zIndex: 120 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="relative z-10">Code</span>
+                      </a>
+                    </div>
+                  </div>
+                </figure>
+
+                <div className="p-6 relative">
+                  <h3
+                    className={`text-xl font-bold mb-3 transition-all duration-300 relative ${
+                      hoveredCard === index
+                        ? "text-primary"
+                        : "text-base-content"
                     }`}
                   >
-                    <a
-                      href={project.demoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-sm btn-primary hover:scale-110 hover:rotate-3 transition-all duration-300 shadow-lg hover:shadow-xl animate-pulse hover:animate-none"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="relative z-10">Live Demo</span>
-                      <div className="absolute inset-0 bg-primary/20 rounded-md blur opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                    </a>
-                    <a
-                      href={project.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-sm btn-accent hover:scale-110 hover:-rotate-3 transition-all duration-300 shadow-lg hover:shadow-xl animate-pulse hover:animate-none"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="relative z-10">Code</span>
-                      <div className="absolute inset-0 bg-accent/20 rounded-md blur opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Animated corner accent */}
-                <div className="absolute top-0 right-0 w-0 h-0 border-l-[50px] border-l-transparent border-t-[50px] border-t-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </figure>
-
-              <div className="card-body text-base-content relative z-10">
-                <h3 className="card-title group-hover:text-primary transition-colors duration-300 relative">
-                  {project.title}
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500" />
-                </h3>
-                <p className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.badges.map((badge, i) => (
+                    {project.title}
                     <div
-                      key={i}
-                      className={`badge ${project.badgeColors[i]} group-hover:scale-105 group-hover:animate-bounce transition-all duration-300 hover:shadow-md cursor-pointer`}
-                      style={{ animationDelay: `${i * 100}ms` }}
-                    >
-                      {badge}
-                    </div>
-                  ))}
-                </div>
+                      className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-500 ${
+                        hoveredCard === index ? "w-full" : "w-0"
+                      }`}
+                    />
+                  </h3>
 
-                {/* Floating particles effect */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-60 group-hover:animate-ping transition-opacity duration-300" />
-                <div className="absolute bottom-8 left-6 w-1.5 h-1.5 bg-secondary rounded-full opacity-0 group-hover:opacity-40 group-hover:animate-pulse transition-opacity duration-300 delay-200" />
-                <div className="absolute top-1/2 right-8 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-bounce transition-opacity duration-300 delay-300" />
+                  <p className="text-sm leading-relaxed mb-4 text-base-content opacity-90">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.badges.map((badge, i) => (
+                      <div
+                        key={i}
+                        className={`badge ${project.badgeColors[i]} transition-all duration-300 hover:scale-105 cursor-pointer shadow-sm`}
+                      >
+                        {badge}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div
+                    className={`absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-500 ${
+                      hoveredCard === index
+                        ? "opacity-60 animate-ping"
+                        : "opacity-0"
+                    }`}
+                  />
+                  <div
+                    className={`absolute bottom-6 left-6 w-2 h-2 bg-gradient-to-r from-secondary to-accent rounded-full transition-all duration-700 ${
+                      hoveredCard === index
+                        ? "opacity-40 animate-pulse"
+                        : "opacity-0"
+                    }`}
+                    style={{ animationDelay: "200ms" }}
+                  />
+                  <div
+                    className={`absolute top-1/2 right-8 w-1.5 h-1.5 bg-gradient-to-r from-accent to-primary rounded-full transition-all duration-700 ${
+                      hoveredCard === index
+                        ? "opacity-50 animate-bounce"
+                        : "opacity-0"
+                    }`}
+                    style={{ animationDelay: "400ms" }}
+                  />
+                </div>
               </div>
+
+              {/* Premium Shadow Effect */}
+              <div
+                className={`absolute inset-0 rounded-3xl transition-all duration-700 -z-10 ${
+                  hoveredCard === index
+                    ? "shadow-2xl shadow-primary/20 blur-sm scale-105"
+                    : "shadow-lg"
+                }`}
+              />
             </div>
           ))}
         </div>
 
-        {/* Enhanced CTA Button */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <a
             href="https://github.com/blyator"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-lg hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-2xl"
+            className="btn btn-lg bg-primary text-base-content rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl"
           >
-            <span className="relative z-10 transition-colors duration-300">
+            <span className="relative z-10 font-semibold">
               View More Projects
             </span>
           </a>
@@ -221,7 +246,7 @@ function Projects() {
 
       <style jsx>{`
         .project-card:hover {
-          filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
+          filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes float {
@@ -230,11 +255,11 @@ function Projects() {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
           }
         }
 
-        .project-card:hover .animate-float {
+        .animate-float {
           animation: float 3s ease-in-out infinite;
         }
       `}</style>
