@@ -62,47 +62,20 @@ function Projects() {
   useEffect(() => {
     const el = sectionRef.current;
 
+    // Simple fade-in animation for the entire section
     gsap.fromTo(
       el,
       {
         opacity: 0,
-        scale: 0.95,
       },
       {
         opacity: 1,
-        scale: 1,
-        duration: 1.4,
+        duration: 0.8,
         ease: "power2.out",
         scrollTrigger: {
           trigger: el,
           scroller: "[data-scroll-container]",
           start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    const cards = el.querySelectorAll(".project-card");
-    gsap.fromTo(
-      cards,
-      {
-        y: 80,
-        opacity: 0,
-        rotateX: 15,
-        scale: 0.9,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: el,
-          scroller: "[data-scroll-container]",
-          start: "top 70%",
           toggleActions: "play none none reverse",
         },
       }
@@ -237,13 +210,11 @@ function Projects() {
             href="https://github.com/blyator"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-lg hover:scale-105 hover:rotate-1 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-2xl"
+            className="btn btn-primary btn-lg hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-2xl"
           >
-            <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+            <span className="relative z-10 transition-colors duration-300">
               View More Projects
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute top-0 left-0 w-0 h-full bg-white/20 group-hover:w-full transition-all duration-500 transform skew-x-12" />
           </a>
         </div>
       </div>

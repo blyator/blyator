@@ -4,7 +4,7 @@ const Terms = () => {
   return (
     <dialog id="terms_modal" className="modal">
       <div className="modal-box">
-        <h1 className="text-2xl text-accent-content font-bold mb-4">
+        <h1 className="text-2xl text-accent font-bold mb-4">
           No terms.. just don't steal the code!
         </h1>
         <img
