@@ -19,7 +19,6 @@ function BouncyLink({ text, href, onClick }) {
       ease: "power2.out",
     });
 
-    // Letter bounce
     lettersRef.current.forEach((el, i) => {
       const direction = i % 2 === 0 ? 1 : -1;
       gsap.fromTo(
@@ -42,7 +41,6 @@ function BouncyLink({ text, href, onClick }) {
   };
 
   const onLeave = () => {
-    // Reset tilt + scale
     gsap.to(containerRef.current, {
       rotate: 0,
       scale: 1,
@@ -67,7 +65,7 @@ function BouncyLink({ text, href, onClick }) {
       ref={containerRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="inline-flex items-center font-poppins text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1 border-none bg-transparent cursor-pointer"
+      className="inline-flex items-center text-lg font-poppins text-primary hover:text-primary-content hover:bg-secondary transition-colors duration-300 rounded-full px-4 py-1 border-none bg-transparent cursor-pointer"
       style={{
         gap: "0.04em",
         transformStyle: "preserve-3d",

@@ -78,7 +78,6 @@ function Navbar({ locoScroll }) {
         </div>
       </div>
 
-      {/* Mobile view - only theme switcher */}
       <div className="navbar-end lg:hidden flex items-center gap-3">
         <div className="flex gap-2">
           <button
@@ -145,12 +144,11 @@ function Navbar({ locoScroll }) {
         </ul>
       </div>
 
-      {/* Desktop theme switcher */}
       <div className="navbar-end hidden lg:flex flex-col items-end gap-1">
-        <span className="text-sm text-base-content">Themes</span>
+        <span className="mr-4 text-sm text-primary">Themes</span>
         <div className="flex gap-2 items-center">
           <button
-            className={`btn btn-circle w-4 h-4 bg-primary ${
+            className={`btn btn-circle w-6 h-6 bg-primary ${
               activeTheme === "retro"
                 ? "ring-1 ring-primary ring-offset-1"
                 : "hover:bg-primary-focus"
@@ -159,7 +157,7 @@ function Navbar({ locoScroll }) {
             title="Retro Theme"
           />
           <button
-            className={`btn btn-circle w-4 h-4 bg-secondary ${
+            className={`btn btn-circle w-6 h-6 bg-secondary ${
               activeTheme === "forest"
                 ? "ring-1 ring-secondary ring-offset-1"
                 : "hover:bg-secondary-focus"
@@ -168,7 +166,7 @@ function Navbar({ locoScroll }) {
             title="Forest Theme"
           />
           <button
-            className={`btn btn-circle w-4 h-4 bg-accent ${
+            className={`btn btn-circle w-6 h-6 bg-accent ${
               activeTheme === "dark"
                 ? "ring-1 ring-accent ring-offset-1"
                 : "hover:bg-accent-focus"

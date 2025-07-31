@@ -63,8 +63,8 @@ export default function Hero() {
         .to(cursorRef.current, { opacity: 1, duration: 0.1 }, "-=0.5")
 
         .to(jokeRef.current, {
-          duration: 2.5,
-          text: "sudo rm -rf / ..",
+          duration: 2.0,
+          text: "sudo rm -rf / 😂",
           ease: "none",
         })
         .to({}, { duration: 1 })

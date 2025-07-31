@@ -21,14 +21,14 @@ export default function useLocoScroll(containerRef, shouldInit = true) {
     const locoScroll = new LocomotiveScroll({
       el: scrollEl,
       smooth: true,
-      lerp: 0.045,
-      multiplier: 0.9,
+      lerp: 0.03,
+      multiplier: 0.6,
       class: "is-inview",
       getDirection: true,
       getSpeed: true,
       scrollbar: false,
       smartphone: {
-        smooth: true,
+        smooth: false,
         scrollbar: false,
       },
       tablet: {

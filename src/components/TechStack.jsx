@@ -92,11 +92,11 @@ function TechStack() {
                   title: "Node.js",
                   color: "primary",
                 },
-                // {
-                //   icon: "https://cdn.simpleicons.org/nestjs",
-                //   title: "NestJS",
-                //   color: "secondary",
-                // },
+                {
+                  icon: "https://cdn.simpleicons.org/flask",
+                  title: "Flask",
+                  color: "secondary",
+                },
                 {
                   icon: "https://cdn.simpleicons.org/express",
                   title: "Express",
