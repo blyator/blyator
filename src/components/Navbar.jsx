@@ -78,6 +78,7 @@ function Navbar({ locoScroll }) {
         </div>
       </div>
 
+      {/* Mobile view - only theme switcher */}
       <div className="navbar-end lg:hidden flex items-center gap-3">
         <div className="flex gap-2">
           <button
@@ -108,68 +109,9 @@ function Navbar({ locoScroll }) {
             title="Dark Theme"
           />
         </div>
-
-        <div className="dropdown dropdown-end">
-          <button
-            className="btn btn-ghost btn-circle text-primary"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </button>
-          <ul
-            ref={menuRef}
-            className="menu dropdown-content bg-base-100 rounded-box z-10 mt-3 w-64 p-4 shadow-lg space-y-3 text-lg right-0"
-            style={{ display: "none" }}
-          >
-            <li>
-              <button
-                onClick={() => handleSmoothScroll("#about")}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
-              >
-                My Story
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleSmoothScroll("#skills")}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
-              >
-                Tech Stack
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleSmoothScroll("#projects")}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
-              >
-                Creations
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleSmoothScroll("#contact")}
-                className="py-2 text-primary hover:text-primary-focus active:text-primary-content transition-all duration-300 hover:scale-105 w-full text-left"
-              >
-                Say Hi 💬
-              </button>
-            </li>
-          </ul>
-        </div>
       </div>
 
+      {/* Desktop navigation links */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           <li>
@@ -203,6 +145,7 @@ function Navbar({ locoScroll }) {
         </ul>
       </div>
 
+      {/* Desktop theme switcher */}
       <div className="navbar-end hidden lg:flex flex-col items-end gap-1">
         <span className="text-sm text-base-content">Themes</span>
         <div className="flex gap-2 items-center">
