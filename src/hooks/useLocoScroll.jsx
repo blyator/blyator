@@ -26,8 +26,10 @@ export default function useLocoScroll(containerRef, shouldInit = true) {
       class: "is-inview",
       getDirection: true,
       getSpeed: true,
+      scrollbar: false,
       smartphone: {
-        smooth: false,
+        smooth: true,
+        scrollbar: false,
       },
       tablet: {
         smooth: true,

@@ -26,10 +26,16 @@ body {
   font-family: "Sono", sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 html,
 body {
-  height: 100%;
-  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .callout {
@@ -65,4 +71,18 @@ body::before {
     url("/assets/neko/downleft1.png"), url("/assets/neko/downleft2.png"),
     url("/assets/neko/left1.png"), url("/assets/neko/left2.png"),
     url("/assets/neko/upleft1.png"), url("/assets/neko/upleft2.png");
+}
+
+/* Hide Locomotive scrollbars */
+.c-scrollbar,
+.c-scrollbar_thumb,
+.c-scrollbar_track,
+.locomotive-scrollbar,
+.locomotive-scrollbar-thumb,
+.locomotive-scrollbar-track {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
