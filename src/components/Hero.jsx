@@ -58,17 +58,14 @@ export default function Hero() {
           },
           "+=0.2"
         )
-
         .to(jokeRef.current, { opacity: 1, duration: 0.5 }, "+=0.2")
         .to(cursorRef.current, { opacity: 1, duration: 0.1 }, "-=0.5")
-
         .to(jokeRef.current, {
           duration: 2.0,
           text: "sudo rm -rf / 😂",
           ease: "none",
         })
         .to({}, { duration: 1 })
-
         .to(jokeRef.current, {
           duration: 0.5,
           text: "sudo rm -rf /",
@@ -89,7 +86,6 @@ export default function Hero() {
           text: "",
           ease: "none",
         })
-
         .to(cursorRef.current, {
           opacity: 0,
           duration: 0.5,
@@ -141,6 +137,25 @@ export default function Hero() {
 
     return () => ctx.revert();
   }, []);
+
+  // Hover animation handlers
+  const handleHover = () => {
+    gsap.to(talkRef.current, {
+      scale: 1.1,
+      rotate: 10,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleHoverEnd = () => {
+    gsap.to(talkRef.current, {
+      scale: 1,
+      rotate: 0,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
 
   return (
     <header
@@ -211,10 +226,12 @@ export default function Hero() {
             target="_blank"
             rel="noreferrer"
             className="inline-block"
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHoverEnd}
           >
             <div
               ref={talkRef}
-              className="relative z-10 flex items-center justify-center rounded-full border border-white bg-[#f3877e] h-[100px] w-[100px]"
+              className="relative z-10 flex items-center justify-center rounded-full border border-white bg-[#f3877e] h-[100px] w-[100px] hover:cursor-pointer"
             >
               <img src={talkButton} alt="talk button" className="h-[70%]" />
               <div

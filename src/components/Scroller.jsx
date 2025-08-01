@@ -74,7 +74,7 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
   }, [numberOfDots]);
 
   return (
-    <div className="fixed top-1/2 right-6 -translate-y-1/2 z-[1000] flex flex-col gap-1 pointer-events-none px-20">
+    <div className="fixed top-1/2 right-6 -translate-y-1/2 z-[1000] flex-col gap-1 pointer-events-none md:flex hidden md:px-20">
       {Array.from({ length: numberOfDots }).map((_, i) => (
         <div
           key={i}
