@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const interpolateColor = (color1, color2, factor) => {
-  return color1.map((c, i) => Math.round(c + factor * (color2[i] - c)));
-};
+const interpolateColor = (color1, color2, factor) =>
+  color1.map((c, i) => Math.round(c + factor * (color2[i] - c)));
 
 const getBlendedColor = (t) => {
   const green = [34, 197, 94];
@@ -23,32 +22,36 @@ const getBlendedColor = (t) => {
 const Scroller = ({ numberOfDots = 30, locoScroll }) => {
   const dotsRef = useRef([]);
   const scrollProgress = useRef(0);
+  const scrollInstance = useRef(null);
+  const animationFrameId = useRef(null);
 
   useEffect(() => {
-    if (!locoScroll?.current) return;
+    scrollInstance.current = locoScroll?.current;
+
+    if (!scrollInstance.current) return;
 
     const onScroll = ({ scroll, limit }) => {
-      if (limit && limit.y > 0) {
+      if (limit?.y > 0) {
         scrollProgress.current = scroll.y / limit.y;
       }
     };
 
-    locoScroll.current.on("scroll", onScroll);
+    scrollInstance.current.on("scroll", onScroll);
 
-    setTimeout(() => {
-      locoScroll.current.update();
-    }, 200);
-
-    return () => locoScroll.current.off("scroll", onScroll);
-  }, [locoScroll]);
+    return () => {
+      if (scrollInstance.current) {
+        scrollInstance.current.off("scroll", onScroll);
+      }
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [locoScroll?.current]);
 
   useEffect(() => {
-    if (dotsRef.current.length !== numberOfDots) {
-      console.warn("[Scroller] Not all dots are mounted yet.");
-      return;
-    }
-
+    const dots = dotsRef.current;
     const positions = new Array(numberOfDots).fill(0);
+
     const animate = () => {
       const target = scrollProgress.current;
 
@@ -59,31 +62,29 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
         const t = i / (numberOfDots - 1);
         const fillThreshold = target * numberOfDots;
 
-        let color;
-        if (i < fillThreshold) {
-          const blendT = i / numberOfDots;
-          color = getBlendedColor(blendT);
-        } else {
-          color = "#4b5563";
-        }
+        let color =
+          i < fillThreshold ? getBlendedColor(i / numberOfDots) : "#4b5563";
 
-        const dot = dotsRef.current[i];
-        if (dot) {
-          gsap.to(dot, {
+        if (dots[i]) {
+          gsap.to(dots[i], {
             backgroundColor: color,
             scale: 1,
             duration: 0.3,
             ease: "sine.out",
           });
-        } else {
-          console.warn(`[Scroller] Dot at index ${i} is null or undefined`);
         }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId.current = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(animate);
+    animationFrameId.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
   }, [numberOfDots]);
 
   return (
@@ -91,10 +92,8 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
       {Array.from({ length: numberOfDots }).map((_, i) => (
         <div
           key={i}
-          ref={(el) => {
-            if (el) dotsRef.current[i] = el;
-          }}
-          className="w-1.5 h-1.5 rounded-full bg-gray-500"
+          ref={(el) => (dotsRef.current[i] = el)}
+          className="w-1 h-1 rounded-full bg-gray-500"
         />
       ))}
     </div>
