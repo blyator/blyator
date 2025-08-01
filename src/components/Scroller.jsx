@@ -28,11 +28,16 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
     if (!locoScroll?.current) return;
 
     const onScroll = ({ scroll, limit }) => {
-      scrollProgress.current = scroll.y / limit.y;
+      if (limit && limit.y > 0) {
+        scrollProgress.current = scroll.y / limit.y;
+      }
     };
 
     locoScroll.current.on("scroll", onScroll);
-    locoScroll.current.update();
+
+    setTimeout(() => {
+      locoScroll.current.update();
+    }, 200);
 
     return () => locoScroll.current.off("scroll", onScroll);
   }, [locoScroll]);
@@ -79,7 +84,7 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
         <div
           key={i}
           ref={(el) => (dotsRef.current[i] = el)}
-          className="w-2 h-2 rounded-full bg-gray-600"
+          className="w-1.5 h-1.5 rounded-full bg-green-500"
         />
       ))}
     </div>

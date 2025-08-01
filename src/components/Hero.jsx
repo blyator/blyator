@@ -138,7 +138,6 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  // Hover animation handlers
   const handleHover = () => {
     gsap.to(talkRef.current, {
       scale: 1.1,
