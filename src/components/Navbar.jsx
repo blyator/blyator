@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { themeChange } from "theme-change";
-import gsap from "gsap";
 import BouncyLink from "./BouncyLink";
 
 function Navbar({ locoScroll }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTheme, setActiveTheme] = useState("dark");
-  const menuRef = useRef(null);
-  const tl = useRef();
 
   useEffect(() => {
     themeChange(false);
@@ -23,52 +20,21 @@ function Navbar({ locoScroll }) {
   };
 
   const handleSmoothScroll = (target) => {
+    const element = document.querySelector(target);
+    if (!element) return;
+
     if (locoScroll && locoScroll.current) {
-      const element = document.querySelector(target);
-      if (element) {
-        locoScroll.current.scrollTo(element, {
-          offset: -100,
-          duration: 1500,
-          easing: [0.25, 0.0, 0.35, 1.0],
-        });
-      }
+      locoScroll.current.scrollTo(element, {
+        offset: -100,
+        duration: 1500,
+        easing: [0.25, 0.0, 0.35, 1.0],
+      });
     } else {
-      const element = document.querySelector(target);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    tl.current = gsap.timeline({ paused: true }).fromTo(
-      menuRef.current,
-      { y: -20, opacity: 0, display: "none" },
-      {
-        y: 0,
-        opacity: 1,
-        display: "block",
-        duration: 0.3,
-        ease: "power2.out",
-      }
-    );
-    return () => tl.current.kill();
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      menuRef.current.style.display = "block";
-      tl.current.play();
-    } else {
-      tl.current.reverse().then(() => {
-        if (!isOpen) menuRef.current.style.display = "none";
-      });
-    }
-  }, [isOpen]);
 
   return (
     <div className="navbar bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
@@ -110,7 +76,6 @@ function Navbar({ locoScroll }) {
         </div>
       </div>
 
-      {/* Desktop navigation links */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           <li>

@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -12,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import useLocoScroll from "./hooks/useLocoScroll";
 import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
+import Scroller from "./components/Scroller";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -28,6 +28,7 @@ function App() {
   return (
     <>
       <Toaster />
+      <Scroller numberOfDots={25} locoScroll={locoScroll} />
       <NekoCat />
       <Privacy />
 
