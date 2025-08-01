@@ -15,6 +15,7 @@ import Scroller from "./components/Scroller";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [scrollReady, setScrollReady] = useState(false);
   const scrollRef = useRef(null);
   const locoScroll = useLocoScroll(scrollRef, !loading);
 
@@ -23,12 +24,26 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (scrollReady) return;
+
+    const interval = setInterval(() => {
+      if (locoScroll?.current) {
+        setScrollReady(true);
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [locoScroll, scrollReady]);
+
   if (loading) return <Loader />;
 
   return (
     <>
       <Toaster />
-      <Scroller numberOfDots={25} locoScroll={locoScroll} />
+      {scrollReady && <Scroller numberOfDots={30} locoScroll={locoScroll} />}
+
       <NekoCat />
       <Privacy />
 
