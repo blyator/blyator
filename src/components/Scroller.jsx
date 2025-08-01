@@ -93,7 +93,7 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
         <div
           key={i}
           ref={(el) => (dotsRef.current[i] = el)}
-          className="w-1 h-1 rounded-full bg-gray-500"
+          className="w-1.5 h-1.5 rounded-full bg-gray-500"
         />
       ))}
     </div>

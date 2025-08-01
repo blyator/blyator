@@ -43,7 +43,7 @@ function App() {
     <>
       <Toaster />
       {locoScroll && locoScroll.current && (
-        <Scroller numberOfDots={30} locoScroll={locoScroll} />
+        <Scroller numberOfDots={60} locoScroll={locoScroll} />
       )}
 
       <NekoCat />
