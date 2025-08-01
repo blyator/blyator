@@ -43,9 +43,12 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
   }, [locoScroll]);
 
   useEffect(() => {
-    const dots = dotsRef.current;
-    const positions = new Array(numberOfDots).fill(0);
+    if (dotsRef.current.length !== numberOfDots) {
+      console.warn("[Scroller] Not all dots are mounted yet.");
+      return;
+    }
 
+    const positions = new Array(numberOfDots).fill(0);
     const animate = () => {
       const target = scrollProgress.current;
 
@@ -64,18 +67,23 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
           color = "#4b5563";
         }
 
-        gsap.to(dots[i], {
-          backgroundColor: color,
-          scale: 1,
-          duration: 0.3,
-          ease: "sine.out",
-        });
+        const dot = dotsRef.current[i];
+        if (dot) {
+          gsap.to(dot, {
+            backgroundColor: color,
+            scale: 1,
+            duration: 0.3,
+            ease: "sine.out",
+          });
+        } else {
+          console.warn(`[Scroller] Dot at index ${i} is null or undefined`);
+        }
       });
 
       requestAnimationFrame(animate);
     };
 
-    animate();
+    requestAnimationFrame(animate);
   }, [numberOfDots]);
 
   return (
@@ -83,8 +91,10 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
       {Array.from({ length: numberOfDots }).map((_, i) => (
         <div
           key={i}
-          ref={(el) => (dotsRef.current[i] = el)}
-          className="w-1.5 h-1.5 rounded-full bg-green-500"
+          ref={(el) => {
+            if (el) dotsRef.current[i] = el;
+          }}
+          className="w-1.5 h-1.5 rounded-full bg-gray-500"
         />
       ))}
     </div>
