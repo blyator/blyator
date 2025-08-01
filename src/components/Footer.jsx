@@ -41,13 +41,13 @@ function Footer({ locoScroll }) {
           className="link link-hover text-left"
           onClick={() => handleSmoothScroll("#about")}
         >
-          About
+          My story
         </button>
         <button
           className="link link-hover text-left"
           onClick={() => handleSmoothScroll("#skills")}
         >
-          Skills
+          Skills & Tech
         </button>
         <button
           className="link link-hover text-left"
@@ -77,7 +77,7 @@ function Footer({ locoScroll }) {
         </a>
         <a
           className="link link-hover"
-          href="https://twitter.com/blyator"
+          href="https://twitter.com/viper_droid"
           target="_blank"
           rel="noopener noreferrer"
         >
