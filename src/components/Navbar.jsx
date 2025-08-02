@@ -54,7 +54,7 @@ function Navbar({ locoScroll }) {
   };
 
   return (
-    <div className="navbar bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
+    <div className="navbar rounded-3xl bg-base-100/80 shadow-sm sticky top-0 z-50 backdrop-blur-sm">
       <div className="navbar-start">
         <div className="text-3xl text-primary text-bold font-poppins">
           <BouncyLink text="blyator" href="/" />
