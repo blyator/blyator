@@ -8,7 +8,7 @@ function Projects() {
     {
       title: "NotesApp",
       description:
-        "This is an app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
+        "This is the perfect app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
       image: "/assets/Illustrations/notes.png",
       badges: ["React", "Tailwind", "Python"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
@@ -25,20 +25,11 @@ function Projects() {
       demoLink: "https://martianhub.vercel.app/",
       codeLink: "https://github.com/blyator/martianhub",
     },
-    {
-      title: "My Portfolio",
-      description:
-        "This portfolio tells the story of how I fell in love with code. Creating beautiful and dynamic web applications. It reflects my journey, creativity, and the joy I find in creating clean design.",
-      image: "/assets/Illustrations/portfolio.png",
-      badges: ["DaisyUI", "React", "Tailwind"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
-      demoLink: "https://blyator.github.io/blyator/",
-      codeLink: "https://github.com/blyator/blyator",
-    },
+
     {
       title: "The Beauty",
       description:
-        "A modern e-commerce platform designed for beauty enthusiasts. Users can explore a range of beauty products enjoying a smooth shopping experience.",
+        "This is a modern e-commerce platform designed for beauty enthusiasts. Customers are able to explore a range of beauty products and buy them while enjoying a smooth shopping experience.",
       image: "/assets/Illustrations/beauty.png",
       badges: ["Python", "React", "PostgreSQL"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
