@@ -66,7 +66,7 @@ function Navbar({ locoScroll }) {
           {themes.map((theme) => (
             <button
               key={theme.value}
-              className={`btn btn-circle w-5 h-5 ${getThemeDotColor(
+              className={`btn btn-circle w-6 h-6 ${getThemeDotColor(
                 theme.value
               )} ${
                 activeTheme === theme.value
@@ -114,12 +114,12 @@ function Navbar({ locoScroll }) {
       </div>
 
       <div className="navbar-end hidden lg:flex flex-col items-end gap-1">
-        <span className="mr-9 text-sm text-primary">Themes</span>
+        <span className="mr-6 text-sm text-primary">Themes</span>
         <div className="flex gap-2 items-center">
           {themes.map((theme) => (
             <button
               key={theme.value}
-              className={`btn btn-circle w-6 h-6 ${getThemeDotColor(
+              className={`btn btn-circle w-5 h-5 ${getThemeDotColor(
                 theme.value
               )} ${
                 activeTheme === theme.value
