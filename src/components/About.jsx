@@ -4,9 +4,10 @@ import { Activity, FlaskConical, Database } from "lucide-react";
 let gsap, ScrollTrigger;
 
 function About() {
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
 
   const pages = [
     {
@@ -35,6 +36,25 @@ function About() {
     },
   ];
 
+  // Premium mouse tracking
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (rect) {
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 2 - 1,
+          y: ((e.clientY - rect.top) / rect.height) * 2 - 1,
+        });
+      }
+    };
+
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener("mousemove", handleMouseMove);
+      return () => section.removeEventListener("mousemove", handleMouseMove);
+    }
+  }, []);
+
   useEffect(() => {
     const initGSAP = async () => {
       try {
@@ -48,7 +68,6 @@ function About() {
         if (gsap && ScrollTrigger) {
           gsap.registerPlugin(ScrollTrigger);
           initAnimations();
-          setIsInitialized(true);
         }
       } catch (error) {
         console.error("Failed to load GSAP:", error);
@@ -59,96 +78,170 @@ function About() {
       const el = sectionRef.current;
       if (!el || !gsap || !ScrollTrigger) return;
 
-      // Kill any existing ScrollTriggers to avoid memory leaks
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-      // Set initial state for the entire section
-      gsap.set(el, {
-        opacity: 0,
-        y: 20,
-      });
-
-      // Animate the section in when scrolled to
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          scroller: "[data-scroll-container]",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      const header = el.querySelector(".about-header");
+      // Header entrance
+      const header = el.querySelector(".hero-header");
       if (header) {
-        gsap.set(header, { opacity: 0, y: 60, scale: 0.9 });
+        const headerTitle = header.querySelector("h1");
+        const headerText = header.querySelector("p");
 
-        gsap.to(header, {
+        gsap.set([headerTitle, headerText], {
+          opacity: 0,
+          y: 60,
+        });
+
+        gsap.to(headerTitle, {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1.8,
-          ease: "back.out(1.7)",
+          duration: 1.2,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: header,
             scroller: "[data-scroll-container]",
             start: "top 80%",
-            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.to(headerText, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          delay: 0.3,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: header,
+            scroller: "[data-scroll-container]",
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
         });
       }
 
-      const cards = el.querySelectorAll(".about-card");
-      gsap.set(cards, {
-        y: 50,
-        opacity: 0,
-        scale: 0.9,
-      });
+      // Premium cards reveal system
+      const cards = el.querySelectorAll(".premium-card");
 
-      cards.forEach((card) => {
-        gsap.to(card, {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "back.out(1.2)",
+      cards.forEach((card, index) => {
+        const cardContent = card.querySelector(".card-content");
+        const cardImage = card.querySelector(".card-image");
+        const cardIcon = card.querySelector(".card-icon");
+        const cardTitle = card.querySelector(".card-title");
+        const cardText = card.querySelector(".card-text");
+        const cardDecorative = card.querySelector(".card-decorative");
+
+        // Initial state - cards come from different directions
+        const direction = index % 2 === 0 ? -100 : 100;
+        gsap.set(card, {
+          opacity: 0,
+          x: direction,
+          y: 50,
+          scale: 0.9,
+          rotationY: index % 2 === 0 ? -15 : 15,
+        });
+
+        gsap.set(cardImage, {
+          scale: 1.2,
+          opacity: 0,
+          filter: "blur(10px)",
+        });
+
+        gsap.set([cardIcon, cardTitle, cardText, cardDecorative], {
+          opacity: 0,
+          y: 60,
+          x: direction * 0.3,
+        });
+
+        // Entrance animation
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
             scroller: "[data-scroll-container]",
-            start: "top 75%",
-            end: "bottom 25%",
-            toggleActions: "play none none reverse",
+            start: "top 80%",
+            end: "center 40%",
+            scrub: 1.5,
+            onEnter: () => setActiveCard(index),
+          },
+        });
+
+        tl.to(card, {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotationY: 0,
+          duration: 1.5,
+          ease: "power3.out",
+        })
+          .to(
+            cardImage,
+            {
+              scale: 1,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 1.2,
+              ease: "power2.out",
+            },
+            "-=1"
+          )
+          .to(
+            cardIcon,
+            {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.8"
+          )
+          .to(
+            cardTitle,
+            {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.6"
+          )
+          .to(
+            cardText,
+            {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .to(
+            cardDecorative,
+            {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.2"
+          );
+
+        // Continuous parallax while in view
+        gsap.to(cardImage, {
+          yPercent: -20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            scroller: "[data-scroll-container]",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
           },
         });
       });
-
-      const footer = el.querySelector(".about-footer");
-      if (footer) {
-        gsap.set(footer, {
-          opacity: 0,
-          y: 40,
-          scale: 0.95,
-        });
-
-        gsap.to(footer, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.6,
-          ease: "elastic.out(1, 0.5)",
-          scrollTrigger: {
-            trigger: footer,
-            scroller: "[data-scroll-container]",
-            start: "top 90%",
-            end: "bottom 10%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
     };
 
     if (typeof window !== "undefined") {
@@ -167,10 +260,10 @@ function About() {
       id="about"
       ref={sectionRef}
       className="py-20 bg-base-100 overflow-hidden"
-      style={{ opacity: 0 }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="about-header text-center mb-16">
+        {/* Clean Header */}
+        <div className="hero-header text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4">
             My Story
           </h1>
@@ -181,92 +274,68 @@ function About() {
           </p>
         </div>
 
+        {/* Premium Cards */}
         <div className="space-y-16">
           {pages.map((page, index) => (
             <div
               key={index}
-              className="about-card group relative"
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="premium-card group"
             >
-              <div
-                className={`card bg-base-200/80 backdrop-blur-xl border border-base-300/50 rounded-2xl transition-all duration-300 ease-out relative overflow-hidden ${
-                  hoveredCard === index
-                    ? "scale-[1.02] -translate-y-2"
-                    : "hover:scale-[1.01] hover:-translate-y-1"
-                }`}
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${page.color} opacity-0 group-hover:opacity-3 transition-all duration-300`}
-                />
-
-                <div className="card-body p-10 relative z-10">
-                  <div
-                    className={`flex flex-col ${
-                      index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                    } gap-12 lg:gap-16 items-center`}
-                  >
-                    <div className="flex-shrink-0 relative">
-                      <div className="relative overflow-hidden rounded-3xl transform transition-all duration-300 group-hover:scale-105">
-                        <img
-                          src={page.img}
-                          alt={page.title}
-                          className="w-[320px] md:w-[400px] lg:w-[450px] h-[380px] md:h-[450px] lg:h-[500px] object-cover rounded-3xl relative z-10 transition-all duration-300 group-hover:brightness-110"
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl" />
-
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                          <div
-                            className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-ping"
-                            style={{ animationDelay: "0s" }}
+              <div className="relative">
+                {/* Main card */}
+                <div className="card bg-base-200/80 backdrop-blur-xl border border-base-300/50 rounded-2xl transition-all duration-300 ease-out relative overflow-hidden hover:shadow-xl">
+                  <div className="card-body p-10 relative z-10">
+                    <div
+                      className={`flex flex-col ${
+                        index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                      } gap-12 lg:gap-16 items-center`}
+                    >
+                      {/* Image Section */}
+                      <div className="flex-shrink-0 relative card-image">
+                        <div className="relative overflow-hidden rounded-3xl group-hover:scale-105 transition-transform duration-700 ease-out">
+                          <img
+                            src={page.img}
+                            alt={page.title}
+                            className="w-[320px] md:w-[400px] lg:w-[450px] h-[380px] md:h-[450px] lg:h-[500px] object-cover rounded-3xl"
                           />
-                          <div
-                            className="absolute top-3/4 right-1/4 w-1 h-1 bg-white rounded-full animate-ping"
-                            style={{ animationDelay: "1s" }}
-                          />
-                          <div
-                            className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-white rounded-full animate-ping"
-                            style={{ animationDelay: "2s" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-1 text-center lg:text-left relative">
-                      <div className="mb-6 flex justify-center lg:justify-start">
-                        <div
-                          className={`p-4 bg-gradient-to-br ${page.color} rounded-2xl transform transition-all duration-300 group-hover:scale-105`}
-                        >
-                          {page.icon}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl" />
                         </div>
                       </div>
 
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight transform transition-all duration-300 group-hover:scale-105 relative">
-                        {page.title}
-                        <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-                      </h2>
+                      {/* Content Section */}
+                      <div className="flex-1 text-center lg:text-left relative card-content">
+                        {/* Icon */}
+                        <div className="card-icon mb-6 flex justify-center lg:justify-start">
+                          <div
+                            className={`p-4 bg-gradient-to-br ${page.color} rounded-2xl shadow-lg`}
+                          >
+                            {page.icon}
+                          </div>
+                        </div>
 
-                      <p className="text-base-content/80 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl transform transition-all duration-300 group-hover:text-base-content/90">
-                        {page.content}
-                      </p>
+                        {/* Title */}
+                        <h2 className="card-title text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+                          {page.title}
+                        </h2>
 
-                      <div className="flex items-center gap-4 justify-center lg:justify-start transform transition-all duration-300 group-hover:scale-105">
-                        <div
-                          className={`h-1 bg-gradient-to-r ${page.color} rounded-full transition-all duration-300 group-hover:w-20 w-16`}
-                        />
-                        <div
-                          className={`w-3 h-3 bg-gradient-to-r ${page.color} rounded-full animate-pulse`}
-                        />
-                        <div
-                          className={`h-1 bg-gradient-to-r ${page.color} rounded-full transition-all duration-300 group-hover:w-12 w-8`}
-                        />
-                      </div>
+                        {/* Description */}
+                        <p className="card-text text-base-content/80 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+                          {page.content}
+                        </p>
 
-                      <div
-                        className={`absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br ${page.color} rounded-full opacity-0 group-hover:opacity-100 transform transition-all duration-300 group-hover:animate-bounce flex items-center justify-center text-white font-bold`}
-                      >
-                        {index + 1}
+                        {/* Decorative elements */}
+                        <div className="card-decorative flex items-center gap-4 justify-center lg:justify-start">
+                          <div
+                            className={`h-1 bg-gradient-to-r ${page.color} rounded-full w-16 group-hover:w-20 transition-all duration-300`}
+                          />
+                          <div
+                            className={`w-3 h-3 bg-gradient-to-r ${page.color} rounded-full animate-pulse`}
+                          />
+                          <div
+                            className={`h-1 bg-gradient-to-r ${page.color} rounded-full w-8 group-hover:w-12 transition-all duration-300`}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -276,7 +345,8 @@ function About() {
           ))}
         </div>
 
-        <div className="about-footer text-center pt-16">
+        {/* Footer */}
+        <div className="text-center pt-16">
           <div className="inline-flex items-center gap-2 text-base-content/60">
             <div className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
             <span className="text-sm">
@@ -286,6 +356,21 @@ function About() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }
