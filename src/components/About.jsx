@@ -36,7 +36,6 @@ function About() {
     },
   ];
 
-  // Premium mouse tracking
   useEffect(() => {
     const handleMouseMove = (e) => {
       const rect = sectionRef.current?.getBoundingClientRect();
@@ -78,48 +77,64 @@ function About() {
       const el = sectionRef.current;
       if (!el || !gsap || !ScrollTrigger) return;
 
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger && el.contains(trigger.trigger)) {
+          trigger.kill();
+        }
+      });
 
-      // Header entrance
       const header = el.querySelector(".hero-header");
       if (header) {
         const headerTitle = header.querySelector("h1");
         const headerText = header.querySelector("p");
 
-        gsap.set([headerTitle, headerText], {
+        gsap.set(headerTitle, {
+          opacity: 0,
+          y: 80,
+          scale: 0.8,
+          rotationX: 45,
+        });
+
+        gsap.set(headerText, {
           opacity: 0,
           y: 60,
+          scale: 0.9,
+          rotationY: 15,
         });
 
-        gsap.to(headerTitle, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power2.out",
+        const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
             scroller: "[data-scroll-container]",
             start: "top 80%",
+            end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
         });
 
-        gsap.to(headerText, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          delay: 0.3,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: header,
-            scroller: "[data-scroll-container]",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
+        headerTl
+          .to(headerTitle, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotationX: 0,
+            duration: 1.5,
+            ease: "back.out(1.4)",
+          })
+          .to(
+            headerText,
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotationY: 0,
+              duration: 1.2,
+              ease: "power3.out",
+            },
+            "-=0.8"
+          );
       }
 
-      // Premium cards reveal system
       const cards = el.querySelectorAll(".premium-card");
 
       cards.forEach((card, index) => {
@@ -130,7 +145,6 @@ function About() {
         const cardText = card.querySelector(".card-text");
         const cardDecorative = card.querySelector(".card-decorative");
 
-        // Initial state - cards come from different directions
         const direction = index % 2 === 0 ? -100 : 100;
         gsap.set(card, {
           opacity: 0,
@@ -152,7 +166,6 @@ function About() {
           x: direction * 0.3,
         });
 
-        // Entrance animation
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -229,7 +242,6 @@ function About() {
             "-=0.2"
           );
 
-        // Continuous parallax while in view
         gsap.to(cardImage, {
           yPercent: -20,
           ease: "none",
@@ -249,8 +261,12 @@ function About() {
     }
 
     return () => {
-      if (ScrollTrigger) {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (ScrollTrigger && sectionRef.current) {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.trigger && sectionRef.current.contains(trigger.trigger)) {
+            trigger.kill();
+          }
+        });
       }
     };
   }, []);
@@ -262,7 +278,6 @@ function About() {
       className="py-20 bg-base-100 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
-        {/* Clean Header */}
         <div className="hero-header text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4">
             My Story
@@ -274,7 +289,6 @@ function About() {
           </p>
         </div>
 
-        {/* Premium Cards */}
         <div className="space-y-16">
           {pages.map((page, index) => (
             <div
@@ -284,7 +298,14 @@ function About() {
             >
               <div className="relative">
                 {/* Main card */}
-                <div className="card bg-base-200/80 backdrop-blur-xl border border-base-300/50 rounded-2xl transition-all duration-300 ease-out relative overflow-hidden hover:shadow-xl">
+                <div
+                  className="card 
+  bg-base-200/80 border border-base-300/50 
+  lg:bg-transparent lg:border-none 
+  backdrop-blur-xl rounded-4xl 
+  transition-all duration-300 ease-out 
+  relative overflow-hidden hover:shadow-lg"
+                >
                   <div className="card-body p-10 relative z-10">
                     <div
                       className={`flex flex-col ${
@@ -299,7 +320,7 @@ function About() {
                             alt={page.title}
                             className="w-[320px] md:w-[400px] lg:w-[450px] h-[380px] md:h-[450px] lg:h-[500px] object-cover rounded-3xl"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-4xl" />
                         </div>
                       </div>
 
@@ -326,15 +347,9 @@ function About() {
 
                         {/* Decorative elements */}
                         <div className="card-decorative flex items-center gap-4 justify-center lg:justify-start">
-                          <div
-                            className={`h-1 bg-gradient-to-r ${page.color} rounded-full w-16 group-hover:w-20 transition-all duration-300`}
-                          />
-                          <div
-                            className={`w-3 h-3 bg-gradient-to-r ${page.color} rounded-full animate-pulse`}
-                          />
-                          <div
-                            className={`h-1 bg-gradient-to-r ${page.color} rounded-full w-8 group-hover:w-12 transition-all duration-300`}
-                          />
+                          <div className="h-1 bg-primary rounded-full w-16 group-hover:w-20 transition-all duration-300" />
+                          <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
+                          <div className="h-1 bg-primary rounded-full w-8 group-hover:w-12 transition-all duration-300" />
                         </div>
                       </div>
                     </div>
@@ -356,21 +371,6 @@ function About() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }
