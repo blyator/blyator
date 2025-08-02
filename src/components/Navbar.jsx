@@ -4,11 +4,11 @@ import BouncyLink from "./BouncyLink";
 
 function Navbar({ locoScroll }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTheme, setActiveTheme] = useState("dark");
+  const [activeTheme, setActiveTheme] = useState("forest");
 
   useEffect(() => {
     themeChange(false);
-    const savedTheme = localStorage.getItem("theme") || "dark";
+    const savedTheme = localStorage.getItem("theme") || "forest";
     document.documentElement.setAttribute("data-theme", savedTheme);
     setActiveTheme(savedTheme);
   }, []);
