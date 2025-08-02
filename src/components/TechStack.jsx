@@ -294,11 +294,11 @@ function TechStack() {
   ];
 
   const toolsSkills = [
-    {
-      icon: "https://cdn.simpleicons.org/npm",
-      title: "npm",
-      color: "primary",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/npm",
+    //   title: "npm",
+    //   color: "primary",
+    // },
     {
       icon: "https://cdn.simpleicons.org/git",
       title: "Git",
@@ -366,7 +366,7 @@ function TechStack() {
       <h3 className="text-2xl font-semibold mb-6 text-center text-base-content">
         {title}
       </h3>
-      <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+      <div className="flex mt-10 flex-wrap justify-center gap-6 md:gap-8">
         {skills.map((skill, index) => (
           <div
             key={index}

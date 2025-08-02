@@ -13,6 +13,23 @@ function Navbar({ locoScroll }) {
     setActiveTheme(savedTheme);
   }, []);
 
+  const themes = [
+    { name: "Retro", value: "retro" },
+    { name: "Forest", value: "forest" },
+    { name: "Dracual", value: "dracula" },
+    { name: "Dark", value: "sunset" },
+  ];
+
+  const getThemeDotColor = (theme) => {
+    const colorMap = {
+      retro: "bg-amber-300",
+      forest: "bg-emerald-600",
+      sunset: "bg-yellow-600",
+      dracula: "bg-rose-300",
+    };
+    return colorMap[theme] || "bg-primary";
+  };
+
   const changeTheme = (theme) => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
@@ -46,33 +63,20 @@ function Navbar({ locoScroll }) {
 
       <div className="navbar-end lg:hidden flex items-center gap-3">
         <div className="flex gap-2">
-          <button
-            className={`btn btn-circle w-6 h-6 bg-primary ${
-              activeTheme === "retro"
-                ? "ring-1 ring-primary ring-offset-1"
-                : "hover:bg-primary-focus"
-            }`}
-            onClick={() => changeTheme("retro")}
-            title="Retro Theme"
-          />
-          <button
-            className={`btn btn-circle w-6 h-6 bg-secondary ${
-              activeTheme === "forest"
-                ? "ring-1 ring-secondary ring-offset-1"
-                : "hover:bg-secondary-focus"
-            }`}
-            onClick={() => changeTheme("forest")}
-            title="Forest Theme"
-          />
-          <button
-            className={`btn btn-circle w-6 h-6 bg-accent ${
-              activeTheme === "dark"
-                ? "ring-1 ring-accent ring-offset-1"
-                : "hover:bg-accent-focus"
-            }`}
-            onClick={() => changeTheme("dark")}
-            title="Dark Theme"
-          />
+          {themes.map((theme) => (
+            <button
+              key={theme.value}
+              className={`btn btn-circle w-5 h-5 ${getThemeDotColor(
+                theme.value
+              )} ${
+                activeTheme === theme.value
+                  ? "ring-1 ring-offset-1"
+                  : "hover:opacity-80"
+              }`}
+              onClick={() => changeTheme(theme.value)}
+              title={`${theme.name}`}
+            />
+          ))}
         </div>
       </div>
 
@@ -110,35 +114,22 @@ function Navbar({ locoScroll }) {
       </div>
 
       <div className="navbar-end hidden lg:flex flex-col items-end gap-1">
-        <span className="mr-4 text-sm text-primary">Themes</span>
+        <span className="mr-9 text-sm text-primary">Themes</span>
         <div className="flex gap-2 items-center">
-          <button
-            className={`btn btn-circle w-6 h-6 bg-primary ${
-              activeTheme === "retro"
-                ? "ring-1 ring-primary ring-offset-1"
-                : "hover:bg-primary-focus"
-            }`}
-            onClick={() => changeTheme("retro")}
-            title="Retro Theme"
-          />
-          <button
-            className={`btn btn-circle w-6 h-6 bg-secondary ${
-              activeTheme === "forest"
-                ? "ring-1 ring-secondary ring-offset-1"
-                : "hover:bg-secondary-focus"
-            }`}
-            onClick={() => changeTheme("forest")}
-            title="Forest Theme"
-          />
-          <button
-            className={`btn btn-circle w-6 h-6 bg-accent ${
-              activeTheme === "dark"
-                ? "ring-1 ring-accent ring-offset-1"
-                : "hover:bg-accent-focus"
-            }`}
-            onClick={() => changeTheme("dark")}
-            title="Dark Theme"
-          />
+          {themes.map((theme) => (
+            <button
+              key={theme.value}
+              className={`btn btn-circle w-6 h-6 ${getThemeDotColor(
+                theme.value
+              )} ${
+                activeTheme === theme.value
+                  ? "ring-1 ring-offset-1"
+                  : "hover:opacity-80"
+              }`}
+              onClick={() => changeTheme(theme.value)}
+              title={`${theme.name}`}
+            />
+          ))}
         </div>
       </div>
     </div>
