@@ -25,7 +25,7 @@ As a tech enthusiast, I love to experience tech and share my experiences and ins
 
 I also have a keen interest in entrepreneurship, branding and outdoor adventures, because I believe in balancing work with personal growth and exploration.
 
-Let’s connect, learn, and grow together whether in tech, business or life in general ❤✌<br><br><br>
+Let’s connect, learn and grow together whether in tech, business or life in general ❤✌<br><br><br>
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmk3Ym0xeGR1aXZ0enNxeTllYml1MjdoZHk1Y3dyN2d2ZXQ0b2lxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/w9Sb2fZrLPxHUFxLV2/giphy.gif" width="450" height="400" align="right" >
 
