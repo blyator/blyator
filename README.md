@@ -1,7 +1,5 @@
 ### Hello World ?<img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="25px"> It's Billy here
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=sakigo9&label=Profile%20views&color=0e75b6&style=flat" alt="Saket Prag" /> </p>
-
 <h3 align="center">Full-Stack Developer | Software QA</h3>
 
 ## 🌐 Socials:
