@@ -19,13 +19,13 @@ I’m a Full-Stack Developer with a strong passion for coding and solving proble
 
 Creating scalable and efficient solutions has always been my drive, combining my background in tech support and quality assurance with my growing expertise in software development
 
-As a tech enthusiast, I love to experience tech and share my experiences and insights with others, through my social media and blogs.
+As a tech enthusiast, I love to experience tech and share my experiences and insights with others through my social media and blogs.
 
 
 
-I also have a keen interest in entrepreneurship, branding, and outdoor adventures, because I believe in balancing work with personal growth and exploration.
+I also have a keen interest in entrepreneurship, branding and outdoor adventures, because I believe in balancing work with personal growth and exploration.
 
-Let’s connect, learn, and grow together whether in tech, business, or life in general ❤✌<br><br><br>
+Let’s connect, learn, and grow together whether in tech, business or life in general ❤✌<br><br><br>
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmk3Ym0xeGR1aXZ0enNxeTllYml1MjdoZHk1Y3dyN2d2ZXQ0b2lxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/w9Sb2fZrLPxHUFxLV2/giphy.gif" width="450" height="400" align="right" >
 
