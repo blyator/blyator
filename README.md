@@ -37,7 +37,7 @@ Let’s connect, learn and grow together whether in tech, business or life in ge
  <li>I love Stargazzing, it's always been my top and favourite hobby as long as I can remember🌟</li>
   <li>When I’m not on a computer, you’re likely to find me hiking, cycling or exploring designs and photography. Tech is a big part of my life, but so is connecting with people, solving problems and embracing new experiences.</li>
   <li>Active in the developer community, always learning and sharing insights.</li>
-   <li>I'm open to collaborations, networking, and mentorships. let’s connect</li>
+   <li>I'm open to collaborations, networking and mentorships. let’s connect</li>
 </ul><br><br><br>
 
 # 🧩 Tech Stack:
