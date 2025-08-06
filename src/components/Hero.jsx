@@ -1,11 +1,11 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useEffect } from "react";
 import { gsap, Back, Elastic, Expo, Power3 } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import talkButton from "../assets/talkButton.png";
 
 gsap.registerPlugin(TextPlugin);
 
-export default function Hero() {
+export default function Hero({ locoScroll }) {
   const heroRef = useRef();
   const talkRef = useRef(null);
   const talkPulseRef = useRef(null);
@@ -14,6 +14,7 @@ export default function Hero() {
   const calloutRef = useRef(null);
   const jokeRef = useRef(null);
   const cursorRef = useRef(null);
+  const imageRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -138,6 +139,32 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (!locoScroll?.current) return;
+
+    locoScroll.current.on("scroll", (args) => {
+      if (imageRef.current) {
+        const speed = 0.7;
+        const y = args.scroll.y * speed;
+        imageRef.current.style.transform = `translateY(${y}px)`;
+      }
+    });
+
+    locoScroll.current.on("scroll", (args) => {
+      if (heroRef.current) {
+        const speed = -0.1;
+        const y = args.scroll.y * speed;
+        heroRef.current.querySelector(
+          ".text-content"
+        ).style.transform = `translateY(${y}px)`;
+      }
+    });
+
+    return () => {
+      locoScroll.current?.off("scroll");
+    };
+  }, [locoScroll]);
+
   const handleHover = () => {
     gsap.to(talkRef.current, {
       scale: 1.1,
@@ -159,18 +186,25 @@ export default function Hero() {
   return (
     <header
       ref={heroRef}
-      className="lg:mt-30 mt-20 mb-34 md:flex items-start gap-10 px-6 md:px-16"
+      className="lg:mt-40 mt-20 mb-34 md:flex items-start gap-10 px-6 md:px-16"
+      data-scroll-section
     >
       {/* Left content */}
-      <div className="md:flex-1 text-center md:text-left">
+      <div className="text-content md:flex-1 text-center md:text-left">
         <div
           ref={calloutRef}
           className="callout bg-secondary shadow rounded-full px-6 py-2 font-bold inline-block relative mb-4 mx-auto md:ml-8 md:mx-0"
+          data-scroll
+          data-scroll-speed="0.1"
         >
           It's me
         </div>
 
-        <h1 className="mb-6 text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent leading-tight text-center md:text-left">
+        <h1
+          className="mb-6 text-4xl sm:text-6xl font-black text-primary"
+          data-scroll
+          data-scroll-speed="0.2"
+        >
           <span className="block lg:inline">
             {"Billy".split("").map((char, i) => (
               <span key={`b${i}`} className="letter inline-block">
@@ -190,6 +224,8 @@ export default function Hero() {
         <p
           ref={desRef}
           className="uppercase font-bold mb-4 text-lg text-accent"
+          data-scroll
+          data-scroll-speed="0.1"
         >
           Full-stack Developer
         </p>
@@ -197,6 +233,8 @@ export default function Hero() {
         <div
           ref={msgRef}
           className="text-lg mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0 leading-relaxed"
+          data-scroll
+          data-scroll-speed="0.1"
         >
           <div className="msg-line mb-2">
             Software Developer from Nairobi, Kenya
@@ -231,6 +269,8 @@ export default function Hero() {
             <div
               ref={talkRef}
               className="relative z-10 flex items-center justify-center rounded-full border border-white bg-[#f3877e] h-[100px] w-[100px] hover:cursor-pointer"
+              data-scroll
+              data-scroll-speed="0.1"
             >
               <img src={talkButton} alt="talk button" className="h-[70%]" />
               <div
@@ -243,8 +283,13 @@ export default function Hero() {
       </div>
 
       {/* Right image */}
-      <div className="md:flex-1 mt-10 md:mt-0">
+      <div
+        className="md:flex-1 mt-10 md:mt-0"
+        data-scroll
+        data-scroll-speed="0.5"
+      >
         <img
+          ref={imageRef}
           className="w-11/12 max-w-xs mx-auto md:max-w-md md:w-96 -scale-x-100"
           src="/hero.png"
           alt="Bill photo"

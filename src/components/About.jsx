@@ -14,7 +14,7 @@ function About() {
       title: "Frontend Work",
       icon: <Activity className="w-6 h-6 text-white" />,
       content:
-        "I make beautiful and responsive user interfaces that are intuitive and also perform smoothly across devices. ",
+        "I make beautiful and responsive user interfaces that are intuitive and also perform smoothly across devices.",
       img: "/assets/Illustrations/frontend.png",
       color: "from-blue-500 to-purple-600",
     },
@@ -35,6 +35,27 @@ function About() {
       color: "from-orange-500 to-red-600",
     },
   ];
+
+  // Improved progressive text reveal utility
+  const splitTextIntoWords = (element) => {
+    if (!element || element.dataset.split) return;
+
+    const text = element.textContent;
+    const words = text.split(" ");
+
+    element.innerHTML = words
+      .map(
+        (word, index) =>
+          `<span class="word-reveal" style="display: inline-block;">
+          <span class="word-inner" style="display: inline-block; opacity: 0; transform: translateY(20px);">${word}${
+            index < words.length - 1 ? "&nbsp;" : ""
+          }</span>
+        </span>`
+      )
+      .join("");
+
+    element.dataset.split = "true";
+  };
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -83,23 +104,21 @@ function About() {
         }
       });
 
+      // Header Animation
       const header = el.querySelector(".hero-header");
       if (header) {
         const headerTitle = header.querySelector("h1");
         const headerText = header.querySelector("p");
 
-        gsap.set(headerTitle, {
-          opacity: 0,
-          y: 80,
-          scale: 0.8,
-          rotationX: 45,
-        });
+        splitTextIntoWords(headerTitle);
+        splitTextIntoWords(headerText);
 
-        gsap.set(headerText, {
+        const titleWords = headerTitle.querySelectorAll(".word-inner");
+        const textWords = headerText.querySelectorAll(".word-inner");
+
+        gsap.set(header, {
           opacity: 0,
-          y: 60,
-          scale: 0.9,
-          rotationY: 15,
+          y: 40,
         });
 
         const headerTl = gsap.timeline({
@@ -113,57 +132,70 @@ function About() {
         });
 
         headerTl
-          .to(headerTitle, {
+          .to(header, {
             opacity: 1,
             y: 0,
-            scale: 1,
-            rotationX: 0,
-            duration: 1.5,
-            ease: "back.out(1.4)",
+            duration: 0.6,
+            ease: "power2.out",
           })
           .to(
-            headerText,
+            titleWords,
             {
               opacity: 1,
               y: 0,
-              scale: 1,
-              rotationY: 0,
-              duration: 1.2,
-              ease: "power3.out",
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power2.out",
             },
-            "-=0.8"
+            "-=0.3"
+          )
+          .to(
+            textWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.05,
+              ease: "power2.out",
+            },
+            "-=0.4"
           );
       }
 
+      // Cards Animation
       const cards = el.querySelectorAll(".premium-card");
 
       cards.forEach((card, index) => {
-        const cardContent = card.querySelector(".card-content");
         const cardImage = card.querySelector(".card-image");
         const cardIcon = card.querySelector(".card-icon");
         const cardTitle = card.querySelector(".card-title");
         const cardText = card.querySelector(".card-text");
         const cardDecorative = card.querySelector(".card-decorative");
 
-        const direction = index % 2 === 0 ? -100 : 100;
+        splitTextIntoWords(cardTitle);
+        splitTextIntoWords(cardText);
+
+        const titleWords = cardTitle.querySelectorAll(".word-inner");
+        const textWords = cardText.querySelectorAll(".word-inner");
+
         gsap.set(card, {
           opacity: 0,
-          x: direction,
-          y: 50,
-          scale: 0.9,
-          rotationY: index % 2 === 0 ? -15 : 15,
+          y: 60,
         });
 
         gsap.set(cardImage, {
-          scale: 1.2,
           opacity: 0,
-          filter: "blur(10px)",
+          scale: 0.95,
         });
 
-        gsap.set([cardIcon, cardTitle, cardText, cardDecorative], {
+        gsap.set(cardIcon, {
           opacity: 0,
-          y: 60,
-          x: direction * 0.3,
+          scale: 0.8,
+        });
+
+        gsap.set(cardDecorative, {
+          opacity: 0,
+          x: -20,
         });
 
         const tl = gsap.timeline({
@@ -172,69 +204,63 @@ function About() {
             scroller: "[data-scroll-container]",
             start: "top 80%",
             end: "center 40%",
-            scrub: 1.5,
+            toggleActions: "play none none reverse",
             onEnter: () => setActiveCard(index),
           },
         });
 
         tl.to(card, {
           opacity: 1,
-          x: 0,
           y: 0,
-          scale: 1,
-          rotationY: 0,
-          duration: 1.5,
-          ease: "power3.out",
+          duration: 0.8,
+          ease: "power2.out",
         })
           .to(
             cardImage,
             {
+              opacity: 1,
               scale: 1,
-              opacity: 1,
-              filter: "blur(0px)",
-              duration: 1.2,
-              ease: "power2.out",
-            },
-            "-=1"
-          )
-          .to(
-            cardIcon,
-            {
-              opacity: 1,
-              y: 0,
-              x: 0,
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.8"
-          )
-          .to(
-            cardTitle,
-            {
-              opacity: 1,
-              y: 0,
-              x: 0,
               duration: 0.8,
               ease: "power2.out",
             },
             "-=0.6"
           )
           .to(
-            cardText,
+            cardIcon,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.6,
+              ease: "back.out(1.2)",
+            },
+            "-=0.4"
+          )
+          .to(
+            titleWords,
             {
               opacity: 1,
               y: 0,
-              x: 0,
-              duration: 0.8,
+              duration: 0.6,
+              stagger: 0.08,
               ease: "power2.out",
             },
-            "-=0.4"
+            "-=0.2"
+          )
+          .to(
+            textWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.03,
+              ease: "power2.out",
+            },
+            "-=0.3"
           )
           .to(
             cardDecorative,
             {
               opacity: 1,
-              y: 0,
               x: 0,
               duration: 0.6,
               ease: "power2.out",
@@ -243,17 +269,39 @@ function About() {
           );
 
         gsap.to(cardImage, {
-          yPercent: -20,
+          yPercent: -10,
           ease: "none",
           scrollTrigger: {
             trigger: card,
             scroller: "[data-scroll-container]",
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
       });
+
+      // Footer Animation
+      const footer = el.querySelector(".text-center.pt-16");
+      if (footer) {
+        gsap.set(footer, {
+          opacity: 0,
+          y: 20,
+        });
+
+        gsap.to(footer, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: footer,
+            scroller: "[data-scroll-container]",
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
     };
 
     if (typeof window !== "undefined") {
@@ -275,14 +323,15 @@ function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 bg-base-100 overflow-hidden"
+      className="py-20 bg-base-100 overflow-hidden font-sans"
+      style={{ fontFamily: "var(--font-family, inherit)" }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="hero-header text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4">
+        <div className="hero-header text-center mb-16 opacity-0 translate-y-10">
+          <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4 leading-tight">
             My Story
           </h1>
-          <p className="text-base-content/70 text-xl max-w-3xl mx-auto">
+          <p className="text-base-content/70 text-xl max-w-3xl mx-auto leading-relaxed">
             I design and build awesome Applications. From dynamic frontend
             interfaces to scalable backend systems using modern technologies and
             clean code principles.
@@ -294,26 +343,17 @@ function About() {
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="premium-card group"
+              className="premium-card group opacity-0 translate-y-16"
             >
               <div className="relative">
-                {/* Main card */}
-                <div
-                  className="card 
-  bg-base-200/80 border border-base-300/50 
-  lg:bg-transparent lg:border-none 
-  backdrop-blur-xl rounded-4xl 
-  transition-all duration-300 ease-out 
-  relative overflow-hidden hover:shadow-lg"
-                >
+                <div className="card bg-base-200/80 border border-base-300/50 lg:bg-transparent lg:border-none backdrop-blur-xl rounded-4xl transition-all duration-300 ease-out relative overflow-hidden hover:shadow-lg">
                   <div className="card-body p-10 relative z-10">
                     <div
                       className={`flex flex-col ${
                         index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                       } gap-12 lg:gap-16 items-center`}
                     >
-                      {/* Image Section */}
-                      <div className="flex-shrink-0 relative card-image">
+                      <div className="flex-shrink-0 relative card-image opacity-0 scale-95">
                         <div className="relative overflow-hidden rounded-3xl group-hover:scale-105 transition-transform duration-700 ease-out">
                           <img
                             src={page.img}
@@ -324,10 +364,8 @@ function About() {
                         </div>
                       </div>
 
-                      {/* Content Section */}
                       <div className="flex-1 text-center lg:text-left relative card-content">
-                        {/* Icon */}
-                        <div className="card-icon mb-6 flex justify-center lg:justify-start">
+                        <div className="card-icon mb-6 flex justify-center lg:justify-start opacity-0 scale-75">
                           <div
                             className={`p-4 bg-gradient-to-br ${page.color} rounded-2xl shadow-lg`}
                           >
@@ -335,18 +373,15 @@ function About() {
                           </div>
                         </div>
 
-                        {/* Title */}
                         <h2 className="card-title text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
                           {page.title}
                         </h2>
 
-                        {/* Description */}
                         <p className="card-text text-base-content/80 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
                           {page.content}
                         </p>
 
-                        {/* Decorative elements */}
-                        <div className="card-decorative flex items-center gap-4 justify-center lg:justify-start">
+                        <div className="card-decorative flex items-center gap-4 justify-center lg:justify-start opacity-0 -translate-x-5">
                           <div className="h-1 bg-primary rounded-full w-16 group-hover:w-20 transition-all duration-300" />
                           <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
                           <div className="h-1 bg-primary rounded-full w-8 group-hover:w-12 transition-all duration-300" />
@@ -360,8 +395,7 @@ function About() {
           ))}
         </div>
 
-        {/* Footer */}
-        <div className="text-center pt-16">
+        <div className="text-center pt-16 opacity-0 translate-y-5">
           <div className="inline-flex items-center gap-2 text-base-content/60">
             <div className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
             <span className="text-sm">

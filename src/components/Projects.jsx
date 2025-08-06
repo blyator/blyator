@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+
+let gsap, ScrollTrigger;
 
 function Projects() {
   const [touchedCard, setTouchedCard] = useState(null);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
 
   const projects = [
     {
@@ -25,7 +29,6 @@ function Projects() {
       demoLink: "https://martianhub.vercel.app/",
       codeLink: "https://github.com/blyator/martianhub",
     },
-
     {
       title: "The Beauty",
       description:
@@ -37,6 +40,27 @@ function Projects() {
       codeLink: "https://github.com/zacthuku/beauty-shop",
     },
   ];
+
+  // Progressive text reveal utility
+  const splitTextIntoWords = (element) => {
+    if (!element || element.dataset.split) return;
+
+    const text = element.textContent;
+    const words = text.split(" ");
+
+    element.innerHTML = words
+      .map(
+        (word, index) =>
+          `<span class="word-reveal" style="display: inline-block;">
+          <span class="word-inner" style="display: inline-block; opacity: 0; transform: translateY(20px);">${word}${
+            index < words.length - 1 ? "&nbsp;" : ""
+          }</span>
+        </span>`
+      )
+      .join("");
+
+    element.dataset.split = "true";
+  };
 
   const handleCardTouch = (index) => {
     setTouchedCard(touchedCard === index ? null : index);
@@ -50,10 +74,272 @@ function Projects() {
     setHoveredCard(null);
   };
 
+  useEffect(() => {
+    const initGSAP = async () => {
+      try {
+        const gsapModule = await import("gsap");
+        const ScrollTriggerModule = await import("gsap/ScrollTrigger");
+
+        gsap = gsapModule.gsap || gsapModule.default;
+        ScrollTrigger =
+          ScrollTriggerModule.ScrollTrigger || ScrollTriggerModule.default;
+
+        if (gsap && ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+          initAnimations();
+        }
+      } catch (error) {
+        console.error("Failed to load GSAP:", error);
+      }
+    };
+
+    const initAnimations = () => {
+      const el = sectionRef.current;
+      if (!el || !gsap || !ScrollTrigger) return;
+
+      // Clear existing triggers for this section
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger && el.contains(trigger.trigger)) {
+          trigger.kill();
+        }
+      });
+
+      // Header Animation
+      const header = el.querySelector(".hero-header");
+      if (header) {
+        const headerTitle = header.querySelector("h2");
+        const headerText = header.querySelector("p");
+
+        splitTextIntoWords(headerTitle);
+        splitTextIntoWords(headerText);
+
+        const titleWords = headerTitle.querySelectorAll(".word-inner");
+        const textWords = headerText.querySelectorAll(".word-inner");
+        const divider = header.querySelector(".divider");
+
+        gsap.set(header, {
+          opacity: 0,
+          y: 40,
+        });
+
+        gsap.set(divider, {
+          scaleX: 0,
+          opacity: 0,
+        });
+
+        const headerTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: header,
+            scroller: "[data-scroll-container]",
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        headerTl
+          .to(header, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          })
+          .to(
+            titleWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          )
+          .to(
+            divider,
+            {
+              scaleX: 1,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .to(
+            textWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.05,
+              ease: "power2.out",
+            },
+            "-=0.2"
+          );
+      }
+
+      // Project Cards Animation
+      const cards = el.querySelectorAll(".project-card");
+
+      cards.forEach((card, index) => {
+        const cardImage = card.querySelector("figure img");
+        const cardTitle = card.querySelector(".card-title");
+        const cardDescription = card.querySelector(".card-description");
+        const badges = card.querySelectorAll(".badge");
+        const buttons = card.querySelectorAll(".card-buttons a");
+
+        if (cardTitle) splitTextIntoWords(cardTitle);
+        if (cardDescription) splitTextIntoWords(cardDescription);
+
+        const titleWords = cardTitle?.querySelectorAll(".word-inner") || [];
+        const descWords =
+          cardDescription?.querySelectorAll(".word-inner") || [];
+
+        // Initial states
+        gsap.set(card, {
+          opacity: 0,
+          y: 80,
+          scale: 0.95,
+        });
+
+        gsap.set(cardImage, {
+          opacity: 0,
+          scale: 1.1,
+        });
+
+        gsap.set(badges, {
+          opacity: 0,
+          y: 20,
+          scale: 0.8,
+        });
+
+        // Don't set initial state for buttons - they should appear on hover/touch
+
+        const cardTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            scroller: "[data-scroll-container]",
+            start: "top 85%",
+            end: "center 50%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        cardTl
+          .to(card, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          })
+          .to(
+            cardImage,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.6"
+          )
+          .to(
+            titleWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.08,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .to(
+            descWords,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.03,
+              ease: "power2.out",
+            },
+            "-=0.2"
+          )
+          .to(
+            badges,
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.5,
+              stagger: 0.1,
+              ease: "back.out(1.2)",
+            },
+            "-=0.3"
+          );
+
+        // Parallax effect for card images
+        gsap.to(cardImage, {
+          yPercent: -15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            scroller: "[data-scroll-container]",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      });
+
+      // Call-to-action button animation
+      const ctaButton = el.querySelector(".cta-button");
+      if (ctaButton) {
+        gsap.set(ctaButton, {
+          opacity: 0,
+          y: 30,
+          scale: 0.95,
+        });
+
+        gsap.to(ctaButton, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: ctaButton,
+            scroller: "[data-scroll-container]",
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      initGSAP();
+    }
+
+    return () => {
+      if (ScrollTrigger && sectionRef.current) {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.trigger && sectionRef.current.contains(trigger.trigger)) {
+            trigger.kill();
+          }
+        });
+      }
+    };
+  }, []);
+
   return (
-    <section id="projects" className="py-20 bg-base-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-20 text-base-content">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="py-20 bg-base-100 relative"
+    >
+      <div className="container mx-auto px-4 relative">
+        <div className="hero-header text-center mb-20 text-base-content opacity-0 translate-y-10">
           <div className="relative inline-block">
             <h2 className="text-5xl font-bold mb-6 text-secondary">
               Featured Projects
@@ -69,7 +355,8 @@ function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`project-card relative group cursor-pointer transition-all duration-700 ease-out ${
+              ref={(el) => (cardsRef.current[index] = el)}
+              className={`project-card relative group cursor-pointer transition-all duration-700 ease-out opacity-0 translate-y-20 scale-95 ${
                 hoveredCard === index ? "z-20" : "z-10"
               }`}
               style={{
@@ -105,15 +392,15 @@ function Projects() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                    className={`w-full h-full object-cover transition-all duration-700 ease-out opacity-0 scale-110 ${
                       hoveredCard === index
-                        ? "scale-110 brightness-110 contrast-105 saturate-110 blur-sm"
-                        : "scale-100 blur-0"
+                        ? "brightness-110 contrast-105 saturate-110 blur-sm"
+                        : "blur-0"
                     }`}
                   />
 
                   <div
-                    className={`absolute inset-0 bg-black/20 transition-all duration-500 flex items-center justify-center ${
+                    className={`card-buttons absolute inset-0 bg-black/20 transition-all duration-500 flex items-center justify-center ${
                       touchedCard === index || hoveredCard === index
                         ? "opacity-100 pointer-events-auto"
                         : "opacity-0 pointer-events-none"
@@ -154,7 +441,7 @@ function Projects() {
 
                 <div className="p-6 relative">
                   <h3
-                    className={`text-xl font-bold mb-3 transition-all duration-300 relative ${
+                    className={`card-title text-xl font-bold mb-3 transition-all duration-300 relative ${
                       hoveredCard === index
                         ? "text-primary"
                         : "text-base-content"
@@ -168,7 +455,7 @@ function Projects() {
                     />
                   </h3>
 
-                  <p className="text-sm leading-relaxed mb-4 text-base-content opacity-90">
+                  <p className="card-description text-sm leading-relaxed mb-4 text-base-content opacity-90">
                     {project.description}
                   </p>
 
@@ -226,7 +513,7 @@ function Projects() {
             href="https://github.com/blyator"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-lg bg-primary text-base-content rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl"
+            className="cta-button btn btn-lg bg-primary text-base-content rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl opacity-0 translate-y-8 scale-95"
           >
             <span className="relative z-10 font-semibold">
               View More Projects

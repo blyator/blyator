@@ -11,7 +11,7 @@ const Privacy = () => {
           className="w-[600px] h-[400px] max-w-full rounded-md mb-4 mx-auto"
         />
         <p className="text-gray-600 text-center">
-          Confused? So are we..😂 we dont have it
+          Confused? dont worry..😂 we dont have it
         </p>
 
         <div className="modal-action">

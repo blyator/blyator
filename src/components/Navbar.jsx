@@ -16,7 +16,7 @@ function Navbar({ locoScroll }) {
   const themes = [
     { name: "Retro", value: "retro" },
     { name: "Forest", value: "forest" },
-    { name: "Dracual", value: "dracula" },
+    { name: "Dracula", value: "dracula" },
     { name: "Dark", value: "sunset" },
   ];
 
@@ -24,7 +24,7 @@ function Navbar({ locoScroll }) {
     const colorMap = {
       retro: "bg-amber-300",
       forest: "bg-emerald-600",
-      sunset: "bg-yellow-600",
+      sunset: "bg-slate-700",
       dracula: "bg-rose-300",
     };
     return colorMap[theme] || "bg-primary";
@@ -105,7 +105,7 @@ function Navbar({ locoScroll }) {
           </li>
           <li>
             <BouncyLink
-              text="Say &nbsp; Hi"
+              text="Let's &nbsp; talk"
               href="#contact"
               onClick={() => handleSmoothScroll("#contact")}
             />

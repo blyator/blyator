@@ -48,9 +48,9 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
         x: 0,
         scale: 1,
         skewX: 0,
-        duration: 0.7,
+        duration: 0.4,
         ease: "back.out(1.2)",
-        stagger: 0.04,
+        stagger: 0.02,
       }
     );
 
@@ -63,7 +63,7 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
       },
       {
         opacity: 1,
-        x: 0,
+        x: -1, //moon position
         scale: 1,
         duration: 0.9,
         ease: "back.out(1.7)",
@@ -205,16 +205,13 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
         className="absolute w-8 h-8 rounded-full pointer-events-none"
         style={{
           right: "1.25rem",
-          mixBlendMode: "screen",
           opacity: 0,
         }}
       >
         <img
           src="/assets/Illustrations/star.svg"
           alt="Star"
-          className="w-full h-full animate-spin-slow drop-shadow-[0_0_24px_rgba(230,230,230,0.6)]
-
-"
+          className="w-full h-full drop-shadow-[0_0_24px_rgba(230,230,230,0.6)]"
         />
       </div>
     </div>
