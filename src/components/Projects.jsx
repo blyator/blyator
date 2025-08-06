@@ -22,7 +22,7 @@ function Projects() {
     {
       title: "MartianHub",
       description:
-        "MartianHub is a web app that showcases images taken by NASA's Mars rovers. It provides a simple way to explore the Red Planet through high-quality photos from Curiosity and Perseverance Rovers.",
+        "MartianHub is a web app that showcases images taken by NASA's Mars rovers. It provides a simple way to explore the Red Planet through high-quality photos from Curiosity and Perseverance.",
       image: "/assets/Illustrations/martian.png",
       badges: ["Javascript", "CSS", "HTML"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],

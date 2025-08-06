@@ -203,7 +203,7 @@ export default function Hero({ locoScroll }) {
         <h1
           className="mb-6 text-4xl sm:text-6xl font-black text-primary"
           data-scroll
-          data-scroll-speed="0.2"
+          data-scroll-speed="0.1"
         >
           <span className="block lg:inline">
             {"Billy".split("").map((char, i) => (
@@ -234,7 +234,7 @@ export default function Hero({ locoScroll }) {
           ref={msgRef}
           className="text-lg mt-6 mb-8 max-w-xs text-base-content mx-auto md:mx-0 leading-relaxed"
           data-scroll
-          data-scroll-speed="0.1"
+          data-scroll-speed="0.2"
         >
           <div className="msg-line mb-2">
             Software Developer from Nairobi, Kenya

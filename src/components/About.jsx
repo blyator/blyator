@@ -3,11 +3,18 @@ import { Activity, FlaskConical, Database } from "lucide-react";
 
 let gsap, ScrollTrigger;
 
-function About() {
-  const [activeCard, setActiveCard] = useState(0);
+function About({ locoScroll }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+
+  useEffect(() => {
+    if (!locoScroll?.current) return;
+
+    locoScroll.current.update();
+
+    return () => {};
+  }, [locoScroll]);
 
   const pages = [
     {
@@ -36,7 +43,6 @@ function About() {
     },
   ];
 
-  // Improved progressive text reveal utility
   const splitTextIntoWords = (element) => {
     if (!element || element.dataset.split) return;
 
@@ -162,7 +168,6 @@ function About() {
           );
       }
 
-      // Cards Animation
       const cards = el.querySelectorAll(".premium-card");
 
       cards.forEach((card, index) => {
@@ -281,7 +286,6 @@ function About() {
         });
       });
 
-      // Footer Animation
       const footer = el.querySelector(".text-center.pt-16");
       if (footer) {
         gsap.set(footer, {
@@ -323,11 +327,14 @@ function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 bg-base-100 overflow-hidden font-sans"
-      style={{ fontFamily: "var(--font-family, inherit)" }}
+      className="py-20 bg-base-100 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="hero-header text-center mb-16 opacity-0 translate-y-10">
+        <div
+          className="hero-header text-center mb-16 opacity-0 translate-y-10"
+          data-scroll
+          data-scroll-speed="0.1"
+        >
           <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4 leading-tight">
             My Story
           </h1>
