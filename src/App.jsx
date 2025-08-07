@@ -12,6 +12,7 @@ import useLocoScroll from "./hooks/useLocoScroll";
 import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Scroller from "./components/Scroller";
+import BackToTopButton from "./components/BackToTopButton";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,7 @@ function App() {
 
       <NekoCat />
       <Privacy />
+      <BackToTopButton locoScroll={locoScroll} />
 
       <div
         ref={scrollRef}

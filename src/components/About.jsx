@@ -36,7 +36,7 @@ function About() {
     },
   ];
 
-  // Improved progressive text reveal utility
+  // text reveal utility
   const splitTextIntoWords = (element) => {
     if (!element || element.dataset.split) return;
 
@@ -105,7 +105,7 @@ function About() {
       const el = sectionRef.current;
       if (!el || !gsap || !ScrollTrigger) return;
 
-      // Kill any existing ScrollTriggers to avoid duplicates
+      // Kill any existing ScrollTrigger
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.trigger && el.contains(trigger.trigger)) {
           trigger.kill();
@@ -320,7 +320,6 @@ function About() {
       style={{ fontFamily: "var(--font-family, inherit)" }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header with initial opacity and transform */}
         <div className="hero-header text-center mb-16 opacity-0 translate-y-10">
           <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4 leading-tight">
             My Story
@@ -389,7 +388,6 @@ function About() {
           ))}
         </div>
 
-        {/* Footer with initial opacity and transform */}
         <div className="text-center pt-16 opacity-0 translate-y-5">
           <div className="inline-flex items-center gap-2 text-base-content/60">
             <div className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
