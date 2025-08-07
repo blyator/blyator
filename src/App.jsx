@@ -13,12 +13,14 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Scroller from "./components/Scroller";
 import BackToTopButton from "./components/BackToTopButton";
+import ContactForm from "./components/ContactForm";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [scrollReady, setScrollReady] = useState(false);
   const scrollRef = useRef(null);
   const locoScroll = useLocoScroll(scrollRef, !loading);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1300);
@@ -43,6 +45,11 @@ function App() {
   return (
     <>
       <Toaster />
+      <Toaster />
+      <ContactForm
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+      />
       {locoScroll && locoScroll.current && (
         <Scroller numberOfDots={60} locoScroll={locoScroll} />
       )}
@@ -61,7 +68,10 @@ function App() {
 
           <main>
             <section id="home" data-scroll-section>
-              <Hero />
+              <Hero
+                locoScroll={locoScroll}
+                onOpenContact={() => setIsContactFormOpen(true)}
+              />
             </section>
 
             <section id="about" data-scroll-section>

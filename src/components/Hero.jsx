@@ -5,7 +5,7 @@ import talkButton from "../assets/talkButton.png";
 
 gsap.registerPlugin(TextPlugin);
 
-export default function Hero({ locoScroll }) {
+export default function Hero({ locoScroll, onOpenContact }) {
   const heroRef = useRef();
   const talkRef = useRef(null);
   const talkPulseRef = useRef(null);
@@ -183,6 +183,12 @@ export default function Hero({ locoScroll }) {
     });
   };
 
+  const handleTalkClick = () => {
+    if (onOpenContact) {
+      onOpenContact();
+    }
+  };
+
   return (
     <header
       ref={heroRef}
@@ -258,13 +264,11 @@ export default function Hero({ locoScroll }) {
         </div>
 
         <div className="talk-wrapper mt-10 relative flex justify-center md:justify-start md:ml-10">
-          <a
-            href="mailto:dmnbilly@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block"
+          <button
+            onClick={handleTalkClick}
             onMouseEnter={handleHover}
             onMouseLeave={handleHoverEnd}
+            className="inline-block"
           >
             <div
               ref={talkRef}
@@ -278,7 +282,7 @@ export default function Hero({ locoScroll }) {
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#e45447] rounded-full h-[120px] w-[120px] opacity-0 scale-0 z-0"
               ></div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
 
