@@ -41,7 +41,7 @@ function Projects() {
     },
   ];
 
-  // Progressive text reveal utility
+  // text reveal utility
   const splitTextIntoWords = (element) => {
     if (!element || element.dataset.split) return;
 
@@ -86,7 +86,9 @@ function Projects() {
 
         if (gsap && ScrollTrigger) {
           gsap.registerPlugin(ScrollTrigger);
-          initAnimations();
+          setTimeout(() => {
+            initAnimations();
+          }, 100);
         }
       } catch (error) {
         console.error("Failed to load GSAP:", error);
@@ -195,7 +197,6 @@ function Projects() {
         const descWords =
           cardDescription?.querySelectorAll(".word-inner") || [];
 
-        // Initial states
         gsap.set(card, {
           opacity: 0,
           y: 80,
@@ -212,8 +213,6 @@ function Projects() {
           y: 20,
           scale: 0.8,
         });
-
-        // Don't set initial state for buttons - they should appear on hover/touch
 
         const cardTl = gsap.timeline({
           scrollTrigger: {
@@ -277,22 +276,8 @@ function Projects() {
             },
             "-=0.3"
           );
-
-        // Parallax effect for card images
-        gsap.to(cardImage, {
-          yPercent: -15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            scroller: "[data-scroll-container]",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
       });
 
-      // Call-to-action button animation
       const ctaButton = el.querySelector(".cta-button");
       if (ctaButton) {
         gsap.set(ctaButton, {

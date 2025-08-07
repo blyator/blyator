@@ -87,11 +87,13 @@ function About() {
 
         if (gsap && ScrollTrigger) {
           gsap.registerPlugin(ScrollTrigger);
-          initAnimations();
+          setTimeout(() => {
+            initAnimations();
+          }, 100);
         }
       } catch (error) {
         console.error("Failed to load GSAP:", error);
-        // Fallback: Show content immediately if GSAP fails
+        // Show content if GSAP fails
         document.querySelectorAll(".opacity-0").forEach((el) => {
           el.style.opacity = 1;
           el.style.transform = "none";
