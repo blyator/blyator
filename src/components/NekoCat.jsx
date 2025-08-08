@@ -94,7 +94,7 @@ export default function NekoCat() {
 
         setIdleFrames(0);
       } else if (hasMoved) {
-        // here is for idle animation
+        // idle animation
         if (countRef.current % 4 === 0) {
           setIdleFrames((prev) => prev + 1);
         }

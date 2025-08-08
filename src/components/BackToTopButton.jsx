@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { CornerRightUp } from "lucide-react";
 
-const BackToTopButton = ({ locoScroll }) => {
+const BackToTopButton = ({ locoScroll, isContactFormOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const eventListenerSet = useRef(false);
 
@@ -80,7 +80,7 @@ const BackToTopButton = ({ locoScroll }) => {
     }
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || isContactFormOpen) return null;
 
   return (
     <StyledWrapper className="md:fixed bottom-30 right-20 z-[9999]">

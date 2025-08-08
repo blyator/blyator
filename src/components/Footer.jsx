@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footer({ locoScroll }) {
+function Footer({ locoScroll, onOpenContact }) {
   const handleSmoothScroll = (target) => {
     const element = document.querySelector(target);
     if (!element) return;
@@ -31,12 +31,12 @@ function Footer({ locoScroll }) {
           <span className="footer-title">Billy Yator</span>
           <p>Creative Developer</p>
           <p>Got a question, proposal or project? </p>
-          <a
-            href="mailto:dmnbilly@gmail.com"
-            className="underline text-primary"
+          <button
+            onClick={onOpenContact}
+            className="underline text-primary cursor-pointer"
           >
-            SEND ME AN EMAIL
-          </a>
+            GET IN TOUCH
+          </button>
         </div>
 
         <div>
@@ -120,7 +120,6 @@ function Footer({ locoScroll }) {
         </div>
       </div>
 
-      {/* Copyright section */}
       <div className="border-t border-base-content/10 py-4 px-6 text-sm text-base-content/60 flex justify-between items-center">
         <p>© {currentYear}</p>
         <p>

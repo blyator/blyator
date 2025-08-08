@@ -45,7 +45,6 @@ function App() {
   return (
     <>
       <Toaster />
-      <Toaster />
       <ContactForm
         isOpen={isContactFormOpen}
         onClose={() => setIsContactFormOpen(false)}
@@ -56,7 +55,11 @@ function App() {
 
       <NekoCat />
       <Privacy />
-      <BackToTopButton locoScroll={locoScroll} />
+      <BackToTopButton
+        locoScroll={locoScroll}
+        isContactFormOpen={isContactFormOpen}
+        onOpenContact={() => setIsContactFormOpen(true)}
+      />
 
       <div
         ref={scrollRef}
@@ -88,7 +91,10 @@ function App() {
           </main>
 
           <section id="contact" data-scroll-section>
-            <Footer locoScroll={locoScroll} />
+            <Footer
+              locoScroll={locoScroll}
+              onOpenContact={() => setIsContactFormOpen(true)}
+            />
             <Privacy />
             <Terms />
           </section>

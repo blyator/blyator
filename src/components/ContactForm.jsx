@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { X, Phone, Mail, ArrowRight } from "lucide-react";
+import {
+  X,
+  Phone,
+  Mail,
+  ArrowRight,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 
 const ContactForm = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +15,12 @@ const ContactForm = ({ isOpen, onClose }) => {
     project: "",
     service: "",
     budget: "",
+  });
+
+  const [submissionState, setSubmissionState] = useState({
+    isSubmitting: false,
+    isSuccess: false,
+    error: null,
   });
 
   const overlayRef = useRef(null);
@@ -41,14 +54,99 @@ const ContactForm = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
+  // Reset submission state when form opens
+  useEffect(() => {
+    if (isOpen) {
+      setSubmissionState({
+        isSubmitting: false,
+        isSuccess: false,
+        error: null,
+      });
+    }
+  }, [isOpen]);
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    onClose();
+
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.project) {
+      setSubmissionState({
+        isSubmitting: false,
+        isSuccess: false,
+        error: "Please fill in all required fields.",
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmissionState({
+        isSubmitting: false,
+        isSuccess: false,
+        error: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    setSubmissionState({
+      isSubmitting: true,
+      isSuccess: false,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("https://formspree.io/f/xnnzozaz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.project,
+          service: formData.service,
+          budget: formData.budget,
+          _subject: `New contact form submission from ${formData.name}`,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmissionState({
+          isSubmitting: false,
+          isSuccess: true,
+          error: null,
+        });
+
+        // Reset form data
+        setFormData({
+          name: "",
+          email: "",
+          project: "",
+          service: "",
+          budget: "",
+        });
+
+        // Auto-close after 3 seconds
+        setTimeout(() => {
+          onClose();
+        }, 3000);
+      } else {
+        throw new Error(
+          `Form submission failed with status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      setSubmissionState({
+        isSubmitting: false,
+        isSuccess: false,
+        error: `Failed to send message: ${error.message}. Please try again or use the email button above.`,
+      });
+    }
   };
 
   const handleOverlayClick = (e) => {
@@ -58,7 +156,7 @@ const ContactForm = ({ isOpen, onClose }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-end p-4"
+      className="fixed inset-0 z-50 flex items-center justify-end p-10"
       style={{
         display: "none",
         backgroundColor: "rgba(0, 0, 0, 0.3)",
@@ -68,27 +166,61 @@ const ContactForm = ({ isOpen, onClose }) => {
     >
       <div
         ref={formRef}
-        className="bg-base-100 text-base-content w-full max-w-lg max-h-[90vh] shadow-2xl flex flex-col rounded-2xl overflow-hidden"
+        className="bg-base-100 text-base-content w-full max-w-lg max-h-[95vh] shadow-2xl flex flex-col rounded-2xl overflow-hidden"
         style={{
           transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header - Fixed */}
-        <div className="flex-shrink-0 p-4 sm:p-6 border-b border-base-200">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold">Get In Touch</h2>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-base-200 rounded-full transition-colors cursor-pointer"
-            >
-              <X size={24} className="text-base-content" />
-            </button>
+        {/* Header */}
+        <div className="flex-shrink-0 p-4 sm:p-6 border-b border-base-200 relative">
+          <div className="bg-neutral rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 bg-success rounded-full"></div>
+              <span className="text-neutral-content text-sm font-medium uppercase tracking-wide">
+                QUICK RESPONSE
+              </span>
+            </div>
+            <p className="text-neutral-content text-sm">
+              We respond within 2-4 hours during business hours.
+            </p>
           </div>
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-red-500 rounded-full btn btn-error w-9 h-9 transition-colors cursor-pointer"
+          >
+            <X size={24} className="text-base-content" />
+          </button>
         </div>
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+          {/* Success Message */}
+          {submissionState.isSuccess && (
+            <div className="mb-6 p-4 bg-success/10 border border-success/20 rounded-lg">
+              <div className="flex items-center gap-2 text-success">
+                <CheckCircle size={20} />
+                <span className="font-medium">Message sent successfully!</span>
+              </div>
+              <p className="text-sm mt-1 text-success/80">
+                Thank you for reaching out. We'll get back to you soon!
+              </p>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submissionState.error && (
+            <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-lg">
+              <div className="flex items-center gap-2 text-error">
+                <AlertCircle size={20} />
+                <span className="font-medium">Error</span>
+              </div>
+              <p className="text-sm mt-1 text-error/80">
+                {submissionState.error}
+              </p>
+            </div>
+          )}
+
           {/* Quick Action Buttons */}
           <div className="mb-6 space-y-3">
             <button
@@ -117,7 +249,7 @@ const ContactForm = ({ isOpen, onClose }) => {
             </div>
             <div className="relative flex justify-center">
               <span className="px-2 bg-base-100 text-base-content">
-                or fill out the form
+                or fill out this form
               </span>
             </div>
           </div>
@@ -134,6 +266,7 @@ const ContactForm = ({ isOpen, onClose }) => {
                 onChange={handleInputChange}
                 placeholder="Your full name"
                 className="w-full px-3 py-2.5 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                required
               />
             </div>
 
@@ -148,6 +281,7 @@ const ContactForm = ({ isOpen, onClose }) => {
                 onChange={handleInputChange}
                 placeholder="your@email.com"
                 className="w-full px-3 py-2.5 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                required
               />
             </div>
 
@@ -162,6 +296,7 @@ const ContactForm = ({ isOpen, onClose }) => {
                 placeholder="Describe your project goals, requirements, and vision..."
                 rows={3}
                 className="w-full px-3 py-2.5 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none"
+                required
               />
             </div>
 
@@ -213,6 +348,7 @@ const ContactForm = ({ isOpen, onClose }) => {
               onClick={() => {
                 window.open("#workflow", "_blank");
               }}
+              type="button"
               className="w-full bg-accent text-accent-content py-3 rounded-lg font-medium hover:bg-accent-focus transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <ArrowRight size={18} />
@@ -221,9 +357,10 @@ const ContactForm = ({ isOpen, onClose }) => {
 
             <button
               onClick={handleSubmit}
-              className="w-full bg-neutral text-neutral-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer"
+              disabled={submissionState.isSubmitting}
+              className="w-full bg-neutral text-neutral-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {submissionState.isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </div>
         </div>

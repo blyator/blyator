@@ -28,9 +28,10 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
   const containerRef = useRef(null);
   const headDotRef = useRef(null);
   const isVisible = useRef(false);
+  const isInitialized = useRef(false);
 
   const showScroller = () => {
-    if (isVisible.current) return;
+    if (isVisible.current || !isInitialized.current) return;
     isVisible.current = true;
 
     gsap.set(containerRef.current, { pointerEvents: "auto" });
@@ -103,8 +104,13 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
     scrollInstance.current = locoScroll?.current;
     if (!scrollInstance.current) return;
 
+    // delay to prevent flash
+    setTimeout(() => {
+      isInitialized.current = true;
+    }, 1000);
+
     const onScroll = ({ scroll, limit }) => {
-      if (limit?.y > 0) {
+      if (limit?.y > 0 && scroll.y > 50) {
         scrollProgress.current = scroll.y / limit.y;
 
         showScroller();
