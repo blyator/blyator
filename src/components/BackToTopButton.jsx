@@ -83,7 +83,7 @@ const BackToTopButton = ({ locoScroll, isContactFormOpen }) => {
   if (!isVisible || isContactFormOpen) return null;
 
   return (
-    <StyledWrapper className="md:fixed bottom-30 right-20 z-[9999]">
+    <StyledWrapper className="md:fixed bottom-25 right-21 z-[9999]">
       <button
         className="btn btn-circle btn-primary hover:btn-secondary group"
         onClick={scrollToTop}
@@ -103,9 +103,9 @@ const BackToTopButton = ({ locoScroll, isContactFormOpen }) => {
 
 const StyledWrapper = styled.div`
   .btn {
-    width: 45px;
-    height: 45px;
-    box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+    width: 40px;
+    height: 40px;
+    box-shadow: 0px 0px 0px 3px rgba(180, 160, 255, 0.253);
     transition: all 0.3s ease;
 
     &:hover {
