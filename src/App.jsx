@@ -23,7 +23,7 @@ function App() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1300);
+    const timer = setTimeout(() => setLoading(false), 1400);
     return () => clearTimeout(timer);
   }, []);
 

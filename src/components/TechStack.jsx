@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-let gsap, ScrollTrigger;
+gsap.registerPlugin(ScrollTrigger);
 
 function TechStack() {
   const sectionRef = useRef(null);
@@ -9,29 +11,15 @@ function TechStack() {
   const toolsRef = useRef(null);
 
   useEffect(() => {
-    const initGSAP = async () => {
-      try {
-        const gsapModule = await import("gsap");
-        const ScrollTriggerModule = await import("gsap/ScrollTrigger");
-
-        gsap = gsapModule.gsap || gsapModule.default;
-        ScrollTrigger =
-          ScrollTriggerModule.ScrollTrigger || ScrollTriggerModule.default;
-
-        if (gsap && ScrollTrigger) {
-          gsap.registerPlugin(ScrollTrigger);
-          setTimeout(() => {
-            initAnimations();
-          }, 100);
-        }
-      } catch (error) {
-        console.error("Failed to load GSAP:", error);
-      }
-    };
-
     const initAnimations = () => {
       const el = sectionRef.current;
-      if (!el || !gsap || !ScrollTrigger) return;
+      if (!el) return;
+
+      const scrollContainer = document.querySelector("[data-scroll-container]");
+      if (!scrollContainer) {
+        setTimeout(initAnimations, 200);
+        return;
+      }
 
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.trigger && el.contains(trigger.trigger)) {
@@ -192,12 +180,18 @@ function TechStack() {
       animateSkillSection(toolsRef.current, 0.4);
     };
 
-    if (typeof window !== "undefined") {
-      initGSAP();
-    }
+    const timeoutId = setTimeout(() => {
+      initAnimations();
+    }, 300);
+
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
 
     return () => {
-      if (ScrollTrigger && sectionRef.current) {
+      clearTimeout(timeoutId);
+      clearTimeout(refreshTimeout);
+      if (sectionRef.current) {
         ScrollTrigger.getAll().forEach((trigger) => {
           if (trigger.trigger && sectionRef.current.contains(trigger.trigger)) {
             trigger.kill();
@@ -294,11 +288,6 @@ function TechStack() {
   ];
 
   const toolsSkills = [
-    // {
-    //   icon: "https://cdn.simpleicons.org/npm",
-    //   title: "npm",
-    //   color: "primary",
-    // },
     {
       icon: "https://cdn.simpleicons.org/git",
       title: "Git",
