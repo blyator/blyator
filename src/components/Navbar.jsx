@@ -22,7 +22,7 @@ function Navbar({ locoScroll }) {
 
   const getThemeDotColor = (theme) => {
     const colorMap = {
-      retro: "bg-amber-300",
+      retro: "bg-orange-200",
       forest: "bg-emerald-600",
       sunset: "bg-slate-700",
       dracula: "bg-rose-300",
