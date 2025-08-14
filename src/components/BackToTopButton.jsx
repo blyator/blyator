@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { CornerRightUp } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const BackToTopButton = ({ locoScroll, isContactFormOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const eventListenerSet = useRef(false);
+  const location = useLocation();
+
+  // Reset when route changes
+  useEffect(() => {
+    setIsVisible(false);
+    eventListenerSet.current = false;
+  }, [location.pathname]);
 
   useEffect(() => {
-    eventListenerSet.current = false;
-
     const setupScrollListener = () => {
       if (eventListenerSet.current) return;
 
@@ -41,29 +47,36 @@ const BackToTopButton = ({ locoScroll, isContactFormOpen }) => {
       }
     };
 
-    if (locoScroll?.current) {
-      return setupScrollListener();
-    }
-
-    const checkInterval = setInterval(() => {
-      if (locoScroll?.current && !eventListenerSet.current) {
-        clearInterval(checkInterval);
+    //delay for locomotive be ready after route change
+    const timeoutId = setTimeout(() => {
+      if (locoScroll?.current) {
         setupScrollListener();
-      }
-    }, 100);
+      } else {
+        const checkInterval = setInterval(() => {
+          if (locoScroll?.current && !eventListenerSet.current) {
+            clearInterval(checkInterval);
+            setupScrollListener();
+          }
+        }, 100);
 
-    const timeout = setTimeout(() => {
-      clearInterval(checkInterval);
-      if (!eventListenerSet.current) {
-        setupScrollListener();
+        const timeout = setTimeout(() => {
+          clearInterval(checkInterval);
+          if (!eventListenerSet.current) {
+            setupScrollListener();
+          }
+        }, 2000);
+
+        return () => {
+          clearInterval(checkInterval);
+          clearTimeout(timeout);
+        };
       }
-    }, 2000);
+    }, 200);
 
     return () => {
-      clearInterval(checkInterval);
-      clearTimeout(timeout);
+      clearTimeout(timeoutId);
     };
-  }, [locoScroll]);
+  }, [locoScroll, location.pathname]);
 
   const scrollToTop = () => {
     if (locoScroll?.current) {
