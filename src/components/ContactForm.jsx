@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   X,
   Phone,
@@ -7,8 +8,38 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import Loader from "./Loader";
 
-const ContactForm = ({ isOpen, onClose }) => {
+const ContactForm = ({ isOpen, onClose, locoScroll }) => {
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleWorkflowClick = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (locoScroll?.current) {
+      locoScroll.current.scrollTo(0, {
+        duration: 800,
+        disableLerp: false,
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+
+    // Navigate after loader
+    setTimeout(() => {
+      navigate("/workflow");
+      setIsLoading(false);
+      setIsVisible(false);
+    }, 1200);
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,33 +59,33 @@ const ContactForm = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Show overlay
       overlayRef.current.style.display = "flex";
-      // Animate overlay opacity
       overlayRef.current.style.opacity = "0";
+      overlayRef.current.style.backdropFilter = "blur(0px)";
+
+      formRef.current.style.transform = "translateX(100%)";
+
+      // Backdrop blur and fade in
       setTimeout(() => {
+        overlayRef.current.style.transition = "all 0.3s ease";
         overlayRef.current.style.opacity = "1";
+        overlayRef.current.style.backdropFilter = "blur(8px)";
       }, 10);
 
-      // Animate form sliding in from right
-      formRef.current.style.transform = "translateX(100%)";
       setTimeout(() => {
         formRef.current.style.transform = "translateX(0%)";
       }, 10);
     } else {
-      // Animate form sliding out to right
       formRef.current.style.transform = "translateX(100%)";
-      // Animate overlay fade out
       overlayRef.current.style.opacity = "0";
+      overlayRef.current.style.backdropFilter = "blur(0px)";
 
-      // Hide overlay after animation
       setTimeout(() => {
         overlayRef.current.style.display = "none";
       }, 300);
     }
   }, [isOpen]);
 
-  // Reset submission state when form opens
   useEffect(() => {
     if (isOpen) {
       setSubmissionState({
@@ -122,7 +153,6 @@ const ContactForm = ({ isOpen, onClose }) => {
           error: null,
         });
 
-        // Reset form data
         setFormData({
           name: "",
           email: "",
@@ -131,7 +161,7 @@ const ContactForm = ({ isOpen, onClose }) => {
           budget: "",
         });
 
-        // Auto-close after 3 seconds
+        //close after 3 seconds
         setTimeout(() => {
           onClose();
         }, 3000);
@@ -153,14 +183,16 @@ const ContactForm = ({ isOpen, onClose }) => {
     if (e.target === overlayRef.current) onClose();
   };
 
+  // Show loader if loading
+  if (isLoading) return <Loader />;
+
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-end p-10"
+      className="fixed inset-0 z-999 flex items-center justify-end p-10"
       style={{
         display: "none",
         backgroundColor: "rgba(0, 0, 0, 0.3)",
-        transition: "opacity 0.3s ease",
       }}
       onClick={handleOverlayClick}
     >
@@ -182,7 +214,7 @@ const ContactForm = ({ isOpen, onClose }) => {
               </span>
             </div>
             <p className="text-neutral-content text-sm">
-              We respond within 2-4 hours during business hours.
+              We respond within 1-4 hours during business hours.
             </p>
           </div>
           <button
@@ -221,25 +253,24 @@ const ContactForm = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {/* Quick Action Buttons */}
-          <div className="mb-6 space-y-3">
+          <div className="mb-6 grid grid-cols-2 gap-3">
             <button
               onClick={() =>
                 window.open("https://calendly.com/your-link", "_blank")
               }
-              className="w-full bg-primary text-primary-content py-3 px-4 rounded-lg font-medium hover:bg-primary-focus transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="bg-primary text-primary-content py-3 px-3 rounded-lg font-medium hover:bg-primary-focus transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
             >
-              <Phone size={18} />
+              <Phone size={16} />
               Book a Call
             </button>
             <button
               onClick={() =>
                 (window.location.href = "mailto:dmnbilly@gmail.com")
               }
-              className="w-full bg-neutral text-neutral-content py-3 px-4 rounded-lg font-medium hover:bg-neutral-focus transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="bg-neutral text-neutral-content py-3 px-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
             >
-              <Mail size={18} />
-              Send me an Email
+              <Mail size={16} />
+              Send an Email
             </button>
           </div>
 
@@ -248,7 +279,7 @@ const ContactForm = ({ isOpen, onClose }) => {
               <div className="w-full border-t border-base-300"></div>
             </div>
             <div className="relative flex justify-center">
-              <span className="px-2 bg-base-100 text-base-content">
+              <span className="px-2 bg-base-100 text-base-content text-sm">
                 or fill out this form
               </span>
             </div>
@@ -302,7 +333,7 @@ const ContactForm = ({ isOpen, onClose }) => {
 
             <div>
               <label className="block font-medium mb-3">
-                How can I help you?
+                How can we assist you?
               </label>
               <div className="space-y-2">
                 {[
@@ -344,24 +375,25 @@ const ContactForm = ({ isOpen, onClose }) => {
               </select>
             </div>
 
-            <button
-              onClick={() => {
-                window.open("#workflow", "_blank");
-              }}
-              type="button"
-              className="w-full bg-accent text-accent-content py-3 rounded-lg font-medium hover:bg-accent-focus transition-colors flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <ArrowRight size={18} />
-              View Our Workflow
-            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={handleWorkflowClick}
+                type="button"
+                disabled={isLoading}
+                className="bg-accent text-accent-content py-3 rounded-lg font-medium hover:bg-accent-focus transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ArrowRight size={16} />
+                {isLoading ? "Loading..." : "View Workflow"}
+              </button>
 
-            <button
-              onClick={handleSubmit}
-              disabled={submissionState.isSubmitting}
-              className="w-full bg-neutral text-neutral-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {submissionState.isSubmitting ? "Sending..." : "Send Message"}
-            </button>
+              <button
+                onClick={handleSubmit}
+                disabled={submissionState.isSubmitting}
+                className="bg-neutral text-neutral-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+              >
+                {submissionState.isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
