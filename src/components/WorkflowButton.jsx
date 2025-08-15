@@ -20,7 +20,10 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
     const setupScrollListener = () => {
       if (eventListenerSet.current) return;
 
-      if (locoScroll?.current) {
+      // Always use regular scroll on mobile
+      const isMobile = window.innerWidth <= 768;
+
+      if (locoScroll?.current && !isMobile) {
         const handleScroll = ({ scroll, limit }) => {
           const scrollPercentage = (scroll.y / limit.y) * 100;
           setIsVisible(scrollPercentage > 60); // Show after 60% scrolling
@@ -36,6 +39,7 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
           eventListenerSet.current = false;
         };
       } else {
+        // Use regular scroll listener for mobile
         const handleScroll = () => {
           const scrollPercentage =
             (window.scrollY /
@@ -56,11 +60,15 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
 
     // delay for locomotive be ready after route change
     const timeoutId = setTimeout(() => {
-      if (locoScroll?.current) {
+      if (locoScroll?.current && window.innerWidth > 768) {
         setupScrollListener();
       } else {
         const checkInterval = setInterval(() => {
-          if (locoScroll?.current && !eventListenerSet.current) {
+          if (
+            locoScroll?.current &&
+            !eventListenerSet.current &&
+            window.innerWidth > 768
+          ) {
             clearInterval(checkInterval);
             setupScrollListener();
           }
@@ -89,7 +97,7 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (locoScroll?.current) {
+    if (locoScroll?.current && window.innerWidth > 768) {
       locoScroll.current.scrollTo(0, {
         duration: 800,
         disableLerp: false,
@@ -114,7 +122,7 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
   if (!isVisible || isContactFormOpen) return null;
 
   return (
-    <div className="md:fixed bottom-10 right-5 z-[988]">
+    <div className="fixed bottom-10 right-5 z-[988]">
       <button
         onClick={handleWorkflowClick}
         className="btn btn-circle btn-primary hover:btn-secondary flex items-center justify-center gap-2 hover:transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed"
@@ -123,7 +131,7 @@ const WorkflowButton = ({ locoScroll, isContactFormOpen }) => {
         disabled={isLoading}
       >
         <ArrowRight size={14} />
-        <span>View Workflow</span>
+        <span className="sm:inline">View Workflow</span>
       </button>
     </div>
   );

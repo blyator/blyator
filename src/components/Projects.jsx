@@ -503,9 +503,9 @@ function Projects() {
               href="https://github.com/blyator"
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-button btn btn-lg bg-primary text-base-content rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl opacity-0 translate-y-8 scale-95"
+              className="cta-button btn btn-lg bg-success rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl opacity-0 translate-y-8 scale-95"
             >
-              <span className="relative z-10 font-semibold">
+              <span className="relative text-base-100/80 z-10 font-semibold">
                 View More Projects
               </span>
             </a>
