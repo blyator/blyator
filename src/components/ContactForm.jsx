@@ -256,7 +256,7 @@ const ContactForm = ({ isOpen, onClose, locoScroll }) => {
           <div className="mb-6 grid grid-cols-2 gap-3">
             <button
               onClick={() =>
-                window.open("https://calendly.com/your-link", "_blank")
+                window.open("https://calendly.com/blyator/30min", "_blank")
               }
               className="bg-primary text-primary-content py-3 px-3 rounded-lg font-medium hover:bg-primary-focus transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
             >
