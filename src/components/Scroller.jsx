@@ -104,12 +104,18 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
     scrollInstance.current = locoScroll?.current;
     if (!scrollInstance.current) return;
 
-    // delay to prevent flash
-    setTimeout(() => {
-      isInitialized.current = true;
-    }, 1000);
+    // Start hidden
+    isVisible.current = false;
+    gsap.set(containerRef.current, { pointerEvents: "none" });
+    gsap.set([...dotsRef.current, headDotRef.current], { opacity: 0 });
 
     const onScroll = ({ scroll, limit }) => {
+      // Only show after initial scroll
+      if (!isInitialized.current) {
+        isInitialized.current = true;
+        return;
+      }
+
       if (limit?.y > 0 && scroll.y > 50) {
         scrollProgress.current = scroll.y / limit.y;
 
@@ -122,9 +128,13 @@ const Scroller = ({ numberOfDots = 30, locoScroll }) => {
       }
     };
 
-    scrollInstance.current.on("scroll", onScroll);
+    // Delay initialization to prevent flash
+    const initTimeout = setTimeout(() => {
+      scrollInstance.current.on("scroll", onScroll);
+    }, 300);
 
     return () => {
+      clearTimeout(initTimeout);
       if (scrollInstance.current) {
         scrollInstance.current.off("scroll", onScroll);
       }
