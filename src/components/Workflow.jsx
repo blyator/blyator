@@ -219,8 +219,8 @@ const Workflow = ({ onOpenContact }) => {
           Putting Your Brand on the Digital Map
         </h1>
         <p className="animate-on-scroll text-xl text-base-content/80 max-w-3xl mx-auto leading-relaxed">
-          From the first idea to the final click, we deliver experiences that
-          make brands visible
+          From the first idea to the first click, we deliver experiences that
+          make brands visible online
         </p>
         <div className="animate-on-scroll mt-8">
           <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
