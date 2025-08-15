@@ -22,7 +22,7 @@ function Footer({ locoScroll, onOpenContact }) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-base-100 text-base-content border-t border-base-content/10 mb-10">
+    <footer className="bg-base-100 text-base-content border-t border-base-content/10 ">
       <div
         id="contact"
         className="footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 pt-10 pb-10"
@@ -43,7 +43,12 @@ function Footer({ locoScroll, onOpenContact }) {
           <span className="footer-title">Quick Links</span>
           <button
             className="link link-hover text-left"
-            onClick={() => handleSmoothScroll("#home")}
+            onClick={() => {
+              locoScroll.current.scrollTo(0, {
+                duration: 800,
+                disableLerp: false,
+              });
+            }}
           >
             Home
           </button>
