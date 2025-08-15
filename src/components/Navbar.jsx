@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { themeChange } from "theme-change";
 import BouncyLink from "./BouncyLink";
 
 function Navbar({ locoScroll }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTheme, setActiveTheme] = useState("forest");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     themeChange(false);
@@ -37,19 +40,30 @@ function Navbar({ locoScroll }) {
   };
 
   const handleSmoothScroll = (target) => {
-    const element = document.querySelector(target);
-    if (!element) return;
-
-    if (locoScroll && locoScroll.current) {
-      locoScroll.current.scrollTo(element, {
-        offset: -100,
-        duration: 1500,
-        easing: [0.25, 0.0, 0.35, 1.0],
-      });
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.querySelector(target);
+        if (element && locoScroll?.current) {
+          locoScroll.current.update();
+          locoScroll.current.scrollTo(element, {
+            offset: -100,
+            duration: 1500,
+            easing: [0.25, 0.0, 0.35, 1.0],
+          });
+        }
+      }, 700);
     } else {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Already on home just scroll
+      const element = document.querySelector(target);
+      if (element && locoScroll?.current) {
+        locoScroll.current.scrollTo(element, {
+          offset: -100,
+          duration: 1500,
+          easing: [0.25, 0.0, 0.35, 1.0],
+        });
+      }
     }
-
     setIsOpen(false);
   };
 
