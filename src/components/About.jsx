@@ -82,7 +82,7 @@ function About() {
       const el = sectionRef.current;
       if (!el) return;
 
-      // Wait for the scroll container to be available
+      // Wait for the scroll container
       const scrollContainer = document.querySelector("[data-scroll-container]");
       if (!scrollContainer) {
         setTimeout(initAnimations, 200);
@@ -281,12 +281,10 @@ function About() {
       }
     };
 
-    // Initialize animations with a longer delay and retry logic
     const timeoutId = setTimeout(() => {
       initAnimations();
     }, 300);
 
-    // Also try to refresh ScrollTrigger after initialization
     const refreshTimeout = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 500);
