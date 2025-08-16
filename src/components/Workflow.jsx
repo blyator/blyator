@@ -115,7 +115,7 @@ const Workflow = ({ onOpenContact }) => {
       duration: "1 day",
       cta: "Go Live",
       description:
-        "Your project goes live! We provide all necessary files, documentation for a smooth handover process.",
+        "Your project goes live! We provide all necessary files and documentation for a smooth handover process.",
       theme: "badge-success",
     },
   ];
