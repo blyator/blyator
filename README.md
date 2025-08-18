@@ -9,13 +9,12 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/billyyator//)
 [![Dev.to](https://img.shields.io/badge/Dev.to-FFDD57?logo=devdotto&logoColor=black&style=for-the-badge)](https://dev.to/billy_yator)
 [![Medium](https://img.shields.io/badge/Medium-02D57F?logo=medium&logoColor=white&style=for-the-badge)](https://dev.to/billy_yator)
-[![YouTube](https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=white&style=for-the-badge)](https://www.youtube.com/@blyator)
+
 
 <br />
 
 I’m a Full-Stack Developer with a strong passion for coding and solving problems through technology. I specialize in building efficient, scalable and user-friendly web applications using modern front-end and back-end technologies
 
-Creating scalable and efficient solutions has always been my drive, combining my background in tech support and quality assurance with my growing expertise in software development
 
 As a tech enthusiast, I love to experience tech and share my experiences and insights with others through my social media and blogs.
 
