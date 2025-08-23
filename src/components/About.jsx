@@ -306,12 +306,12 @@ function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 bg-base-100 overflow-hidden font-sans"
+      className="py-12 md:py-16 lg:py-20 bg-base-100 overflow-hidden font-sans"
       style={{ fontFamily: "var(--font-family, inherit)" }}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="hero-header text-center mb-16 opacity-0 translate-y-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-secondary mb-4 leading-tight">
+      <div className="max-w-full px-2 md:px-4 lg:px-6">
+        <div className="hero-header text-center mb-12 md:mb-16 opacity-0 translate-y-10 px-2 md:px-4">
+          <h1 className="text-5xl md:text-4xl lg:text-5xl font-bold text-secondary mb-4 leading-tight">
             My Story
           </h1>
           <p className="text-base-content/70 text-xl max-w-3xl mx-auto leading-relaxed">
@@ -321,7 +321,7 @@ function About() {
           </p>
         </div>
 
-        <div className="space-y-16">
+        <div className="space-y-8 md:space-y-12 lg:space-y-16 px-2 md:px-4">
           {pages.map((page, index) => (
             <div
               key={index}
@@ -329,45 +329,47 @@ function About() {
               className="premium-card group opacity-0 translate-y-16"
             >
               <div className="relative">
-                <div className="card bg-base-200/80 border border-base-300/50 lg:bg-transparent lg:border-none backdrop-blur-xl rounded-4xl transition-all duration-300 ease-out relative overflow-hidden hover:shadow-lg">
-                  <div className="card-body p-10 relative z-10">
+                <div className="card bg-base-200/80 border border-base-300/50 lg:bg-transparent lg:border-none backdrop-blur-xl rounded-2xl md:rounded-3xl lg:rounded-4xl transition-all duration-300 ease-out relative overflow-hidden hover:shadow-lg">
+                  <div className="card-body p-6 md:p-8 lg:p-10 relative z-10">
                     <div
                       className={`flex flex-col ${
                         index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                      } gap-12 lg:gap-16 items-center`}
+                      } gap-6 md:gap-8 lg:gap-12 items-center`}
                     >
-                      <div className="flex-shrink-0 relative card-image opacity-0 scale-95">
-                        <div className="relative overflow-hidden rounded-3xl group-hover:scale-105 transition-transform duration-700 ease-out">
+                      {/* Image Section - Responsive sizing */}
+                      <div className="flex-shrink-0 relative card-image opacity-0 scale-95 w-full lg:w-auto">
+                        <div className="relative overflow-hidden rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700 ease-out mx-auto lg:mx-0">
                           <img
                             src={page.img}
                             alt={page.title}
-                            className="w-[320px] md:w-[400px] lg:w-[450px] h-[380px] md:h-[450px] lg:h-[500px] object-cover rounded-3xl"
+                            className="w-full max-w-[280px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[380px] h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] object-cover rounded-2xl md:rounded-3xl mx-auto"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-4xl" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl md:rounded-3xl" />
                         </div>
                       </div>
 
-                      <div className="flex-1 text-center lg:text-left relative card-content">
-                        <div className="card-icon mb-6 flex justify-center lg:justify-start opacity-0 scale-75">
+                      {/* Content Section */}
+                      <div className="flex-1 text-center relative card-content min-w-0 max-w-full overflow-hidden">
+                        <div className="card-icon mb-4 md:mb-6 flex justify-center opacity-0 scale-75">
                           <div
-                            className={`p-4 bg-gradient-to-br ${page.color} rounded-2xl shadow-lg`}
+                            className={`p-3 md:p-4 bg-gradient-to-br ${page.color} rounded-xl md:rounded-2xl shadow-lg`}
                           >
                             {page.icon}
                           </div>
                         </div>
 
-                        <h2 className="card-title text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+                        <h2 className="card-title text-4xl md:text-3xl lg:text-4xl font-bold text-primary mb-4 md:mb-6 leading-tight break-words text-center">
                           {page.title}
                         </h2>
 
-                        <p className="card-text text-base-content/80 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+                        <p className="card-text text-base-content/80 text-lg md:text-xl leading-relaxed mb-6 md:mb-8 max-w-full lg:max-w-2xl">
                           {page.content}
                         </p>
 
-                        <div className="card-decorative flex items-center gap-4 justify-center lg:justify-start opacity-0 -translate-x-5">
-                          <div className="h-1 bg-primary rounded-full w-16 group-hover:w-20 transition-all duration-300" />
-                          <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-                          <div className="h-1 bg-primary rounded-full w-8 group-hover:w-12 transition-all duration-300" />
+                        <div className="card-decorative flex items-center gap-2 md:gap-4 justify-center opacity-0 -translate-x-5">
+                          <div className="h-0.5 md:h-1 bg-primary rounded-full w-12 md:w-16 group-hover:w-16 md:group-hover:w-20 transition-all duration-300" />
+                          <div className="w-2 md:w-3 h-2 md:h-3 bg-primary rounded-full animate-pulse" />
+                          <div className="h-0.5 md:h-1 bg-primary rounded-full w-6 md:w-8 group-hover:w-8 md:group-hover:w-12 transition-all duration-300" />
                         </div>
                       </div>
                     </div>
@@ -378,13 +380,13 @@ function About() {
           ))}
         </div>
 
-        <div className="text-center pt-16 opacity-0 translate-y-5">
-          <div className="inline-flex items-center gap-2 text-base-content/60">
-            <div className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
-            <span className="text-sm">
+        <div className="text-center pt-12 md:pt-16 opacity-0 translate-y-5 px-2 md:px-4">
+          <div className="inline-flex items-center gap-2 text-base-content/60 flex-wrap justify-center">
+            <div className="w-6 md:w-8 h-px bg-gradient-to-r from-transparent to-primary" />
+            <span className="text-xs md:text-sm whitespace-nowrap">
               Ready to build something amazing together?
             </span>
-            <div className="w-8 h-px bg-gradient-to-r from-primary to-transparent" />
+            <div className="w-6 md:w-8 h-px bg-gradient-to-r from-primary to-transparent" />
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ function Projects() {
     {
       title: "NotesApp",
       description:
-        "This is the perfect app made to help users easily create, manage, and organize their notes. With a simple interface, users can add notes and tags, then edit or delete them as they wish.",
+        "This is the perfect app made to help users quickly create, manage and organize their notes. It comes with a simple interface, users can add notes and tags, then edit or delete them as they wish.",
       image: "/assets/Illustrations/notes.png",
       badges: ["React", "Tailwind", "Python"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
