@@ -319,11 +319,6 @@ function TechStack() {
       color: "success",
     },
     {
-      icon: "https://cdn.simpleicons.org/netlify",
-      title: "Netlify",
-      color: "primary",
-    },
-    {
       icon: "https://cdn.simpleicons.org/vercel",
       title: "Vercel",
       color: "secondary",
