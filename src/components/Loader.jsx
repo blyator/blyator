@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 z-50 bg-base-200 text-base-content flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-[#212121] text-primary flex items-center justify-center">
       <StyledWrapper>
         <div
           aria-label="Orange and tan hamster running in a metal wheel"
@@ -27,7 +27,7 @@ const Loader = () => {
           </div>
           <div className="spoke" />
         </div>
-        <p className="text-base-content text-lg text-center font-semibold mt-4">
+        <p className="text-white text-lg text-center font-semibold mt-4">
           Loading...
         </p>
       </StyledWrapper>

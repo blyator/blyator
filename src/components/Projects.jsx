@@ -32,7 +32,7 @@ function Projects() {
     {
       title: "The Beauty",
       description:
-        "This is a modern e-commerce platform designed for beauty enthusiasts. Customers are able to explore a range of beauty products and buy them while enjoying a smooth shopping experience.",
+        "This is a modern e-commerce platform designed for beauty enthusiasts. Customers are able to explore a vast range of beauty products and buy them while enjoying a smooth shopping experience.",
       image: "/assets/Illustrations/beauty.png",
       badges: ["Python", "React", "PostgreSQL"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
@@ -52,7 +52,7 @@ function Projects() {
       .map(
         (word, index) =>
           `<span class="word-reveal" style="display: inline-block;">
-          <span class="word-inner" style="display: inline-block; opacity: 0; transform: translateY(20px);">${word}${
+          <span class="word-inner" style="display: inline-block; opacity: 0; transform: translateY(10px);">${word}${
             index < words.length - 1 ? "&nbsp;" : ""
           }</span>
         </span>`
@@ -99,46 +99,33 @@ function Projects() {
       const el = sectionRef.current;
       if (!el || !gsap || !ScrollTrigger) return;
 
-      // Wait for Locomotive
-      const locoScrollContainer = document.querySelector(
-        "[data-scroll-container]"
-      );
-
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.trigger && el.contains(trigger.trigger)) {
           trigger.kill();
         }
       });
 
-      // Header Animation
+      // Header Animation with text splitting
       const header = el.querySelector(".hero-header");
       if (header) {
         const headerTitle = header.querySelector("h2");
         const headerText = header.querySelector("p");
+        const divider = header.querySelector(".divider");
 
         splitTextIntoWords(headerTitle);
         splitTextIntoWords(headerText);
 
         const titleWords = headerTitle.querySelectorAll(".word-inner");
         const textWords = headerText.querySelectorAll(".word-inner");
-        const divider = header.querySelector(".divider");
 
-        gsap.set(header, {
-          opacity: 0,
-          y: 40,
-        });
-
-        gsap.set(divider, {
-          scaleX: 0,
-          opacity: 0,
-        });
+        gsap.set(header, { opacity: 0, y: 20 });
+        gsap.set(divider, { scaleX: 0, opacity: 0 });
 
         const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
             scroller: "[data-scroll-container]",
             start: "top 80%",
-            end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
         });
@@ -155,8 +142,8 @@ function Projects() {
             {
               opacity: 1,
               y: 0,
-              duration: 0.8,
-              stagger: 0.1,
+              duration: 0.6,
+              stagger: 0.08,
               ease: "power2.out",
             },
             "-=0.3"
@@ -166,7 +153,7 @@ function Projects() {
             {
               scaleX: 1,
               opacity: 1,
-              duration: 0.8,
+              duration: 0.6,
               ease: "power2.out",
             },
             "-=0.4"
@@ -176,126 +163,48 @@ function Projects() {
             {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              stagger: 0.05,
+              duration: 0.5,
+              stagger: 0.04,
               ease: "power2.out",
             },
             "-=0.2"
           );
       }
 
-      // Project Cards Animation
+      //  Cards Animation
       const cards = el.querySelectorAll(".project-card");
 
       cards.forEach((card, index) => {
-        const cardImage = card.querySelector("figure img");
-        const cardTitle = card.querySelector(".card-title");
-        const cardDescription = card.querySelector(".card-description");
-        const badges = card.querySelectorAll(".badge");
-        const buttons = card.querySelectorAll(".card-buttons a");
-
-        if (cardTitle) splitTextIntoWords(cardTitle);
-        if (cardDescription) splitTextIntoWords(cardDescription);
-
-        const titleWords = cardTitle?.querySelectorAll(".word-inner") || [];
-        const descWords =
-          cardDescription?.querySelectorAll(".word-inner") || [];
-
         gsap.set(card, {
           opacity: 0,
-          y: 80,
-          scale: 0.95,
+          y: 30,
         });
 
-        gsap.set(cardImage, {
-          opacity: 0,
-          scale: 1.1,
-        });
-
-        gsap.set(badges, {
-          opacity: 0,
-          y: 20,
-          scale: 0.8,
-        });
-
-        const cardTl = gsap.timeline({
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
             scroller: "[data-scroll-container]",
             start: "top 85%",
-            end: "center 50%",
             toggleActions: "play none none reverse",
           },
         });
-
-        cardTl
-          .to(card, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          })
-          .to(
-            cardImage,
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.6"
-          )
-          .to(
-            titleWords,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.08,
-              ease: "power2.out",
-            },
-            "-=0.4"
-          )
-          .to(
-            descWords,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              stagger: 0.03,
-              ease: "power2.out",
-            },
-            "-=0.2"
-          )
-          .to(
-            badges,
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.5,
-              stagger: 0.1,
-              ease: "back.out(1.2)",
-            },
-            "-=0.3"
-          );
       });
 
+      //CTA button
       const ctaButton = el.querySelector(".cta-button");
       if (ctaButton) {
-        gsap.set(ctaButton, {
-          opacity: 0,
-          y: 30,
-          scale: 0.95,
-        });
+        gsap.set(ctaButton, { opacity: 0, y: 20 });
 
         gsap.to(ctaButton, {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.2)",
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ctaButton,
             scroller: "[data-scroll-container]",
@@ -329,7 +238,7 @@ function Projects() {
         className="py-20 bg-base-100 relative"
       >
         <div className="container mx-auto px-4 relative">
-          <div className="hero-header text-center mb-20 text-base-content opacity-0 translate-y-10">
+          <div className="hero-header text-center mb-20 text-base-content">
             <div className="relative inline-block">
               <h2 className="text-5xl font-bold mb-6 text-secondary">
                 Featured Projects
@@ -346,84 +255,65 @@ function Projects() {
               <div
                 key={index}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className={`project-card relative group cursor-pointer transition-all duration-700 ease-out opacity-0 translate-y-20 scale-95 ${
+                className={`project-card relative group cursor-pointer transition-all duration-300 ease-out ${
                   hoveredCard === index ? "z-20" : "z-10"
                 }`}
                 style={{
                   transform:
                     hoveredCard === index
-                      ? "translateY(-12px) rotateX(5deg) rotateY(2deg) scale(1.03)"
-                      : "translateY(0) rotateX(0) rotateY(0) scale(1)",
-                  transformStyle: "preserve-3d",
-                  perspective: "1200px",
+                      ? "translateY(-8px) scale(1.02)"
+                      : "translateY(0) scale(1)",
                 }}
                 onMouseEnter={() => handleCardHover(index)}
                 onMouseLeave={handleCardLeave}
                 onTouchStart={() => handleCardTouch(index)}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl transition-all duration-700">
+                {/*  background effects */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl transition-all duration-300">
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5 rounded-3xl transition-opacity duration-500 ${
+                    className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5 rounded-3xl transition-opacity duration-300 ${
                       hoveredCard === index ? "opacity-100" : "opacity-0"
                     }`}
                   />
                 </div>
 
-                <div
-                  className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-secondary to-accent p-[2px] transition-opacity duration-500 ${
-                    hoveredCard === index ? "opacity-60" : "opacity-0"
-                  }`}
-                >
-                  <div className="w-full h-full bg-base-100 rounded-3xl" />
-                </div>
-
-                <div className="relative bg-base-100/95 backdrop-blur-lg rounded-3xl shadow-xl border border-base-300/50 overflow-hidden transition-all duration-700">
+                <div className="relative bg-base-100/95 backdrop-blur-lg rounded-3xl shadow-xl border border-base-300/50 overflow-hidden transition-all duration-300">
                   <figure className="relative overflow-hidden rounded-t-3xl h-56">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className={`w-full h-full object-cover transition-all duration-700 ease-out opacity-0 scale-110 ${
+                      className={`w-full h-full object-cover transition-all duration-300 ease-out ${
                         hoveredCard === index
-                          ? "brightness-110 contrast-105 saturate-110 blur-sm"
-                          : "blur-0"
+                          ? "scale-105 brightness-110"
+                          : "scale-100"
                       }`}
                     />
 
                     <div
-                      className={`card-buttons absolute inset-0 bg-black/20 transition-all duration-500 flex items-center justify-center ${
+                      className={`card-buttons absolute inset-0 bg-black/20 transition-all duration-300 flex items-center justify-center ${
                         touchedCard === index || hoveredCard === index
                           ? "opacity-100 pointer-events-auto"
                           : "opacity-0 pointer-events-none"
                       }`}
-                      style={{ zIndex: 100 }}
                     >
-                      <div
-                        className={`flex gap-4 transition-all duration-600 ${
-                          touchedCard === index || hoveredCard === index
-                            ? "translate-y-0 scale-100"
-                            : "translate-y-8 scale-90"
-                        }`}
-                        style={{ zIndex: 110 }}
-                      >
+                      <div className="flex gap-4">
                         <a
                           href={project.demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-sm bg-gradient-to-r from-primary to-primary/80 border-none text-white hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
-                          style={{ zIndex: 120 }}
+                          className="btn btn-sm bg-gradient-to-r from-primary to-primary/80 border-none text-white hover:scale-105 transition-all duration-200 shadow-xl"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <span className="relative z-10">Live Site</span>
+                          Live Site
                         </a>
                         <a
                           href={project.codeLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-sm bg-gradient-to-r from-accent to-accent/80 border-none text-white hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
-                          style={{ zIndex: 120 }}
+                          className="btn btn-sm bg-gradient-to-r from-accent to-accent/80 border-none text-white hover:scale-105 transition-all duration-200 shadow-xl"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <span className="relative z-10">Code</span>
+                          Code
                         </a>
                       </div>
                     </div>
@@ -439,7 +329,7 @@ function Projects() {
                     >
                       {project.title}
                       <div
-                        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-500 ${
+                        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 ${
                           hoveredCard === index ? "w-full" : "w-0"
                         }`}
                       />
@@ -453,44 +343,27 @@ function Projects() {
                       {project.badges.map((badge, i) => (
                         <div
                           key={i}
-                          className={`badge ${project.badgeColors[i]} transition-all duration-300 hover:scale-105 cursor-pointer shadow-sm`}
+                          className={`badge ${project.badgeColors[i]} transition-all duration-200 hover:scale-105 cursor-pointer shadow-sm`}
                         >
                           {badge}
                         </div>
                       ))}
                     </div>
 
+                    {/* decorative elements */}
                     <div
-                      className={`absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-500 ${
-                        hoveredCard === index
-                          ? "opacity-60 animate-ping"
-                          : "opacity-0"
+                      className={`absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300 ${
+                        hoveredCard === index ? "opacity-60" : "opacity-0"
                       }`}
-                    />
-                    <div
-                      className={`absolute bottom-6 left-6 w-2 h-2 bg-gradient-to-r from-secondary to-accent rounded-full transition-all duration-700 ${
-                        hoveredCard === index
-                          ? "opacity-40 animate-pulse"
-                          : "opacity-0"
-                      }`}
-                      style={{ animationDelay: "200ms" }}
-                    />
-                    <div
-                      className={`absolute top-1/2 right-8 w-1.5 h-1.5 bg-gradient-to-r from-accent to-primary rounded-full transition-all duration-700 ${
-                        hoveredCard === index
-                          ? "opacity-50 animate-bounce"
-                          : "opacity-0"
-                      }`}
-                      style={{ animationDelay: "400ms" }}
                     />
                   </div>
                 </div>
 
-                {/* Premium Shadow Effect */}
+                {/* shadow */}
                 <div
-                  className={`absolute inset-0 rounded-3xl transition-all duration-700 -z-10 ${
+                  className={`absolute inset-0 rounded-3xl transition-all duration-300 -z-10 ${
                     hoveredCard === index
-                      ? "shadow-2xl shadow-primary/20 blur-sm scale-105"
+                      ? "shadow-2xl shadow-primary/20"
                       : "shadow-lg"
                   }`}
                 />
@@ -503,7 +376,7 @@ function Projects() {
               href="https://github.com/blyator"
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-button btn btn-lg bg-success rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl opacity-0 translate-y-8 scale-95"
+              className="cta-button btn btn-lg bg-success rounded-4xl border-none hover:scale-105 transition-all duration-300 relative overflow-hidden group shadow-xl hover:shadow-2xl"
             >
               <span className="relative text-base-100/80 z-10 font-semibold">
                 View More Projects
@@ -512,27 +385,6 @@ function Projects() {
           </div>
         </div>
       </section>
-
-      <style>
-        {`
-          .project-card:hover {
-            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.2));
-          }
-
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-8px);
-            }
-          }
-
-          .animate-float {
-            animation: float 3s ease-in-out infinite;
-          }
-        `}
-      </style>
     </>
   );
 }
