@@ -87,7 +87,7 @@ function App() {
         data-scroll-container
         className="min-h-screen bg-base-200 dark:bg-base-100"
       >
-        <div className="w-full md:max-w-6xl mx-auto md:p-6 md:rounded-lg md:shadow-2xl md:card bg-base-100 text-base-content dark:text-base-100 pb-24">
+        <div className="w-full md:max-w-5xl mx-auto md:p-6 md:rounded-lg md:shadow-2xl md:card bg-base-100 text-base-content dark:text-base-100 pb-24">
           <Navbar
             locoScroll={locoScroll}
             setNavigationLoading={setNavigationLoading}
