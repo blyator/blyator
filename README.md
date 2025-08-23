@@ -12,7 +12,7 @@
 
 <br />
 
-I’m a Full-Stack Developer with love for coding and tech in overall. I build efficient, scalable and user-friendly web applications using modern frontend and backend technologies and I test them properly as well
+I’m a Full-Stack Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern frontend and backend technologies and I test them properly as well
 
 
 As a tech enthusiast, I enjoy exploring new technologies and sharing my experiences and insights through social media and blogs.
