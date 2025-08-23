@@ -192,7 +192,7 @@ export default function Hero({ locoScroll, onOpenContact }) {
   return (
     <header
       ref={heroRef}
-      className="lg:mt-40 mt-20 mb-34 md:flex items-start gap-10 px-6 md:px-16"
+      className="lg:mt-20 mt-20 mb-10 md:flex items-start gap-10 px-6 md:px-16"
       data-scroll-section
     >
       {/* Left content */}
@@ -294,7 +294,7 @@ export default function Hero({ locoScroll, onOpenContact }) {
       >
         <img
           ref={imageRef}
-          className="w-11/12 max-w-xs mx-auto md:max-w-md md:w-96 -scale-x-100"
+          className="w-11/12 max-w-xs mx-auto md:max-w-md md:w-96 lg:w-72 xl:w-64 -scale-x-100"
           src="/hero.png"
           alt="Bill photo"
         />

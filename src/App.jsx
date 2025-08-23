@@ -27,7 +27,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1400);
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,7 +45,7 @@ function App() {
   }, [locoScroll, scrollReady]);
 
   // Update locomotive when route changes
-  //enables scrolling in /workflow
+  //basically enables scrolling in /workflow
   useEffect(() => {
     if (locoScroll?.current) {
       setTimeout(() => {

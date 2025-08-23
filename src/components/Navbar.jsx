@@ -11,7 +11,7 @@ function Navbar({ locoScroll }) {
 
   useEffect(() => {
     themeChange(false);
-    const savedTheme = localStorage.getItem("theme") || "forest";
+    const savedTheme = localStorage.getItem("theme") || "retro";
     document.documentElement.setAttribute("data-theme", savedTheme);
     setActiveTheme(savedTheme);
   }, []);

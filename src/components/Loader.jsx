@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 z-50 bg-base-100 text-base-content flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-base-200 text-base-content flex items-center justify-center">
       <StyledWrapper>
         <div
           aria-label="Orange and tan hamster running in a metal wheel"
