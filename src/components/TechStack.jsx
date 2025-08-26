@@ -13,19 +13,11 @@ function TechStack() {
   useEffect(() => {
     const initAnimations = () => {
       const el = sectionRef.current;
-      if (!el) return;
-
       const scrollContainer = document.querySelector("[data-scroll-container]");
-      if (!scrollContainer) {
+      if (!el || !scrollContainer) {
         setTimeout(initAnimations, 200);
         return;
       }
-
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger && el.contains(trigger.trigger)) {
-          trigger.kill();
-        }
-      });
 
       const header = el.querySelector(".section-header");
       if (header) {
@@ -253,6 +245,16 @@ function TechStack() {
     {
       icon: "https://cdn.simpleicons.org/flask",
       title: "Flask",
+      color: "secondary",
+    },
+    {
+      icon: "https://cdn.simpleicons.org/django",
+      title: "Django",
+      color: "secondary",
+    },
+    {
+      icon: "https://cdn.simpleicons.org/fastapi",
+      title: "FastApi",
       color: "secondary",
     },
     {

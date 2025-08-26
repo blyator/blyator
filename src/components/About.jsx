@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Activity, FlaskConical, Database } from "lucide-react";
+import { MonitorCog, FlaskConical, Database } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,7 +14,7 @@ function About() {
   const pages = [
     {
       title: "Frontend Work",
-      icon: <Activity className="w-6 h-6 text-white" />,
+      icon: <MonitorCog className="w-6 h-6 text-white" />,
       content:
         "I make beautiful and responsive user interfaces that are intuitive and also perform smoothly across devices.",
       img: "/assets/Illustrations/frontend.png",
@@ -336,7 +336,7 @@ function About() {
                         index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                       } gap-6 md:gap-8 lg:gap-12 items-center`}
                     >
-                      {/* Image Section - Responsive sizing */}
+                      {/* Image Section  */}
                       <div className="flex-shrink-0 relative card-image opacity-0 scale-95 w-full lg:w-auto">
                         <div className="relative overflow-hidden rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700 ease-out mx-auto lg:mx-0">
                           <img
@@ -352,7 +352,7 @@ function About() {
                       <div className="flex-1 text-center relative card-content min-w-0 max-w-full overflow-hidden">
                         <div className="card-icon mb-4 md:mb-6 flex justify-center opacity-0 scale-75">
                           <div
-                            className={`p-3 md:p-4 bg-gradient-to-br ${page.color} rounded-xl md:rounded-2xl shadow-lg`}
+                            className={`p-3 md:p-4 bg-primary ${page.color} rounded-4xl shadow-lg`}
                           >
                             {page.icon}
                           </div>
