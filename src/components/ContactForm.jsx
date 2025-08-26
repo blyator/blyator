@@ -198,7 +198,7 @@ const ContactForm = ({ isOpen, onClose, locoScroll }) => {
     >
       <div
         ref={formRef}
-        className="bg-base-100 text-base-content w-full max-w-lg max-h-[95vh] shadow-2xl flex flex-col rounded-2xl overflow-hidden"
+        className="bg-base-100 text-base-content w-full max-w-lg max-h-[98vh] shadow-2xl flex flex-col rounded-2xl overflow-hidden"
         style={{
           transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
@@ -389,7 +389,7 @@ const ContactForm = ({ isOpen, onClose, locoScroll }) => {
               <button
                 onClick={handleSubmit}
                 disabled={submissionState.isSubmitting}
-                className="bg-neutral text-neutral-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="bg-primary text-accent-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm"
               >
                 {submissionState.isSubmitting ? "Sending..." : "Send Message"}
               </button>
