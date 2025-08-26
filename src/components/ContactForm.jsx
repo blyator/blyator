@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle,
   AlertCircle,
+  Send,
 } from "lucide-react";
 import Loader from "./Loader";
 
@@ -385,12 +386,13 @@ const ContactForm = ({ isOpen, onClose, locoScroll }) => {
                 <ArrowRight size={16} />
                 {isLoading ? "Loading..." : "View Workflow"}
               </button>
-
               <button
                 onClick={handleSubmit}
-                disabled={submissionState.isSubmitting}
-                className="bg-primary text-accent-content py-3 rounded-lg font-medium hover:bg-neutral-focus transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                type="button"
+                disabled={isLoading}
+                className="bg-primary text-accent-content  py-3 rounded-lg font-medium hover:bg-accent-focus transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
+                <Send size={16} />
                 {submissionState.isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </div>

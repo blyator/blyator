@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { ArrowRight, Phone, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 const Workflow = ({ onOpenContact }) => {
   const containerRef = useRef(null);
