@@ -74,7 +74,7 @@ Let’s connect, learn and grow together whether in tech, business or life in ge
 
 ![Billy's GitHub Stats](https://github-readme-stats.vercel.app/api?username=blyator&theme=gruvbox&hide_border=false&include_all_commits=false&show_icons=true&count_private=false&custom_title=Billy's%20GitHub%20Stats)<br/><br>
 [![wakatime](https://wakatime.com/badge/user/62d2ac03-3e1a-4c1f-b2a6-fbbfec642734.svg)](https://wakatime.com/@62d2ac03-3e1a-4c1f-b2a6-fbbfec642734)<br/>
-[![Wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=blyator&layout=compact&hide_time=true&theme=gruvbox&custom_title=Billy's%20Weekly%20Coding%20Time)](https://wakatime.com/blyator)
+[![Wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=blyator&layout=compact&hide_time=true&theme=gruvbox&custom_title=Billy's%20Monthly%20Coding%20Time)](https://wakatime.com/blyator)
 
 
 
