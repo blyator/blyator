@@ -14,7 +14,7 @@
 I’m a Software Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern technologies
 
 
-I also have a interest in entrepreneurship and outdoor adventures because I believe in balancing work with personal growth and exploration.
+I also have an interest in entrepreneurship and outdoor adventures because I believe in balancing work with personal growth and exploration.
 
  ❤✌<br><br>
 
