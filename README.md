@@ -2,34 +2,31 @@
 
 <h3 align="center">Full-Stack Developer | Software QA</h3>
 
-## 🌐 Socials:
+## 🌐 Reach me:
 
 [![Follow Me](https://img.shields.io/badge/Follow%20Me-1DA1F2?logo=x&logoColor=white&style=for-the-badge)](https://x.com/viper_droid)
 [![Telegram](https://img.shields.io/badge/Telegram-26A5E4?logo=telegram&logoColor=white&style=for-the-badge)](https://t.me/viperdroided)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/billyyator//)
-[![Dev.to](https://img.shields.io/badge/Dev.to-FFDD57?logo=devdotto&logoColor=black&style=for-the-badge)](https://dev.to/billy_yator)
 
 
 <br />
 
-I’m a Full-Stack Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern frontend and backend technologies and I test them properly as well
+I’m a Software Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern technologies
 
-
-As a tech enthusiast, I enjoy exploring new technologies and sharing my experiences and insights through social media and blogs.
 
 I also have a interest in entrepreneurship and outdoor adventures because I believe in balancing work with personal growth and exploration.
 
-Let’s connect, learn and grow together whether in tech, business or life in general ❤✌<br><br><br>
+ ❤✌<br><br>
 
-<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmk3Ym0xeGR1aXZ0enNxeTllYml1MjdoZHk1Y3dyN2d2ZXQ0b2lxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/w9Sb2fZrLPxHUFxLV2/giphy.gif" width="450" height="400" align="right" >
 
-<h3 align="left">🟢 More Than Just Code:</h3>
+
+<h4 align="left">🟢 More Than Just Code:</h4>
 
 <ul>
- <li>I love Stargazzing, it's always been my top and favourite hobby as long as I can remember🌟</li>
-  <li>hiking, cycling or exploring designs and photography. Tech is a big part of my life, but so is connecting with people and embracing new experiences.</li>
-   <li>open to collaborations, networking and mentorships. let’s connect</li>
-</ul><br><br><br><br><br><br><br><br>
+ <li>I love Stargazzing, nothing beats it🌟</li>
+  <li>designs and photography. Tech is a big part of my life, but so is connecting with people and embracing new experiences.</li>
+   <li>Open to collaborations, networking and mentorships. let’s connect</li>
+</ul><br><br>
 
 # 🧩 Tech Stack
 
