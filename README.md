@@ -1,6 +1,6 @@
 ### Hello World ?<img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="25px"> It's Billy here
 
-<h3 align="center">Full-Stack Developer | Software QA</h3>
+<h3 align="center">Software Developer | Software QA</h3>
 
 ## 🌐 Reach me:
 
