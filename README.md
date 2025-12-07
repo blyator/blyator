@@ -23,7 +23,7 @@ I also have an interest in entrepreneurship and outdoor adventures because I bel
 <h4 align="left">🟢 More Than Just Code:</h4>
 
 <ul>
- <li>I love Stargazzing, nothing beats it🌟</li>
+ <li>I love Stargazzing, nothing comes close to it 🌟</li>
   <li>designs and photography. Tech is a big part of my life, but so is connecting with people and embracing new experiences.</li>
    <li>Open to collaborations, networking and mentorships. let’s connect</li>
 </ul><br><br>
