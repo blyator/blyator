@@ -10,6 +10,16 @@ function Projects() {
 
   const projects = [
     {
+      title: "Pi-hole Ad-block",
+      description:
+        "A network-wide ad-blocking and infrastructure monitoring system. It uses Pi-hole for DNS sinkholing, Prometheus for metrics and Grafana for  visualization of network health and system performance.",
+      image: "/assets/Illustrations/pihole.png",
+      badges: ["Grafana", "Prometheus", "Nginx"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
+      demoLink: "https://serverdashboard.qzz.io",
+      codeLink: "https://github.com/blyator",
+    },
+    {
       title: "NotesApp",
       description:
         "This is the perfect app made to help users quickly create, manage and organize their notes. It comes with a simple interface, users can add notes and tags, then edit or delete them as they wish.",
@@ -18,16 +28,6 @@ function Projects() {
       badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
       demoLink: "https://notes-hub-psi.vercel.app/",
       codeLink: "https://github.com/blyator/noteshub",
-    },
-    {
-      title: "MartianHub",
-      description:
-        "MartianHub is a web app that showcases images taken by NASA's Mars rovers. It provides a simple way to explore the Red Planet through high-quality photos from Curiosity and Perseverance.",
-      image: "/assets/Illustrations/martian.png",
-      badges: ["Javascript", "CSS", "HTML"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
-      demoLink: "https://martianhub.vercel.app/",
-      codeLink: "https://github.com/blyator/martianhub",
     },
     {
       title: "The Beauty",
