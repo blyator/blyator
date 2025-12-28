@@ -17,7 +17,7 @@ function Projects() {
       badges: ["Grafana", "Prometheus", "Nginx"],
       badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
       demoLink: "https://serverdashboard.qzz.io",
-      codeLink: "https://github.com/blyator",
+      codeLink: "https://github.com/blyator/Grafana-Dashboards",
     },
     {
       title: "NotesApp",
