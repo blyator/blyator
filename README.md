@@ -106,6 +106,3 @@ I mostly write backend with **Django** and frontend with **React Javascript**. R
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/billyyator//)
 
 
-
-<!--START_SECTION:waka-->
-<!--END_SECTION:waka-->
