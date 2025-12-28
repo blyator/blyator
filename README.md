@@ -97,8 +97,7 @@ I mostly write backend with **Django** and frontend with **React Javascript**. R
 ![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=blyator&theme=gruvbox&hide_border=false&include_all_commits=false&show_icons=true&count_private=false&custom_title=Billy's%20GitHub%20Stats)<br/><br>
 [![wakatime](https://wakatime.com/badge/user/62d2ac03-3e1a-4c1f-b2a6-fbbfec642734.svg)](https://wakatime.com/@62d2ac03-3e1a-4c1f-b2a6-fbbfec642734)<br/>
 [![Wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=blyator&layout=compact&hide_time=true&theme=gruvbox&custom_title=Coding%20Stats)](https://wakatime.com/blyator)
-#### currently streaming....
-[![spotify-github-profile](https://spotify-github-profile.kittinanx.com/api/view?uid=31lszj64fidvnhvjucliatdz2twi&cover_image=true&theme=spotify-embed&show_offline=true&background_color=121212&interchange=true&profanity=false&bar_color=53b14f&bar_color_cover=true&mode=light)](https://github.com/kittinan/spotify-github-profile)
+
 
 ### 🌐 Reach me:
 
