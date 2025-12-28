@@ -89,6 +89,9 @@ function About() {
         return;
       }
 
+      const isMobile = window.innerWidth <= 768;
+      const scroller = isMobile ? window : "[data-scroll-container]";
+
       // Kill any existing ScrollTrigger
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.trigger && el.contains(trigger.trigger)) {
@@ -111,7 +114,7 @@ function About() {
         const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 80%",
             end: "bottom 20%",
             toggleActions: "play none none reverse",
@@ -183,7 +186,7 @@ function About() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 80%",
             end: "center 40%",
             toggleActions: "play none none reverse",
@@ -255,7 +258,7 @@ function About() {
           ease: "none",
           scrollTrigger: {
             trigger: card,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top bottom",
             end: "bottom top",
             scrub: 1,
@@ -273,7 +276,7 @@ function About() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: footer,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 90%",
             toggleActions: "play none none reverse",
           },

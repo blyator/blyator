@@ -99,6 +99,9 @@ function Projects() {
       const el = sectionRef.current;
       if (!el || !gsap || !ScrollTrigger) return;
 
+      const isMobile = window.innerWidth <= 768;
+      const scroller = isMobile ? window : "[data-scroll-container]";
+
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.trigger && el.contains(trigger.trigger)) {
           trigger.kill();
@@ -124,7 +127,7 @@ function Projects() {
         const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
@@ -188,7 +191,7 @@ function Projects() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
@@ -207,7 +210,7 @@ function Projects() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: ctaButton,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 90%",
             toggleActions: "play none none reverse",
           },

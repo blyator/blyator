@@ -19,6 +19,9 @@ function TechStack() {
         return;
       }
 
+      const isMobile = window.innerWidth <= 768;
+      const scroller = isMobile ? window : "[data-scroll-container]";
+
       const header = el.querySelector(".section-header");
       if (header) {
         const title = header.querySelector("h2");
@@ -33,7 +36,7 @@ function TechStack() {
         const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: header,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
@@ -89,7 +92,7 @@ function TechStack() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionEl,
-            scroller: "[data-scroll-container]",
+            scroller: scroller,
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
