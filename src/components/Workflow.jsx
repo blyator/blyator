@@ -12,7 +12,7 @@ const Workflow = ({ onOpenContact }) => {
     {
       title: "Landing Pages",
       description:
-        "We design high-performance responsive pages that turn visitors into customers, blending strategy, speed, and style.",
+        "We design high-performance responsive pages that turn visitors into customers, blending strategy, speed and style.",
       features: [
         "Tailored to your Audience",
         "No distraction Layouts",
