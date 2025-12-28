@@ -224,11 +224,11 @@ function TechStack() {
       title: "GSAP",
       color: "error",
     },
-    {
-      icon: "https://cdn.simpleicons.org/Nextdotjs",
-      title: "Next.js",
-      color: "neutral",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/Nextdotjs",
+    //   title: "Next.js",
+    //   color: "neutral",
+    // },
     {
       icon: "https://cdn.simpleicons.org/daisyui",
       title: "DaisyUi",
@@ -237,11 +237,11 @@ function TechStack() {
   ];
 
   const backendSkills = [
-    {
-      icon: "https://cdn.simpleicons.org/nodedotjs",
-      title: "Node.js",
-      color: "primary",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/nodedotjs",
+    //   title: "Node.js",
+    //   color: "primary",
+    // },
     {
       icon: "https://cdn.simpleicons.org/flask",
       title: "Flask",
@@ -258,8 +258,8 @@ function TechStack() {
       color: "secondary",
     },
     {
-      icon: "https://cdn.simpleicons.org/express",
-      title: "Express",
+      icon: "https://cdn.simpleicons.org/Redis",
+      title: "Redis",
       color: "accent",
     },
     {
@@ -272,14 +272,14 @@ function TechStack() {
       title: "PostgreSQL",
       color: "success",
     },
+    // {
+    //   icon: "https://cdn.simpleicons.org/mysql",
+    //   title: "MySql",
+    //   color: "warning",
+    // },
     {
-      icon: "https://cdn.simpleicons.org/mysql",
-      title: "MySql",
-      color: "warning",
-    },
-    {
-      icon: "https://cdn.simpleicons.org/python",
-      title: "Python",
+      icon: "https://cdn.simpleicons.org/celery",
+      title: "Celery",
       color: "error",
     },
     {
@@ -290,6 +290,11 @@ function TechStack() {
   ];
 
   const toolsSkills = [
+    {
+      icon: "https://cdn.simpleicons.org/iterm2",
+      title: "Bash",
+      color: "secondary",
+    },
     {
       icon: "https://cdn.simpleicons.org/git",
       title: "Git",
@@ -305,11 +310,11 @@ function TechStack() {
       title: "Jira",
       color: "info",
     },
-    {
-      icon: "https://cdn.simpleicons.org/cypress",
-      title: "Cypress",
-      color: "success",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/cypress",
+    //   title: "Cypress",
+    //   color: "success",
+    // },
     {
       icon: "https://cdn.simpleicons.org/selenium",
       title: "Selenium",
@@ -320,26 +325,26 @@ function TechStack() {
       title: "Docker",
       color: "success",
     },
-    {
-      icon: "https://cdn.simpleicons.org/vercel",
-      title: "Vercel",
-      color: "secondary",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/vercel",
+    //   title: "Vercel",
+    //   color: "secondary",
+    // },
     {
       icon: "https://cdn.simpleicons.org/digitalocean",
       title: "DigitalOcean",
       color: "accent",
     },
-    {
-      icon: "https://cdn.simpleicons.org/Figma",
-      title: "Figma",
-      color: "info",
-    },
-    {
-      icon: "https://cdn.simpleicons.org/vite",
-      title: "Vite",
-      color: "warning",
-    },
+    // {
+    //   icon: "https://cdn.simpleicons.org/Figma",
+    //   title: "Figma",
+    //   color: "info",
+    // },
+    // {
+    //   icon: "https://cdn.simpleicons.org/vite",
+    //   title: "Vite",
+    //   color: "warning",
+    // },
     {
       icon: "https://cdn.simpleicons.org/postman",
       title: "Postman",
