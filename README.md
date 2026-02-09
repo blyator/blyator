@@ -79,7 +79,7 @@ I mostly write backend with **Django** and frontend with **React Javascript**. R
 
 ### Stats
 [![wakatime](https://wakatime.com/badge/user/62d2ac03-3e1a-4c1f-b2a6-fbbfec642734.svg)](https://wakatime.com/@62d2ac03-3e1a-4c1f-b2a6-fbbfec642734)<br/>
-![WakaTime Stats](https://wakatime.com/share/@blyator/1e0da47b-c952-444b-bdd3-b43bc270ce56.svg)
+<!--![WakaTime Stats](https://wakatime.com/share/@blyator/1e0da47b-c952-444b-bdd3-b43bc270ce56.svg)-->
 
 
 <!-- ![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=blyator&theme=gruvbox&hide_border=false&include_all_commits=false&show_icons=true&count_private=false&custom_title=Billy's%20GitHub%20Stats)<br/><br> -->
