@@ -39,7 +39,7 @@ pipeline {
 
                     sh 'cp -r dist/* /var/jenkins_home/deploy_target/dist/'
                     
-                    echo 'Deployment successful! Nginx is now serving the new files.'
+                    echo 'Deployment successful!'
                 }
             }
         }
