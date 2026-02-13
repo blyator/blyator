@@ -31,13 +31,15 @@ pipeline {
             steps {
                 script {
 
+                    sh 'mkdir -p /var/jenkins_home/deploy_target/dist'
+                    
+
                     sh 'rm -rf /var/jenkins_home/deploy_target/dist/*'
                     
+
                     sh 'cp -r dist/* /var/jenkins_home/deploy_target/dist/'
                     
-                    echo 'Deployment successful!'
+                    echo 'Deployment successful! Nginx is now serving the new files.'
                 }
             }
         }
-    }
-}
