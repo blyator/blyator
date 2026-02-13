@@ -2,7 +2,6 @@ pipeline {
     agent any
     
     tools {
-
         nodejs 'node20' 
     }
 
@@ -15,14 +14,12 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-
                 sh 'npm ci' 
             }
         }
 
         stage('Build Frontend') {
             steps {
-
                 sh 'npm run build'
             }
         }
@@ -35,7 +32,7 @@ pipeline {
                     
 
                     sh 'rm -rf /var/jenkins_home/deploy_target/dist/*'
-                    
+
 
                     sh 'cp -r dist/* /var/jenkins_home/deploy_target/dist/'
                     
@@ -43,3 +40,6 @@ pipeline {
                 }
             }
         }
+    }
+}
+// DO NOT DELETE THIS COMMENT. Leave a blank line below it to prevent Jenkins EOF parsing errors!
