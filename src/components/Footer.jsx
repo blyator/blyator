@@ -126,7 +126,7 @@ function Footer({ locoScroll, onOpenContact }) {
       </div>
 
       <div className="border-t border-base-content/10 py-4 px-6 text-sm text-base-content/60 flex justify-between items-center">
-        <p>© {currentYear}</p>
+
         <p>
           Designed and developed by{" "}
           <a
