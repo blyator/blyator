@@ -27,15 +27,9 @@ pipeline {
         stage('Deploy to Server') {
             steps {
                 script {
-
-                    sh 'mkdir -p /var/jenkins_home/deploy_target/dist'
-                    
-
-                    sh 'rm -rf /var/jenkins_home/deploy_target/dist/*'
-
-
-                    sh 'cp -r dist/* /var/jenkins_home/deploy_target/dist/'
-                    
+                    sh 'mkdir -p /var/www/blyator'
+                    sh 'rm -rf /var/www/blyator/*'
+                    sh 'cp -r dist/* /var/www/blyator/'
                     echo 'Deployment successful!'
                 }
             }
