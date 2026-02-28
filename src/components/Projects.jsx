@@ -12,32 +12,32 @@ function Projects() {
 
   const projects = [
     {
-      title: "Pi-hole Ad-block",
+      title: "Grafana Dashboards",
       description:
-        "A network-wide ad-blocking and infrastructure monitoring system. It uses Pi-hole for DNS sinkholing, Prometheus for metrics and Grafana for  visualization of network health and system performance.",
+        "A collection of custom made Grafana dashboards designed to monitor various services, It includes Docker, Adguard home and Sytem perfomance. These dashboards provide real-time insights and visualizations.",
       image: "/assets/Illustrations/pihole.png",
-      badges: ["Grafana", "Prometheus", "Nginx"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
-      demoLink: "https://serverdashboard.qzz.io",
+      badges: ["Grafana", "Prometheus", "Nginx","Adguard Home"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent", "badge-error"],
+      demoLink: "https://serverdashboard.qzz.io/d/homelab-docker/docker-containers?kiosk",
       codeLink: "https://github.com/blyator/Grafana-Dashboards",
     },
     {
-      title: "NotesApp",
+      title: "Eccomerce Shop API",
       description:
-        "This is the perfect app made to help users quickly create, manage and organize their notes. It comes with a simple interface, users can add notes and tags, then edit or delete them as they wish.",
-      image: "/assets/Illustrations/notes.png",
-      badges: ["React", "Tailwind", "Python"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-error"],
-      demoLink: "https://notes-hub-psi.vercel.app/",
-      codeLink: "https://github.com/blyator/noteshub",
+        "A fully Docker containerized high performance Flask API designed for e-commerce applications. The API is optimized for Performance, scalability and security, making it ideal for modern online stores.",
+      image: "/assets/Illustrations/Locust..png",
+      badges: ["Docker", "Redis", "Celery", "Locust"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-error", "badge-accent"],
+      demoLink: "https://serverdashboard.qzz.io/shop-api/swagger/",
+      codeLink: "https://github.com/blyator/flask-ecommerce-API",
     },
     {
       title: "The Beauty",
       description:
         "This is a modern e-commerce platform designed for beauty enthusiasts. Customers are able to explore a vast range of beauty products and buy them while enjoying a smooth shopping experience.",
       image: "/assets/Illustrations/beauty.png",
-      badges: ["Python", "React", "PostgreSQL"],
-      badgeColors: ["badge-primary", "badge-secondary", "badge-accent"],
+      badges: ["Python", "React", "PostgreSQL", "Resend"],
+      badgeColors: ["badge-primary", "badge-secondary", "badge-accent", "badge-error"],
       demoLink: "https://beauty-shop-opal.vercel.app/",
       codeLink: "https://github.com/zacthuku/beauty-shop",
     },
