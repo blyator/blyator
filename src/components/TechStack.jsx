@@ -334,15 +334,15 @@ function TechStack() {
     //   color: "secondary",
     // },
     {
-      icon: "https://cdn.simpleicons.org/digitalocean",
-      title: "DigitalOcean",
+      icon: "https://cdn.simpleicons.org/kubernetes",
+      title: "Kubernetes",
       color: "accent",
     },
-    // {
-    //   icon: "https://cdn.simpleicons.org/Figma",
-    //   title: "Figma",
-    //   color: "info",
-    // },
+    {
+      icon: "https://cdn.simpleicons.org/jenkins",
+      title: "Jenkins",
+      color: "info",
+    },
     // {
     //   icon: "https://cdn.simpleicons.org/vite",
     //   title: "Vite",
