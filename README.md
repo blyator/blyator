@@ -13,7 +13,6 @@
 I’m a Software Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern technologies
 .
 
- ❤✌<br><br>
 
 
 
