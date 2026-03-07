@@ -1,12 +1,4 @@
-<div align="center">
-  
- 
 
-
-
-  <img width="55%" alt="Github" src="https://raw.githubusercontent.com/onimur/.github/master/.resources/git-header.svg" />
-
-</div>
  <h3>
     Hello World 
     <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="25px"> 
@@ -19,9 +11,7 @@
 <br />
 
 I’m a Software Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern technologies
-
-
-I also have an interest in entrepreneurship and outdoor adventures because I believe in balancing work with personal growth and exploration.
+.
 
  ❤✌<br><br>
 
