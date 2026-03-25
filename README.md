@@ -1,31 +1,23 @@
 
  <h3>
-    Hello World 
+    You there 
     <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="25px"> 
-    It's Billy here,
+    
   </h3>
-  <h3>Software Developer | Software QA</h3>
+  <h3>DevOps | Software Developer | Software QA</h3>
 
 
 
 <br />
 
-I’m a Software Developer with love for coding and tech in general. I build efficient, scalable and user-friendly web applications using modern technologies
-.
+DevOps Engineer pivoting into Software Development, with passion for coding and technology in general. I build efficient, scalable and user-friendly web applications using modern technologies, combining my infra and QA skills with solid development practices.
 
 
-
-
-<h4 align="left">🟢 More Than Just Code:</h4>
 
 <ul>
  <li>I love Stargazzing, nothing comes close to it 🌟</li>
-  <li>designs and photography. Tech is a big part of my life, but so is connecting with people and embracing new experiences.</li>
-   <li>Open to collaborations, networking and mentorships. let’s connect</li>
-</ul><br><br>
 
-
-
+</ul><br>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/holic-x/holic-x/output/github-contribution-grid-snake-dark.svg">
@@ -36,7 +28,7 @@ I’m a Software Developer with love for coding and tech in general. I build eff
 
 
 
-### Tech Stack
+### Stack
 
 I mostly write backend with **Django** and frontend with **React Javascript**. Recently, I have been tinkering with **GoLang**.
 
