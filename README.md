@@ -19,18 +19,10 @@ DevOps Engineer pivoting into Software Development, with passion for coding and 
 
 </ul><br>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/holic-x/holic-x/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/holic-x/holic-x/output/github-contribution-grid-snake.svg">
-  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/adorabled4/adorabled4/output/github-contribution-grid-snake.svg">
-</picture>
-
-
-
 
 ### Stack
 
-I mostly write backend with **Django** and frontend with **React Javascript**. Recently, I have been tinkering with **GoLang**.
+I write backend with **Python** and frontend with **React**. Recently, I have been tinkering with **GoLang**.
 
 ![Django](https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white)
 ![GoLang](https://img.shields.io/badge/-Golang-00ADD8?logo=go&logoColor=white)
